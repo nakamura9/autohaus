@@ -1,0 +1,234 @@
+.nav {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    z-index: 100000;
+}
+
+.nav > div > div {
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav > div > img, .nav img {
+    width: auto;
+    height: 60px;
+}
+
+.nav > div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navList {
+    margin: 0;
+    display: flex;
+    transition: all 0.3s ease;
+}
+
+.navList li {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    color: #555;
+    font-weight: 700;
+}
+
+.navList a {
+    display: block;
+    margin: 0.5rem 1rem;
+}
+
+.navList a,
+footer a {
+    text-decoration: none;
+}
+
+.navList a:visited {
+    color: #555;
+}
+
+footer a:visited {
+    color: white;
+}
+
+.accountButton {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 1.5rem;
+}
+
+.navDropdown {
+    position: relative;
+}
+
+.navDropdownList {
+    position: absolute;
+    width: 175px;
+    top: calc(100% + 2.5rem);
+    right: calc(0% + 0.5rem);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, 
+                    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.navDropdownList li {
+    margin: 0.5rem !important
+}
+
+.navDropdownList label {
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.navDropdownList select,
+.select {
+    width: 100%;
+}
+
+.main {
+    padding-top: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: white;
+    margin: 6rem auto;
+    min-height: 100vh;
+    width: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, 
+                    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.mobileButton {
+    display: none;
+    border: 0px;
+    background-color: transparent;
+    padding: 1rem;
+    font-size: 1.5rem;
+    z-index: 10000;
+
+}
+
+@media (max-width: 575px) {
+    .nav > div > img {
+        width: 70px;
+        height: auto;
+    }
+
+    .mobileButton {
+        display: block;
+    }
+    .nav {
+        min-height: 50px;
+        width: 105vw;
+    }
+    .navList {
+        position: absolute;
+        top: 0px;
+        left: 155vw;
+        width: 50vw;
+        height: 105vh;
+        max-height: 105vh;
+        overflow-y: auto;
+        flex-direction: column;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        z-index: 100000;
+        padding: 1rem;
+        right: 5px;
+    }
+
+    .navList img {
+        margin: 0px auto
+    }
+
+    .mobileNavDropdownList {
+        margin-left: 0px;
+        padding-inline-start: 0px;
+    }
+
+    .navList li {
+        margin: 0.25rem;
+        font-size: 1.25rem;
+    }
+
+    .main {
+        margin-top: 2rem;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .main {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .main {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main {
+        max-width: 1140px;
+    }
+}
+
+.mobileOverlay {
+    position: fixed;
+    z-index: 10000;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.footer {
+    padding:2rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-color: #010038;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer > div {
+    padding: 1rem;
+    width: 200px;
+}
+
+.footer h5 {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    color: #F58533
+}
+
+.footer li {
+    list-style-type: none;
+    margin-bottom: 0.5rem;
+}

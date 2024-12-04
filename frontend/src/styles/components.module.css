@@ -1,0 +1,457 @@
+.card {
+    margin: 1rem;
+    border-radius: 10px;
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.card:hover {
+    border: 1px solid #ccc;
+}
+
+.card img {
+    width: 200px;
+    height: auto;
+}
+
+.card a,
+.card a:visited {
+    text-decoration: none;
+    color: #333
+}
+
+.departmentCard h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.card ul {
+    margin-top: 0px;
+    padding-left: 0.5rem
+}
+
+.card li {
+    list-style-type: none;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-radius: 0.25rem;
+}
+
+.card li:hover {
+    background: rgba(0, 255,0, 0.1)
+}
+
+.cardImg {
+    height: 175px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc
+}
+
+.cardBody {
+    padding: 1rem;
+}
+
+.input input,
+.input textarea {
+    margin-top: 0.25rem;
+    border: 0px;
+    background-color: rgb(250, 250,250);
+    border-radius: 4px;
+    outline: 0px;
+    display: block;  
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    width: 100%;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.input input {
+    height: 1.25rem;
+}
+
+.input textarea {
+    height: 6rem;
+}
+
+.input input:hover,
+.input textarea:hover, 
+.input input:focus,
+.input textarea:focus {
+    background-color: #eee;
+} 
+
+.input {
+    margin-bottom: 0.75rem;
+}
+
+.input label {
+    font-weight: 700;
+    color: #777
+}
+
+.departmentList,
+.categoryList 
+{
+    list-style-type: none;
+    padding: 0.5rem 1rem;
+}
+
+.departmentName {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.departmentName h4 {
+    margin-bottom: 0.5rem;
+}
+
+.departmentName:visited,
+.categoryList a:visited {
+    color: #333;
+}
+
+.categoryList li {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.categoryList li:hover {
+    background-color: #dedede;
+}
+
+.categoryList a {
+    text-decoration: none;
+}
+
+.departmentList > li > ul {
+    border-top: 1px solid black;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.categoryList {
+    padding: 0.5rem 1rem 
+}
+
+.btnGroup {
+    display: flex;
+    width: 100%;
+}
+
+.addToCart,
+.addToWishList
+{
+    border: 0px;
+    padding: .35rem;
+    border-radius: 0.175rem;
+}
+
+.addToCart {
+
+    background-color: teal;
+    color: white;
+    flex: 1;
+    margin-right: 0.2rem;
+}
+
+.addToWishList {
+    background-color: transparent;
+    color: crimson;
+    border: 1px solid crimson;
+}
+
+.productLabel {
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: .5rem
+}
+
+.productLabel a {
+    text-decoration: none;
+    color: #333
+}
+
+.productLabel a:visited {
+    color: #333
+}
+
+.productPrice {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: .5rem
+}
+
+.spinner {
+    min-height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000000;
+}
+
+.modal {
+    background-color: white;
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.modal h2 {
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid teal;
+}
+
+.modal_btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.emptyList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #bbb;
+    min-height: 50vh;
+}
+
+.emptyList svg {
+    margin: 0px auto
+}
+
+.emptyList h3 {
+    font-size: 2rem;
+}
+
+
+.search input {
+    border: 0px;
+    outline: 0px;
+    height: 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    width: 100%;
+    padding-left: 8px;
+}
+
+.search button {
+    background-color: transparent;
+    border: 0px;
+    padding: 8px;
+    width: 40px;
+    color: var(--primary)
+}
+
+.search button:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.search svg path {
+    color: var(--primary)
+}
+
+.search button:hover svg path {
+    color: white
+}
+
+.search {
+    display: flex;
+    margin: -0.5rem;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    overflow-x: hidden;
+}
+
+.searchContainer {
+    position: relative;
+    transition: all 0.3s ease;
+    width: 200px;
+    margin-right: 2rem;
+}
+
+.results {
+    position: absolute;
+    left: -8px;
+    top: calc(100% + 28px);
+    padding: 1rem;
+    background-color: white;
+    width: 200px;
+    border-radius: 8px;
+    height: 300px;
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+}
+
+.result {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    display: flex;
+}
+
+.result h4 {
+    margin-bottom: .25rem;
+}
+
+.result img {
+    width: 80px;
+    height: auto;
+}
+
+.result > div:first-child {
+    margin-right: 0.5rem
+}
+
+
+.pendingSearchWindow {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggleButtons {
+    display: flex;
+    border: 2px solid #F58533;
+    width: fit-content;
+    border-radius: 6px;
+    margin: 12px;
+}
+
+.toggleButtons > div {
+    width:128px;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+    color: #F58533;
+    background-color: #010038;
+}
+
+.toggleButtons > div:hover,
+.toggleButtons > div.active,
+.conditionButtons > div:hover,
+.conditionButtons > div.active {
+    color: #010038;
+    background-color: #F58533;
+}
+
+.toggleButtons > div:not(:last-child) {
+    border-right: 2px solid #F58533
+}
+
+
+.conditionButtons {
+    margin-left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.conditionButtons > div {
+    color: #F58533;
+    font-weight: bold;
+    padding: 6px;
+    margin-right: 12px;
+    border: 2px solid #F58533;
+    width: 128px;
+    border-radius: 4px;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.imageUploadWidget {
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 196px
+}
+
+.imageUploadInput {
+    display: none;
+}
+
+.imgPreview {
+    max-width: 100%;
+    max-height: 200px;
+    margin-bottom: 10px
+}
+
+.dragContainer {
+    padding: 8px 16px;
+    background-color: #F58533;
+    color: #010038;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.uploadContainer {
+    width: 196px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px;
+    align-items: center;
+}
+
+.fieldGroup label {
+    color: white
+}
+
+.fieldGroup {
+    width: 200px;
+    box-sizing: border-box;
+    margin-top: 8px;
+}
+
+.fieldGroupFields {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    gap: 4px
+}
+
+.fieldGroupFields input {
+    width: 84px;
+    border: 2px solid #F58533;
+    color: #F58533;
+    padding: 4px;
+    font-size: 16px;
+    background: transparent;
+    border-radius: 4px;
+}
+
+/* 
+.searchWrapper {
+    margin-top: 12px
+} */

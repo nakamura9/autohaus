@@ -1,0 +1,62 @@
+.search {
+    background-color: #010038;
+    border-radius: 12px;
+    padding: 12px;
+    
+}
+
+.searchFields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.search h4 {
+    color: #F58533
+}
+
+.search button {
+    color: white;
+    background-color: #1363DF;
+    border: 0px;
+    padding: 8px;
+    width: 196px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+
+.search input::placeholder {
+    color: #F58533;
+    font-weight: bold;
+}
+
+.inputContainer {
+    border: 2px solid #F58533;
+    border-radius: 4px;
+    padding: 2px;
+    width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    height: 32px;
+    margin-top: 8px
+}
+
+.inputContainer select {
+    background: transparent;
+    color: #F58533;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px;
+    border: 0px;
+}
+
+.inputContainer option {
+    background-color: #010038;
+}
+
+.inputContainer option:hover {
+    background-color: #1363DF;
+}

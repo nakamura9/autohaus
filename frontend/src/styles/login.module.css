@@ -1,0 +1,92 @@
+.overlay {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    backdrop-filter: blur(5px);
+    background: rgba(255,255,255, 0.1);
+}
+
+.card {
+    background-color: white;
+    position: relative;
+    width: 320px;
+    margin: 10vh auto;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow:  rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.card input {
+    display: block;
+    padding: 8px;
+    border-radius: 8px;
+    outline: 0px;
+    border: 1px solid #47B5FF;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    width: calc(100% - 16px);
+}
+
+.name {
+    display: flex;
+    gap: 12px
+}
+
+.name input {
+    flex: 1;
+}
+
+.card h1 {
+    text-align: center;
+}
+
+.card p {
+    text-align: center;
+}
+
+.card button {
+    background-color: #010038;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.google {
+    display: block;
+    margin-bottom: 12px;
+    background-color: #E94235;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.facebook {
+    display: block;
+    margin-bottom: 12px;
+    background-color: #0866FF;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.close {
+    width: 40px;
+    height: 40px;
+    background: crimson;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -20px;
+    top: -20px
+}

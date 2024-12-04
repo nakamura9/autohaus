@@ -1,0 +1,140 @@
+.inputContainer {
+    border: 2px solid #F58533;
+    width: 196px;
+    border-radius: 4px;
+    display: flex;
+    padding: 4px;
+    margin: 12px;
+    color: #F58533;
+}
+
+label {
+    color: white;
+    font-weight: bold;
+    margin-left: 12px;
+}
+
+.inputContainer input:focus {
+    outline: 0;
+    border: 0;
+}
+.inputContainer textarea,
+.inputContainer select,
+.inputContainer input {
+    background: transparent;
+    border: 0px;
+    color: #F58533;
+    font-size: 16px;
+
+}
+
+.sellContainer {
+    background-color: #010038;
+    padding: 24px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border: 4px solid #F58533;
+    min-height: 500px;
+    position: relative;
+}
+
+.sellTabs {
+    display: flex;
+    padding-left: 0px;
+    margin: 0px;
+}
+
+.sellTabs li.active,
+.sellTabs li:hover {
+    color: #010038;
+    background-color: #F58533;
+}
+
+.sellTabs li {
+    background-color: #010038;
+    color: #F58533;
+    border-top: 4px solid #F58533;
+    width: 128px;
+    text-align: center;
+    list-style-type: none;
+    padding: 6px;
+    font-weight: bold;
+}
+
+.sellTabs li:first-child {
+    border-top-left-radius: 6px;
+    border-left: 4px solid #F58533;
+    border-right: 4px solid #F58533;
+}
+
+.sellTabs li:last-child {
+    border-top-right-radius: 6px;
+    border-right: 4px solid #F58533;
+    border-left: 4px solid #F58533;
+}
+
+
+.imgCarousel {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.imageWrapper {
+    justify-content: center;
+    align-items: center;
+    height: 128px;
+    width: 128px;
+    overflow: hidden;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 2px solid #F58533;
+    border-radius: 8px;
+    display: flex;
+}
+.imgContainer {
+    position: relative;
+}
+
+.remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: crimson;
+    right: calc(100% - 16px);
+    top: -16px;
+    border-radius: 50%;
+}
+
+.sellFooter {
+    position: absolute;
+    width: 100%;
+    right: 0px;
+    bottom: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.sellFooter button {
+    display: flex;
+    border: 2px solid #47B5FF;
+    width: fit-content;
+    border-radius: 6px;
+    color: #010038;
+    background-color: #47B5FF;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.sellFooter button:last-child {
+    border: 2px solid #F58533;
+    background-color: #F58533;
+}
