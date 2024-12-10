@@ -2,3 +2,5 @@
 env/
 **/__pycache__/
 **/node_modules/
+make_logos/
+vehicle_photos/
