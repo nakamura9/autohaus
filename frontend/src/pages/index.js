@@ -3,6 +3,8 @@ import React from 'react'
 import {url} from '../constants'
 import styles from '../styles/index.module.css'
 import Search from '../components/search';
+import Vehicle from '../components/card';
+
 
 function Index() {
     const [data, setData] = React.useState([])
@@ -19,7 +21,7 @@ function Index() {
             <div className={styles.hero}>
             <ul className={styles.heroTabs}>
                 <li className={styles.active}>Buy</li>
-                <li>Sell</li>
+                <li><a href="/sell">Sell</a></li>
             </ul>
             <div className={styles.tabs}>
                 <div className={styles.buyTab}>
@@ -52,13 +54,19 @@ function Index() {
             
             </div>
             <div>
+                <h5>Featured Brands</h5>
+                
+            </div>
+            
+            <div>
                 <h5>Featured Listings</h5>
-                {data.map(d => (
-                    <div>
-                        <p>{d.year} {d.make.name} {d.model.name}</p>
-                        <p>{d.price}</p>
+                <div className={styles.listingsContainer}>
+                    <div className={styles.listings}>
+                        {data.map(d => (
+                            <Vehicle {...d} />
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
             
         </main>

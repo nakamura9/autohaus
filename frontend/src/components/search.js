@@ -3,7 +3,7 @@ import axios from 'axios'
 import {url} from '../constants'
 import styles from '../styles/search.module.css'
 
-const Search = ({placeholder, model}) => {
+const Search = ({placeholder, model, onChange}) => {
     const [value, setValue] = React.useState('')
     const [id, setId] = React.useState(null)
     const [options, setOptions] = React.useState([{name: "Honda Fit", description: "hello", thumb: "https://picsum.photos/200"}])
@@ -11,8 +11,7 @@ const Search = ({placeholder, model}) => {
 
 
     React.useEffect(() => {
-        console.log(value)
-        if(value.length > 0) {
+        if(value && value.length > 0) {
             axios.get(`${url}/api/search/${model}/?q=${value}`).then((data) => {
                 setOptions(data.data.results)
                 setSearchVisible(true)
@@ -20,6 +19,8 @@ const Search = ({placeholder, model}) => {
         } else {
             setOptions([])
             setSearchVisible(false)
+            setValue(null)
+            setId(null)
         }
     }, [value])
 
@@ -28,6 +29,12 @@ const Search = ({placeholder, model}) => {
         setId(option.id)
         setSearchVisible(false)
     }
+
+    React.useEffect(() => {
+        if(onChange) {
+            onChange(id)
+        }
+    }, [id])
 
     return (
         <div className={styles.searchContainer}>

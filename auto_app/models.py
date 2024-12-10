@@ -37,7 +37,7 @@ class Make(BaseModel):
     name = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='make_logos/')
     number_of_vehicles = models.PositiveIntegerField(default=0)
-    number_of_models  = models.PositiveIntegerField(default=0)
+    number_of_models = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
@@ -86,6 +86,7 @@ class Vehicle(BaseModel):
     make = models.ForeignKey('auto_app.Make', on_delete=models.CASCADE, related_name='vehicles')
     model = models.ForeignKey('auto_app.Model', on_delete=models.CASCADE, related_name='vehicles')
     seller = models.ForeignKey('auto_app.Seller', on_delete=models.CASCADE, related_name='seller')
+    negotiable = models.BooleanField(default=False,blank=True)
     price = models.DecimalField(max_digits=16, decimal_places=2, default=0)
     currency = models.ForeignKey('auto_app.Currency', on_delete=models.SET_NULL, null=True, related_name='currency')
     mileage = models.IntegerField()
@@ -118,6 +119,17 @@ class Vehicle(BaseModel):
         ('sports_car', 'Sports Car'),
         ('other', 'Other'),
     ])
+    condition = models.CharField(max_length=50, choices=[
+        ("Non-Runner", "Non-Runner"),
+        ("Excellent", "Excellent"),
+        ("Good", "Good"),
+        ("Fair", "Fair"),
+        ("New", "New"),
+        ("Needs Work", "Needs Work"),
+    ], default="Good")
+    published = models.BooleanField(default=False)
+    published_date = models.DateField(blank=True, null=True)
+    description = models.TextField(blank=True, default="")
 
     def __str__(self) -> str:
         return str(self.model)
@@ -128,3 +140,14 @@ class VehiclePhoto(BaseModel):
     photo = models.ImageField(upload_to='vehicle_photos/')
     thumbnail = models.ImageField(upload_to='vehicle_thumbnails/', null=True, blank=True)
     is_main = models.BooleanField(default=False)
+
+
+class City(models.Model):
+    search_fields = ["name"]
+    search_map = {
+        "description": "name",
+    }
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name

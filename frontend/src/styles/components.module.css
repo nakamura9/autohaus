@@ -2,9 +2,12 @@
     margin: 1rem;
     border-radius: 10px;
     width: 200px;
+    min-width: 200px;
     height: 300px;
     overflow: hidden;
 }
+
+
 
 .card:hover {
     border: 1px solid #ccc;
@@ -31,6 +34,15 @@
 .card ul {
     margin-top: 0px;
     padding-left: 0.5rem
+}
+
+.cardPrice {
+    text-align: right;
+    font-size: 1.25rem;    
+}
+
+.make {
+    color: #47B5FF;
 }
 
 .card li {

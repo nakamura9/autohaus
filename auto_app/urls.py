@@ -1,5 +1,5 @@
 from django.urls import path
-from auto_app.views import app, search
+from auto_app.views import app, search, create_vehicle, search_vehicles
 from auto_app.views.serializers import VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet
 
 
@@ -19,6 +19,8 @@ vehicle_photo_router.register(r'vehicle_photo', VehiclePhotoViewSet)
 urlpatterns = [
     path("", app, name="app"),
     path("api/search/<str:model>/", search, name="search"),
+    path("api/create-vehicle/", create_vehicle, name="create-vehicle"),
+    path("api/search-vehicles/", search_vehicles, name="search-vehicles"),
 ]
 
 urlpatterns += vehicle_router.urls

@@ -60,3 +60,16 @@
 .inputContainer option:hover {
     background-color: #1363DF;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50vh;
+}
+
+.results {
+    display: flex;
+    flex-wrap: wrap;
+}
