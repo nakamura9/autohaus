@@ -2,6 +2,7 @@ import './App.css';
 import Index from './pages';
 import {
   createBrowserRouter,
+  data,
   RouterProvider,
 } from "react-router-dom";
 
@@ -13,6 +14,7 @@ import ContactPage from './pages/contact';
 import SellPage from './pages/sell';
 import BuyPage from './pages/buy';
 import ProductPage from './pages/product';
+import FAQPage from './pages/faq';
 import React from 'react'
 
 const router = createBrowserRouter([
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
         element: <AboutPage />
       },
       {
+        path: "/faq",
+        element: <FAQPage />
+      },
+      {
         path: "/product/:id",
         element: <ProductPage />
       },
@@ -54,17 +60,42 @@ function App() {
   const [appState, setAppState] = React.useState({
     loginVisible: false,
     signUpVisible: false,
+    accountMenu: true,
+    accountVisible: true,
+    user: null
   })
+
+  React.useEffect(() => {
+    
+    localStorage.setItem('appState', JSON.stringify(appState))
+  }, [appState])
+
+  React.useEffect(() => {
+    const data = localStorage.getItem('appState')
+    if(data) {
+      setAppState(JSON.parse(data))
+    }
+  }, [])
 
   return (
     <Context.Provider value={{
       ...appState,
       toggleSignUp: () => {
-        setAppState({...appState, signUpVisible: !appState.signUpVisible, loginVisible: false})
+        setAppState((prevAppState, _) => ({...appState, signUpVisible: !prevAppState.signUpVisible, loginVisible: false}))
       },
       toggleLogin: () => {
-        setAppState({...appState, loginVisible: !appState.loginVisible, signUpVisible: false})
+        setAppState((prevAppState, _) => ({...prevAppState, loginVisible: !prevAppState.loginVisible, signUpVisible: false}))
+      },
+      toggleAccountMenu: () => {
+        setAppState((prevAppState, _) => ({...prevAppState, accountMenu: !prevAppState.accountMenu}))
+      },
+      toggleAccount: () => {
+        setAppState((prevAppState, _) => ({...prevAppState, accountVisible: !prevAppState.accountVisible}))
+      },
+      setUser: (data) => {
+        setAppState((prevAppState, _) => ({...prevAppState, user: data}))
       }
+
     }}>
       <RouterProvider router={router} />
     </Context.Provider>

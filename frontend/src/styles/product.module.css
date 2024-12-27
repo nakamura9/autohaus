@@ -12,12 +12,38 @@
     gap: 12px
 }
 
+.attrContainer {
+    height: 36px;
+    text-align: center;
+}
+
+.attrName {
+    font-weight: bold;
+    opacity: 0.5;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: block;
+}
+
+.attrValue {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 .primaryAttributes > div {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 96px;
-    height: 164px;
+    height: 128px;
     padding: 8px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+
 }
 .contact > div {
     display: flex;
@@ -30,4 +56,49 @@
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
+}
+
+.table {
+    width: 100%;
+}
+
+.tableRow {
+    display: flex;
+}
+
+.tableRow:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.tableCol {
+    padding: 12px;
+    min-width: 120px;
+}
+
+.tableRow .tableCol:first-child {
+    font-weight: bold;
+}
+
+.sellerDetails {
+    border: 1px solid #ccc;
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+.sellerDetails h5 {
+    margin-bottom: 0.5rem;
+}
+
+.sellerDetails img {
+    width: 64px;
+    height: 64px;
+}
+
+.sellerImage {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
 }

@@ -1,10 +1,12 @@
 from rest_framework import viewsets
 from auto_app.serializers import (
     VehicleSerializer, MakeSerializer, VehiclePhotoSerializer,
-    ModelSerializer , SellerSerializer
+    ModelSerializer , SellerSerializer, FAQCategorySerializer
 )
 import django_filters 
-from auto_app.models import Vehicle, Make, VehiclePhoto, Model, Seller
+from auto_app.models import (
+    Vehicle, Make, VehiclePhoto, Model, Seller, FAQCategory
+)
 
 
 class VehicleViewSet(viewsets.ModelViewSet):
@@ -35,3 +37,8 @@ class ModelViewSet(viewsets.ModelViewSet):
 class SellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
+
+
+class FAQViewSet(viewsets.ModelViewSet):
+    queryset = FAQCategory.objects.all()
+    serializer_class = FAQCategorySerializer

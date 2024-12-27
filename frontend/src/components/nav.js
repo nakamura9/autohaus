@@ -15,8 +15,16 @@ const NavBar = ({toggleSignUp}) => {
                             <div className={styles.navTop}>
                                 <div className={styles.navContent}>
                                 <a href="/"><h1>AutoHaus</h1></a>
-                                <div>
-                                    <button className={styles.accountBtn} onClick={context.toggleLogin}><FontAwesomeIcon color="white"  icon={faUser} /></button>
+                                <div className={styles.navMenuContainer}>
+                                    <button className={styles.accountBtn} onClick={context.toggleAccountMenu}><FontAwesomeIcon color="white"  icon={faUser} /></button>
+                                    {context.accountMenu && <div  className={styles.navMenu}>
+                                        <ul onClick={() => setTimeout(context.toggleAccountMenu, 200)}>
+                                            {context.user && <li onClick={context.toggleAccount}><span>My Acoount</span><span>{context.user.username}</span></li>}
+                                            <li onClick={context.toggleSignUp}>Sign Up</li>
+                                            {!context.user && <li onClick={context.toggleLogin}>Login</li>}
+                                            {context.user && <li onClick={context.signOut}>Sign Out</li>}
+                                        </ul>
+                                    </div>}
                                 </div>
                                 </div>
                             </div>
@@ -27,7 +35,8 @@ const NavBar = ({toggleSignUp}) => {
                                         <li><a href="/sell">Sell</a></li>
                                         <li><a href="/about">About</a></li>
                                         <li><a href="/contact">Contact Us</a></li>
-                                        <li><button onClick={context.toggleSignUp}>Sign Up</button></li>
+                                        <li><a href="/faq">FAQ</a></li>
+                                        
                                     </ul>
                                 </div>
                             </div>

@@ -37,3 +37,16 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     photos = VehiclePhotoSerializer(many=True)
 
+
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields =  "__all__"
+
+class FAQCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQCategory
+        fields = '__all__'
+        depth = 1
+
+    faq_set = FAQSerializer(many=True)

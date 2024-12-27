@@ -22,6 +22,8 @@ class Seller(BaseModel):
     zip_code = models.CharField(max_length=20)
     country = models.CharField(max_length=100)
     whatsapp = models.BooleanField(blank=True, null=True, default=False)
+    photo = models.ImageField(upload_to="seller_photos/", null=True)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='seller', null=True)
 
     def __str__(self) -> str:
         return self.name
@@ -151,3 +153,27 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class FAQCategory(models.Model):
+    name = models.CharField(max_length=1024)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+class FAQ(models.Model):
+    category = models.ForeignKey("auto_app.FAQCategory", on_delete=models.CASCADE)
+    question = models.CharField(max_length=1024)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+
+class ContactEntry(models.Model):
+    name = models.CharField(max_length=256)
+    email = models.CharField(max_length=128)
+    phone = models.CharField(max_length=128)
+    message = models.TextField()

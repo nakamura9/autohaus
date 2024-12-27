@@ -27,6 +27,7 @@ const CountrySelect = ({ value, onChange }) => {
       <select 
         value={value} 
         onChange={onChange}
+        style={{ width: '80px', fontSize: '16px', border: "0px" }}
       >
         {countries.map(country => (
           <option 

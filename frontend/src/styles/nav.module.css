@@ -29,6 +29,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .navTop h1 {
@@ -78,4 +79,45 @@
     border-radius: 50%;
     border: 0px;
     outline: 0px
+}
+
+.navMenuContainer {
+    position: relative;
+}
+
+.navMenu {
+    margin-top: .25rem;
+    top: 100%;
+    position: absolute;
+    background-color: white;
+    width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 4px;
+    color: black;
+}
+
+.navMenu ul {
+    padding-left: 0px;
+}
+
+.navMenu li {
+    list-style-type: none;
+    padding: 6px 12px ;
+    margin: 8px;
+    border-radius: 4px;
+}
+
+.navMenu li span {
+    font-size: 0.75rem;
+    display: block;
+}
+
+.navMenu li span:first-child {
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+.navMenu li:hover {
+    background-color: #47B5FF;
+    color: white
 }

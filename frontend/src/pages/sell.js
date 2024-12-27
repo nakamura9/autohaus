@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 import styles from '../styles/sell.module.css'
@@ -8,6 +8,7 @@ import ImageUploadWidget from '../components/upload'
 import CountrySelect from '../components/country'
 import axios from 'axios'
 import { url } from '../constants'
+import Context from '../provider'
 
 
 const Tab = ({children, active}) => {
@@ -39,6 +40,17 @@ const SellPage = () => {
   const [price, setPrice] = React.useState(0)
   const [negotiable, setNegotiable] = React.useState(false)
   const [description, setDescription] = React.useState(null)
+  const context = useContext(Context)
+
+  React.useEffect(() => {
+    if(!context.user)
+      return;
+
+    setName(`${context.user.first_name} ${context.user.last_name}`)
+    setEmail(context.user.email)
+    setPhone(context.user.phone)
+    setLocation(context.user.location)
+  }, [context.user])
 
   const validate = () => {
     return true
@@ -85,12 +97,10 @@ const SellPage = () => {
     
     <div  className={styles.sellContainer}>
       <Tab active={active == 0} >
-          <div>
-            <label htmlFor="make_field">Make</label>
-            <Search model="make" placeholder={"Search Makes"} onChange={setMake} />
+          <div style={{marginLeft: "8px", marginBottom: "12px"}}>
+            <Search label="Make" model="make" placeholder={"Search Makes"} onChange={setMake} />
+            <Search label="Model" model="model" placeholder={"Search Model"} onChange={setModel} />
           </div>
-          <label htmlFor="model_field">Model</label>
-          <Search model="model" placeholder={"Search Model"} onChange={setModel} />
           <label >Fuel Type</label>
           <Pills options={["PETROL", "DIESEL"]} onChange={setFuelType} />
           <label >Transmission</label>

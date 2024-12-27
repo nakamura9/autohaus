@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import { url } from '../constants';
 import styles from '../styles/product.module.css'
-import {faCar, faEnvelope, faMap, faMessage, faPhone, faSms} from '@fortawesome/free-solid-svg-icons'
+import {faBottleWater, faCar, faCarAlt, faEnvelope, faMap, faMessage, faPhone, faSms} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const ProductPage = () => {
@@ -34,16 +34,55 @@ const ProductPage = () => {
                     {product.photos.map(p => (<img src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))}
                     </Carousel>
                 </div>
-                <div className={styles.secondaryAttributes}></div>
+                <div className={styles.secondaryAttributes}>
+                    <h5>Vehicle Attributes</h5>
+                    <div className={styles.table}>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Make</div>
+                            <div className={styles.tableCol}>{product.make.name}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Model</div>
+                            <div className={styles.tableCol}>{product.model.name}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Year</div>
+                            <div className={styles.tableCol}>{product.year}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Transmission</div>
+                            <div className={styles.tableCol}>{product.transmission}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Fuel Type</div>
+                            <div className={styles.tableCol}>{product.fuel_type}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Drivetrain</div>
+                            <div className={styles.tableCol}>{product.drivetrain}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Engine</div>
+                            <div className={styles.tableCol}>{product.engine}</div>
+                        </div>
+                        <div  className={styles.tableRow}>
+                            <div className={styles.tableCol}>Car Class</div>
+                            <div className={styles.tableCol}>{product.car_class}</div>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
             <div className={styles.column}>
                 <div>
                     <b>{product.make.name}</b>
                     <h2 style={{marginTop: "0px", marginBottom: "0.75rem",fontSize: "2rem"}}>{product.model.name}</h2>
-                    <h4 style={{textAlign: "right", color: "#47b5ff", fontSize: "1.5rem", marginTop: "0px"}}>$18,000.00</h4>
+                    <h4 style={{textAlign: "right", color: "#47b5ff", fontSize: "1.5rem", marginTop: "0px", marginBottom: "1rem"}}>$18,000.00</h4>
                 </div>
-                <div>
-                    <img />
+                <div className={styles.sellerDetails}>
+                    <div className={styles.sellerImage}>
+                    <img src={product.seller.photo} alt={product.seller.name}/>
+                    </div>
                     <div>
                         <h5>Seller: {product.seller.name}</h5>
                         <p>Number of Ads: 1</p>
@@ -51,24 +90,32 @@ const ProductPage = () => {
                 </div>
                 <div className={styles.primaryAttributes}>
                     <div>
-                        <FontAwesomeIcon icon={faMap} />
-                        <span>Mileage</span><br />
-                        <span>{product.mileage} KM</span>
+                        <FontAwesomeIcon icon={faMap} size="3x" />
+                        <div className={styles.attrContainer}>
+                            <span className={styles.attrName}>Mileage</span>
+                            <span className={styles.attrValue}>{product.mileage} KM</span>
+                        </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon={"fa-fuel"} />
-                        <span>Fuel</span><br />
-                        <span>{product.fuel_type}</span>
+                        <FontAwesomeIcon  icon={faBottleWater} size="3x" />
+                        <div className={styles.attrContainer}>
+                            <span className={styles.attrName}>Fuel</span>
+                            <span className={styles.attrValue}>{product.fuel_type}</span>
+                        </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon={faCar}/>
-                        <span>Drivetrain</span><br />
-                        <span>{product.drivetrain}</span>
+                        <FontAwesomeIcon  icon={faCar} size="3x"/>
+                        <div className={styles.attrContainer}>
+                            <span className={styles.attrName}>Drivetrain</span>
+                            <span className={styles.attrValue}>{product.drivetrain}</span>
+                        </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon="fa-engine"/>
-                        <span>Engine</span><br />
-                        <span>{product.engine} L</span>
+                        <FontAwesomeIcon  icon={faCarAlt} size="3x"/>
+                        <div className={styles.attrContainer}>
+                            <span className={styles.attrName}>Engine</span>
+                            <span className={styles.attrValue}>{product.engine} L</span>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.contact}>

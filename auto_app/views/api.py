@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.apps import apps
 from django.db.models import Q
 import json
-from auto_app.models import Vehicle, Make, Model, Seller, City, VehiclePhoto, Vehicle
+from auto_app.models import Vehicle, Make, Model, Seller, City, VehiclePhoto, Vehicle, ContactEntry
 from django.views.decorators.csrf import csrf_exempt
 import copy
 from auto_app.utils import base64_file
@@ -63,20 +63,18 @@ def search_vehicles(request):
     if request.GET.get('max_price'):
         filters.add(Q(price__lte=request.GET.get('max_price')), Q.AND)
 
-
-    print(filters)
     order_by = request.GET.get('sort_by') or 'price'
     results = Vehicle.objects.filter(filters).order_by(order_by)
     return JsonResponse(VehicleSerializer(results, many=True).data, safe=False)
 
-# @csrf_exempt
+
 def create_vehicle(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        print(data)
         data['make'] = Make.objects.get(pk=data['make'])
         data['model'] = Model.objects.get(pk=data['model'])
         data['city'] = City.objects.get(pk=data['location'])
+        # check if email or phone is registered
         data['seller'] = Seller.objects.create(
             name=data['name'],
             phone_number=data['phone'],
@@ -111,3 +109,17 @@ def create_vehicle(request):
 
         return JsonResponse({"status": "success"})
     return JsonResponse({"status": "error"})
+
+
+def submit_contact(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        contact = ContactEntry.objects.create(
+            name=data.get('name'),
+            email=data.get('email'),
+            phone=data.get('phone'),
+            message=data.get('message')
+        )
+        return JsonResponse({"id": contact.pk})
+    else:
+        return JsonResponse({"status": "error"})

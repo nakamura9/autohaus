@@ -11,7 +11,7 @@
 .card {
     background-color: white;
     position: relative;
-    width: 320px;
+    width: 400px;
     margin: 10vh auto;
     padding: 24px;
     border-radius: 16px;
@@ -101,4 +101,43 @@
 
 .row input {
     margin-bottom: 0!important
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabs li.active,
+.tabs li:hover {
+    color: white;
+    background-color: #010038;
+}
+.tabs li {
+    list-style-type: none;
+    padding: 8px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.tabs li:last-child {
+    border-right: 1px solid #ccc;
+    border-top-right-radius: 6px;
+
+}
+
+.tabs li:first-child {
+    border-top-left-radius: 6px;
+}
+
+output {
+    border: 1px solid #ccc;
+    padding: 6px;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.label {
+    color: black
 }

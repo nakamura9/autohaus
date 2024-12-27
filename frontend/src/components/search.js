@@ -3,7 +3,7 @@ import axios from 'axios'
 import {url} from '../constants'
 import styles from '../styles/search.module.css'
 
-const Search = ({placeholder, model, onChange}) => {
+const Search = ({placeholder, model, onChange, label}) => {
     const [value, setValue] = React.useState('')
     const [id, setId] = React.useState(null)
     const [options, setOptions] = React.useState([{name: "Honda Fit", description: "hello", thumb: "https://picsum.photos/200"}])
@@ -37,26 +37,31 @@ const Search = ({placeholder, model, onChange}) => {
     }, [id])
 
     return (
-        <div className={styles.searchContainer}>
-            <input 
-                className={styles.searchInput}
-                type="text"
-                placeholder={placeholder}
-                onChange={(evt) => setValue(evt.target.value)}
-                value={value}
-            />
-            {searchVisible && (<div className={styles.options}>{options.map(opt => (
-                <div className={styles.option} onClick={() => onSelect(opt)}>
-                    <div className={styles.optImg}>
-                        {opt.thumb && <img src={opt.thumb} alt="" width={48} height={48} />}
+        <div>
+            {label && <label>{label}</label>}
+            <div className={styles.searchContainer}>
+                
+                <input 
+                    className={styles.searchInput}
+                    type="text"
+                    placeholder={placeholder}
+                    onChange={(evt) => setValue(evt.target.value)}
+                    value={value}
+                />
+                {searchVisible && (<div className={styles.options}>{options.map(opt => (
+                    <div className={styles.option} onClick={() => onSelect(opt)}>
+                        <div className={styles.optImg}>
+                            {opt.thumb && <img src={opt.thumb} alt="" width={48} height={48} />}
+                        </div>
+                        <div className={styles.optText}>
+                            <b>{opt.title}</b><br />
+                            {opt.description}
+                        </div>
                     </div>
-                    <div className={styles.optText}>
-                        <b>{opt.title}</b><br />
-                        {opt.description}
-                    </div>
-                </div>
-            ))}</div>)}
+                ))}</div>)}
+            </div>
         </div>
+        
     )
 }
 

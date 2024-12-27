@@ -1,0 +1,24 @@
+.faqQuestion {
+    background-color: #ccc;
+    padding: 6px;
+    font-weight: bold;
+}
+
+.faqAnswer {
+    background-color: #eee;
+    overflow: hidden;
+}
+
+.faqAnswer p {
+    margin: 8px;
+}
+
+.faq {
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.title {
+    font-weight: 300;
+    font-size: 4rem;
+}

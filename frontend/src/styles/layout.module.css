@@ -58,6 +58,7 @@ footer a {
     color: #555;
 }
 
+footer a, 
 footer a:visited {
     color: white;
 }
