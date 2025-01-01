@@ -1,0 +1,132 @@
+.container {
+    display: flex;
+    gap: 36px
+}
+
+.column {
+ flex: 1   
+}
+
+.primaryAttributes {
+    display: flex;
+    gap: 12px
+}
+
+.attrContainer {
+    height: 64px;
+    text-align: center;
+}
+
+.attrName {
+    font-weight: bold;
+    opacity: 0.5;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: block;
+}
+
+.attrValue {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.productHeader {
+    display: flex;
+    gap: 18px
+}
+
+.productHeader div:last-child {
+    flex: 1
+}
+
+.primaryAttributes > div {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 96px;
+    height: 164px;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+
+}
+.contact > div {
+    display: flex;
+    gap: 12px
+}
+.contact button {
+    width: 64px;
+    height: 64px;
+    border: 0px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.table {
+    width: 100%;
+}
+
+.tableRow {
+    display: flex;
+}
+
+.tableRow:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.tableCol {
+    padding: 12px;
+    min-width: 120px;
+}
+
+.tableRow .tableCol:first-child {
+    font-weight: bold;
+}
+
+.sellerDetails {
+    border: 1px solid #ccc;
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+.sellerDetails h5 {
+    margin-bottom: 0.5rem;
+}
+
+.sellerDetails img {
+    width: 64px;
+    height: 64px;
+}
+
+.sellerImage {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.saveButton {
+    width: 100%;
+    background-color: #010038;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 6px;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+.saveButton:hover {
+    background-color: white;
+    color: #010038;
+}

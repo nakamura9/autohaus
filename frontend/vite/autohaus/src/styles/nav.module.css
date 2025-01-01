@@ -1,0 +1,124 @@
+.nav {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    z-index: 2000;
+}
+
+
+.navTop,
+.navBottom {
+    height: 48px;
+    margin-bottom: 0;
+    padding: 0
+}
+
+.navTop .navContent, 
+.navBottom .navContent {
+    width: 992px;
+    margin: 0px auto;
+}
+
+.navTop {
+    background-color: #010038;
+    color: white !important;
+    font-size: 20px !important;
+}
+
+.navTop .navContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.navTop h1 {
+    margin: 0;
+}
+
+.navBottom {
+    background-color: #47B5FF;
+}
+
+.navLinks {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navLinks li {
+    list-style-type: none;
+    margin: 0;
+    font-size: 20px;
+    width: 120px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.navLinks a,
+.navTop a
+ {
+    text-decoration: none;
+    color: white;
+}
+
+.navLinks button {
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 120px
+}
+
+.accountBtn {
+    background-color: #F58533;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0px;
+    outline: 0px
+}
+
+.navMenuContainer {
+    position: relative;
+}
+
+.navMenu {
+    margin-top: .25rem;
+    top: 100%;
+    position: absolute;
+    background-color: white;
+    width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 4px;
+    color: black;
+}
+
+.navMenu ul {
+    padding-left: 0px;
+}
+
+.navMenu li {
+    list-style-type: none;
+    padding: 6px 12px ;
+    margin: 8px;
+    border-radius: 4px;
+}
+
+.navMenu li span {
+    font-size: 0.75rem;
+    display: block;
+}
+
+.navMenu li span:first-child {
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+.navMenu li:hover {
+    background-color: #47B5FF;
+    color: white
+}

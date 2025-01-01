@@ -16,6 +16,7 @@ class Seller(BaseModel):
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
+    recovery_email = models.EmailField(blank=True, default="")
     address = models.TextField()
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -177,3 +178,8 @@ class ContactEntry(models.Model):
     email = models.CharField(max_length=128)
     phone = models.CharField(max_length=128)
     message = models.TextField()
+
+
+class SavedListing(models.Model):
+    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    vehicle = models.ForeignKey("auto_app.Vehicle", on_delete=models.CASCADE)

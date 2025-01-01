@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from auto_app.views.api import search, create_vehicle, search_vehicles, submit_contact
+from auto_app.views.api import *
 from auto_app.forms import SignUpForm, LoginForm
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from auto_app.models import Seller
+from rest_framework.authtoken.models import Token
+from auto_app.utils import seller_json
 
 def app(request):
     return render(request,'index.html')
@@ -38,7 +40,13 @@ def sign_up(request):
         whatsapp=True
     )
 
-    return JsonResponse({'success': True, 'id': seller.pk})
+    token = Token.objects.create(user=new_user)
+
+    return JsonResponse({
+        'success': True, 
+        'id': seller.pk,
+        'token': token.key
+    })
 
 
 def login(request):
@@ -47,16 +55,14 @@ def login(request):
         return JsonResponse({'success': False, 'errors': form.errors})
 
     user = authenticate(username=form.cleaned_data.get('email'), password=form.cleaned_data.get('password'))
-    return JsonResponse({
+    token, _ = Token.objects.get_or_create(user=user)
+    resp = {
         'success': True,
-        'user': {
-            'id': user.pk,
-            'username': user.username,
-            'email': user.email,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'phone': user.seller.phone_number,
-            'country': user.seller.country,
-            'city': user.seller.city,
-        }
-    })
+        "token": token.key
+    }
+    resp.update(seller_json(user))
+    return JsonResponse(resp)
+
+
+def get_user_details(request):
+    return JsonResponse(seller_json(request.user))

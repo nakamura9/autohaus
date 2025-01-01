@@ -1,5 +1,10 @@
 from django.urls import path
-from auto_app.views import app, search, create_vehicle, search_vehicles, sign_up, login, submit_contact
+from auto_app.views import (
+    app, search, create_vehicle, search_vehicles,
+    sign_up, login, submit_contact, get_user_details,
+    save_listing, saved_listings, account_listings, reset_password, delete_account,
+    update_account
+)
 from auto_app.views.serializers import (
     VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet,
     FAQViewSet
@@ -27,6 +32,11 @@ urlpatterns = [
     path("api/create-vehicle/", create_vehicle, name="create-vehicle"),
     path("api/search-vehicles/", search_vehicles, name="search-vehicles"),
     path("api/sign-up/", sign_up, name="sign-up"),
+    path("api/user-details/", get_user_details, name="user-details"),
+    path("api/update-account/", update_account, name="update-account"),
+    path("api/account-listings/", account_listings, name="my-listings"),
+    path("api/save-listing/", save_listing, name="save-listing"),
+    path("api/saved-listings/", saved_listings, name="saved-listings"),
     path("api/submit-contact/", submit_contact, name="submit-contact"),
     path("api/login/", login, name="log-in"),
 ]

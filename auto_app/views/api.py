@@ -2,7 +2,10 @@ from django.http import JsonResponse
 from django.apps import apps
 from django.db.models import Q
 import json
-from auto_app.models import Vehicle, Make, Model, Seller, City, VehiclePhoto, Vehicle, ContactEntry
+from auto_app.models import (
+    Vehicle, Make, Model, Seller, City, VehiclePhoto, Vehicle, ContactEntry,
+    SavedListing
+)
 from django.views.decorators.csrf import csrf_exempt
 import copy
 from auto_app.utils import base64_file
@@ -23,6 +26,9 @@ def search(request, model=None):
 
     for field in klass.search_fields:
         filters.add(Q(**{f"{field}__icontains": request.GET.get("q")}), Q.OR)
+
+    if request.GET.get('filters'):
+        filters.add(Q(**json.loads(request.GET.get('filters'))), Q.AND)
 
     qs = klass.objects.filter(filters)[:20]
     return JsonResponse({"results": [extract_fields(klass, res) for res in qs]})
@@ -123,3 +129,71 @@ def submit_contact(request):
         return JsonResponse({"id": contact.pk})
     else:
         return JsonResponse({"status": "error"})
+
+
+def update_account(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user = request.user
+        seller = request.user.seller
+
+        user.first_name = data.get('first_name')
+        user.last_name = data.get('last_name')
+        user.save()
+        seller.whatsapp = data.get('whatsapp') == "true"
+        seller.recovery_email = data.get('recovery_email')
+        seller.phone_number = data.get('phone')
+        seller.country = data.get('country')
+        seller.city = data.get('city')
+        if data.get('photo'):
+            seller.photo = base64_file(data.get('photo', {}).get('src'))[0]
+
+        seller.save()
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+
+
+def delete_account(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        vehicle = Vehicle.objects.get(pk=data['id'])
+        vehicle.delete()
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+
+
+def reset_password(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        vehicle = Vehicle.objects.get(pk=data['id'])
+        vehicle.password = data['password']
+        vehicle.save()
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+
+
+def account_listings(request):
+    seller = request.user.seller
+    vehicles = Vehicle.objects.filter(seller=seller)
+    return JsonResponse(VehicleSerializer(vehicles, many=True).data, safe=False)
+
+
+def save_listing(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        vehicle = Vehicle.objects.get(pk=data['vehicle'])
+        if SavedListing.objects.filter(user=request.user, vehicle=vehicle).exists():
+            return JsonResponse({"status": "success"})
+        SavedListing.objects.create(user=request.user, vehicle=vehicle)
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+
+
+def saved_listings(request):
+    saved = SavedListing.objects.filter(user=request.user)
+    vehicles = [s.vehicle for s in saved]
+    return JsonResponse(VehicleSerializer(vehicles, many=True).data, safe=False)
