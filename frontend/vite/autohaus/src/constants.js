@@ -1,3 +1,3 @@
-const url = "http://localhost:8000"
+const url = "http://auto.bench.co.zw"
 
 export {url}
