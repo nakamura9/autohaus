@@ -1,0 +1,1886 @@
+[{
+    "model": "auto_app.make",
+    "pk": 1,
+    "fields": {
+        "created_at": "2024-11-18T19:13:44.069Z",
+        "updated_at": "2024-11-18T19:13:44.069Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Tyre Guru",
+        "logo": "make_logos/tyre_logo.PNG",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 2,
+    "fields": {
+        "created_at": "2024-12-01T20:03:47.990Z",
+        "updated_at": "2024-12-29T13:19:50.436Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Dodge",
+        "logo": "make_logos/dodge-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 3,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.480Z",
+        "updated_at": "2024-12-01T20:04:34.480Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Buick",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 4,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.490Z",
+        "updated_at": "2024-12-29T13:16:36.159Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Mazda",
+        "logo": "make_logos/mazda-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 5,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.500Z",
+        "updated_at": "2024-12-01T20:04:34.500Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Oldsmobile",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 6,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.547Z",
+        "updated_at": "2024-12-01T20:04:34.547Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Subaru",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 7,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.555Z",
+        "updated_at": "2024-12-01T20:04:34.556Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Plymouth",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 8,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.564Z",
+        "updated_at": "2024-12-01T20:04:34.564Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Gmc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 9,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.573Z",
+        "updated_at": "2024-12-29T13:16:20.452Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Ford",
+        "logo": "make_logos/ford-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 10,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.590Z",
+        "updated_at": "2024-12-01T20:04:34.590Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Am General",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 11,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.631Z",
+        "updated_at": "2024-12-29T13:15:56.373Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Chevrolet",
+        "logo": "make_logos/chevrolet-logo_1.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 12,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.684Z",
+        "updated_at": "2024-12-29T13:16:10.350Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Isuzu",
+        "logo": "make_logos/isuzu-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 13,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.697Z",
+        "updated_at": "2024-12-29T13:18:29.472Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Acura",
+        "logo": "make_logos/acura-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 14,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.735Z",
+        "updated_at": "2024-12-29T13:15:37.612Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Honda",
+        "logo": "make_logos/honda-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 15,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.744Z",
+        "updated_at": "2024-12-29T13:15:28.043Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Nissan",
+        "logo": "make_logos/nissan-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 16,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.757Z",
+        "updated_at": "2024-12-01T20:04:34.757Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ferrari",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 17,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.779Z",
+        "updated_at": "2024-12-29T13:15:12.169Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Mitsubishi",
+        "logo": "make_logos/mitsubishi-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 18,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.787Z",
+        "updated_at": "2024-12-01T20:04:34.787Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Rolls-Royce",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 19,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.851Z",
+        "updated_at": "2024-12-01T20:04:34.851Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Geo",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 20,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.859Z",
+        "updated_at": "2024-12-29T13:15:03.495Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Kia",
+        "logo": "make_logos/kia-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 21,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.867Z",
+        "updated_at": "2024-12-29T13:14:54.054Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Infiniti",
+        "logo": "make_logos/infiniti-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 22,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.912Z",
+        "updated_at": "2024-12-29T13:14:43.491Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Lexus",
+        "logo": "make_logos/lexus-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 23,
+    "fields": {
+        "created_at": "2024-12-01T20:04:34.971Z",
+        "updated_at": "2024-12-29T13:14:33.755Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Jeep",
+        "logo": "make_logos/jeep-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 24,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.047Z",
+        "updated_at": "2024-12-29T13:14:23.173Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Suzuki",
+        "logo": "make_logos/suzuki-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 25,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.055Z",
+        "updated_at": "2024-12-29T13:14:08.526Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Lotus",
+        "logo": "make_logos/lotus-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 26,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.069Z",
+        "updated_at": "2024-12-01T20:04:35.069Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Panoz Auto-Development",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 27,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.077Z",
+        "updated_at": "2024-12-29T13:13:57.587Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Bmw",
+        "logo": "make_logos/bmw-logo_Y98iSz6.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 28,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.136Z",
+        "updated_at": "2024-12-29T13:13:50.340Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Toyota",
+        "logo": "make_logos/toyota-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 29,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.160Z",
+        "updated_at": "2024-12-01T20:04:35.160Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Saturn",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 30,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.170Z",
+        "updated_at": "2024-12-29T13:13:42.454Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Volkswagen",
+        "logo": "make_logos/volkswagen-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 31,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.179Z",
+        "updated_at": "2024-12-29T13:20:02.779Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Chrysler",
+        "logo": "make_logos/chrysler-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 32,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.197Z",
+        "updated_at": "2024-12-29T13:13:21.060Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Mercedes-Benz",
+        "logo": "make_logos/mercedes-benz-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 33,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.232Z",
+        "updated_at": "2024-12-01T20:04:35.232Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Dabryan Coach Builders Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 34,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.240Z",
+        "updated_at": "2024-12-29T13:13:09.914Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Volvo",
+        "logo": "make_logos/volvo-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 35,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.383Z",
+        "updated_at": "2024-12-01T20:04:35.383Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Eagle",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 36,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.498Z",
+        "updated_at": "2024-12-01T20:04:35.498Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Pontiac",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 37,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.522Z",
+        "updated_at": "2024-12-29T13:13:00.251Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Audi",
+        "logo": "make_logos/audi-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 38,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.579Z",
+        "updated_at": "2024-12-01T20:04:35.580Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Lincoln",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 39,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.588Z",
+        "updated_at": "2024-12-01T20:04:35.588Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Mercury",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 40,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.603Z",
+        "updated_at": "2024-12-01T20:04:35.603Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Saab",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 41,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.690Z",
+        "updated_at": "2024-12-01T20:04:35.690Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Daewoo",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 42,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.817Z",
+        "updated_at": "2024-12-01T20:04:35.817Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Bentley",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 43,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.845Z",
+        "updated_at": "2024-12-29T13:20:09.832Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Cadillac",
+        "logo": "make_logos/cadillac-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 44,
+    "fields": {
+        "created_at": "2024-12-01T20:04:35.900Z",
+        "updated_at": "2024-12-29T13:12:39.755Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Hyundai",
+        "logo": "make_logos/hyundai-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 45,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.135Z",
+        "updated_at": "2024-12-29T13:12:29.816Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Jaguar",
+        "logo": "make_logos/jaguar-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 46,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.314Z",
+        "updated_at": "2024-12-01T20:04:36.314Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Panther Car Company Limited",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 47,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.345Z",
+        "updated_at": "2024-12-01T20:04:36.345Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Texas Coach Company",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 48,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.387Z",
+        "updated_at": "2024-12-01T20:04:36.387Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Lamborghini",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 49,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.580Z",
+        "updated_at": "2024-12-01T20:04:36.580Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Porsche",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 50,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.932Z",
+        "updated_at": "2024-12-29T13:12:15.809Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Mini",
+        "logo": "make_logos/mini-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 51,
+    "fields": {
+        "created_at": "2024-12-01T20:04:36.950Z",
+        "updated_at": "2024-12-29T13:12:05.593Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Fiat",
+        "logo": "make_logos/fiat-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 52,
+    "fields": {
+        "created_at": "2024-12-01T20:04:37.003Z",
+        "updated_at": "2024-12-01T20:04:37.003Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ram",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 53,
+    "fields": {
+        "created_at": "2024-12-01T20:04:37.223Z",
+        "updated_at": "2024-12-01T20:04:37.223Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Alfa Romeo",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 54,
+    "fields": {
+        "created_at": "2024-12-01T20:04:37.259Z",
+        "updated_at": "2024-12-01T20:04:37.259Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Mobility Ventures Llc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 55,
+    "fields": {
+        "created_at": "2024-12-01T20:04:37.838Z",
+        "updated_at": "2024-12-01T20:04:37.838Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Maserati",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 56,
+    "fields": {
+        "created_at": "2024-12-01T20:04:37.846Z",
+        "updated_at": "2024-12-29T13:20:18.432Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Land Rover",
+        "logo": "make_logos/land-rover-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 57,
+    "fields": {
+        "created_at": "2024-12-01T20:04:38.197Z",
+        "updated_at": "2024-12-01T20:04:38.197Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Aston Martin",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 58,
+    "fields": {
+        "created_at": "2024-12-01T20:04:38.490Z",
+        "updated_at": "2024-12-01T20:04:38.490Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Mclaren Automotive",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 59,
+    "fields": {
+        "created_at": "2024-12-01T20:04:38.696Z",
+        "updated_at": "2024-12-29T13:11:20.164Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Tesla",
+        "logo": "make_logos/tesla-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 60,
+    "fields": {
+        "created_at": "2024-12-01T20:04:39.365Z",
+        "updated_at": "2024-12-01T20:04:39.365Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Merkur",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 61,
+    "fields": {
+        "created_at": "2024-12-01T20:04:39.387Z",
+        "updated_at": "2024-12-01T20:04:39.387Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Lucid",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 62,
+    "fields": {
+        "created_at": "2024-12-01T20:04:39.714Z",
+        "updated_at": "2024-12-01T20:04:39.714Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Cx Automotive",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 63,
+    "fields": {
+        "created_at": "2024-12-01T20:04:40.068Z",
+        "updated_at": "2024-12-29T13:11:10.838Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Peugeot",
+        "logo": "make_logos/peugeot-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 64,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.055Z",
+        "updated_at": "2024-12-01T20:04:41.055Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Vpg",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 65,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.161Z",
+        "updated_at": "2024-12-29T13:10:59.332Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Scion",
+        "logo": "make_logos/scion-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 66,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.640Z",
+        "updated_at": "2024-12-01T20:04:41.640Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Srt",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 67,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.819Z",
+        "updated_at": "2024-12-01T20:04:41.819Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Roush Performance",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 68,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.844Z",
+        "updated_at": "2024-12-29T13:10:47.172Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Byd",
+        "logo": "make_logos/byd-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 69,
+    "fields": {
+        "created_at": "2024-12-01T20:04:41.861Z",
+        "updated_at": "2024-12-01T20:04:41.861Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Smart",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 70,
+    "fields": {
+        "created_at": "2024-12-01T20:04:42.617Z",
+        "updated_at": "2024-12-01T20:04:42.617Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Bitter Gmbh And Co. Kg",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 71,
+    "fields": {
+        "created_at": "2024-12-01T20:04:43.288Z",
+        "updated_at": "2024-12-29T13:10:37.829Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Renault",
+        "logo": "make_logos/renault-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 72,
+    "fields": {
+        "created_at": "2024-12-01T20:04:43.818Z",
+        "updated_at": "2024-12-01T20:04:43.818Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Spyker",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 73,
+    "fields": {
+        "created_at": "2024-12-01T20:04:44.181Z",
+        "updated_at": "2024-12-01T20:04:44.181Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Shelby",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 74,
+    "fields": {
+        "created_at": "2024-12-01T20:04:45.445Z",
+        "updated_at": "2024-12-01T20:04:45.445Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Bill Dovell Motor Car Company",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 75,
+    "fields": {
+        "created_at": "2024-12-01T20:04:45.764Z",
+        "updated_at": "2024-12-01T20:04:45.764Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Genesis",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 76,
+    "fields": {
+        "created_at": "2024-12-01T20:04:45.773Z",
+        "updated_at": "2024-12-01T20:04:45.773Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Polestar",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 77,
+    "fields": {
+        "created_at": "2024-12-01T20:04:46.063Z",
+        "updated_at": "2024-12-01T20:04:46.063Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Rivian",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 78,
+    "fields": {
+        "created_at": "2024-12-01T20:04:47.937Z",
+        "updated_at": "2024-12-01T20:04:47.937Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Vinfast",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 79,
+    "fields": {
+        "created_at": "2024-12-01T20:04:48.544Z",
+        "updated_at": "2024-12-01T20:04:48.544Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Sterling",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 80,
+    "fields": {
+        "created_at": "2024-12-01T20:04:49.195Z",
+        "updated_at": "2024-12-01T20:04:49.195Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Pas Inc - Gmc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 81,
+    "fields": {
+        "created_at": "2024-12-01T20:04:50.616Z",
+        "updated_at": "2024-12-01T20:04:50.616Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ruf Automobile",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 82,
+    "fields": {
+        "created_at": "2024-12-01T20:04:50.838Z",
+        "updated_at": "2024-12-01T20:04:50.838Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Sti",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 83,
+    "fields": {
+        "created_at": "2024-12-01T20:04:51.839Z",
+        "updated_at": "2024-12-01T20:04:51.839Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Bugatti",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 84,
+    "fields": {
+        "created_at": "2024-12-01T20:04:52.191Z",
+        "updated_at": "2024-12-01T20:04:52.191Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Yugo",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 85,
+    "fields": {
+        "created_at": "2024-12-01T20:04:53.985Z",
+        "updated_at": "2024-12-01T20:04:53.985Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Pagani",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 86,
+    "fields": {
+        "created_at": "2024-12-01T20:04:54.554Z",
+        "updated_at": "2024-12-01T20:04:54.554Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Grumman Olson",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 87,
+    "fields": {
+        "created_at": "2024-12-01T20:05:00.160Z",
+        "updated_at": "2024-12-01T20:05:00.160Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Superior Coaches Div E.P. Dutton",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 88,
+    "fields": {
+        "created_at": "2024-12-01T20:05:02.557Z",
+        "updated_at": "2024-12-01T20:05:02.557Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Aurora Cars Ltd",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 89,
+    "fields": {
+        "created_at": "2024-12-01T20:05:04.185Z",
+        "updated_at": "2024-12-01T20:05:04.185Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Kandi",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 90,
+    "fields": {
+        "created_at": "2024-12-01T20:05:06.865Z",
+        "updated_at": "2024-12-01T20:05:06.865Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Volga Associated Automobile",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 91,
+    "fields": {
+        "created_at": "2024-12-01T20:05:06.887Z",
+        "updated_at": "2024-12-01T20:05:06.887Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Autokraft Limited",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 92,
+    "fields": {
+        "created_at": "2024-12-01T20:05:06.900Z",
+        "updated_at": "2024-12-01T20:05:06.900Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Import Trade Services",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 93,
+    "fields": {
+        "created_at": "2024-12-01T20:05:06.958Z",
+        "updated_at": "2024-12-01T20:05:06.958Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "J.K. Motors",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 94,
+    "fields": {
+        "created_at": "2024-12-01T20:05:06.982Z",
+        "updated_at": "2024-12-01T20:05:06.982Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Wallace Environmental",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 95,
+    "fields": {
+        "created_at": "2024-12-01T20:05:08.823Z",
+        "updated_at": "2024-12-01T20:05:08.823Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Mcevoy Motors",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 96,
+    "fields": {
+        "created_at": "2024-12-01T20:05:12.661Z",
+        "updated_at": "2024-12-29T13:10:25.852Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Hummer",
+        "logo": "make_logos/hummer-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 97,
+    "fields": {
+        "created_at": "2024-12-01T20:05:12.937Z",
+        "updated_at": "2024-12-01T20:05:12.937Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Saleen Performance",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 98,
+    "fields": {
+        "created_at": "2024-12-01T20:05:13.046Z",
+        "updated_at": "2024-12-01T20:05:13.046Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Maybach",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 99,
+    "fields": {
+        "created_at": "2024-12-01T20:05:13.476Z",
+        "updated_at": "2024-12-01T20:05:13.476Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Bertone",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 100,
+    "fields": {
+        "created_at": "2024-12-01T20:05:14.055Z",
+        "updated_at": "2024-12-01T20:05:14.055Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ineos Automotive",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 101,
+    "fields": {
+        "created_at": "2024-12-01T20:05:16.221Z",
+        "updated_at": "2024-12-01T20:05:16.221Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Morgan",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 102,
+    "fields": {
+        "created_at": "2024-12-01T20:05:28.620Z",
+        "updated_at": "2024-12-01T20:05:28.620Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Evans Automobiles",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 103,
+    "fields": {
+        "created_at": "2024-12-01T20:05:29.110Z",
+        "updated_at": "2024-12-29T13:06:35.865Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Daihatsu",
+        "logo": "make_logos/daihatsu-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 104,
+    "fields": {
+        "created_at": "2024-12-01T20:05:29.842Z",
+        "updated_at": "2024-12-01T20:05:29.842Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "American Motors Corporation",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 105,
+    "fields": {
+        "created_at": "2024-12-01T20:05:34.293Z",
+        "updated_at": "2024-12-01T20:05:34.293Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Grumman Allied Industries",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 106,
+    "fields": {
+        "created_at": "2024-12-01T20:05:39.782Z",
+        "updated_at": "2024-12-01T20:05:39.782Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ruf Automobile Gmbh",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 107,
+    "fields": {
+        "created_at": "2024-12-01T20:05:41.020Z",
+        "updated_at": "2024-12-01T20:05:41.020Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "London Taxi",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 108,
+    "fields": {
+        "created_at": "2024-12-01T20:05:43.312Z",
+        "updated_at": "2024-12-01T20:05:43.312Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Federal Coach",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 109,
+    "fields": {
+        "created_at": "2024-12-01T20:05:44.310Z",
+        "updated_at": "2024-12-01T20:05:44.310Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Tvr Engineering Ltd",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 110,
+    "fields": {
+        "created_at": "2024-12-01T20:05:46.000Z",
+        "updated_at": "2024-12-01T20:05:46.000Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Pininfarina",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 111,
+    "fields": {
+        "created_at": "2024-12-01T20:05:46.150Z",
+        "updated_at": "2024-12-01T20:05:46.150Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Avanti Motor Corporation",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 112,
+    "fields": {
+        "created_at": "2024-12-01T20:05:50.262Z",
+        "updated_at": "2024-12-01T20:05:50.262Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Coda Automotive",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 113,
+    "fields": {
+        "created_at": "2024-12-01T20:05:53.311Z",
+        "updated_at": "2024-12-01T20:05:53.311Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Kenyon Corporation Of America",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 114,
+    "fields": {
+        "created_at": "2024-12-01T20:05:53.694Z",
+        "updated_at": "2024-12-01T20:05:53.694Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Pas, Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 115,
+    "fields": {
+        "created_at": "2024-12-01T20:05:56.087Z",
+        "updated_at": "2024-12-01T20:05:56.087Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Consulier Industries Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 116,
+    "fields": {
+        "created_at": "2024-12-01T20:05:56.701Z",
+        "updated_at": "2024-12-01T20:05:56.701Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Saleen",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 117,
+    "fields": {
+        "created_at": "2024-12-01T20:06:01.298Z",
+        "updated_at": "2024-12-01T20:06:01.298Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Vector",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 118,
+    "fields": {
+        "created_at": "2024-12-01T20:06:03.698Z",
+        "updated_at": "2024-12-01T20:06:03.698Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Tecstar, Lp",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 119,
+    "fields": {
+        "created_at": "2024-12-01T20:06:05.806Z",
+        "updated_at": "2024-12-01T20:06:05.806Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Environmental Rsch And Devp Corp",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 120,
+    "fields": {
+        "created_at": "2024-12-01T20:06:06.209Z",
+        "updated_at": "2024-12-01T20:06:06.209Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Goldacre",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 121,
+    "fields": {
+        "created_at": "2024-12-01T20:06:07.878Z",
+        "updated_at": "2024-12-01T20:06:07.878Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Koenigsegg",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 122,
+    "fields": {
+        "created_at": "2024-12-01T20:06:09.132Z",
+        "updated_at": "2024-12-01T20:06:09.132Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Quantum Technologies",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 123,
+    "fields": {
+        "created_at": "2024-12-01T20:06:16.960Z",
+        "updated_at": "2024-12-01T20:06:16.960Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Karma",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 124,
+    "fields": {
+        "created_at": "2024-12-01T20:06:18.238Z",
+        "updated_at": "2024-12-01T20:06:18.238Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Ccc Engineering",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 125,
+    "fields": {
+        "created_at": "2024-12-01T20:06:18.426Z",
+        "updated_at": "2024-12-01T20:06:18.426Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Lambda Control Systems",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 126,
+    "fields": {
+        "created_at": "2024-12-01T20:06:25.323Z",
+        "updated_at": "2024-12-01T20:06:25.323Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Panos",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 127,
+    "fields": {
+        "created_at": "2024-12-01T20:06:27.951Z",
+        "updated_at": "2024-12-29T13:06:11.379Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "Bmw Alpina",
+        "logo": "make_logos/bmw-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 128,
+    "fields": {
+        "created_at": "2024-12-01T20:06:35.040Z",
+        "updated_at": "2024-12-01T20:06:35.040Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Fisker",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 129,
+    "fields": {
+        "created_at": "2024-12-01T20:06:39.722Z",
+        "updated_at": "2024-12-01T20:06:39.722Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Import Foreign Auto Sales Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 130,
+    "fields": {
+        "created_at": "2024-12-01T20:06:41.369Z",
+        "updated_at": "2024-12-01T20:06:41.369Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Lordstown",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 131,
+    "fields": {
+        "created_at": "2024-12-01T20:06:43.636Z",
+        "updated_at": "2024-12-01T20:06:43.636Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Red Shift Ltd.",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 132,
+    "fields": {
+        "created_at": "2024-12-01T20:06:48.710Z",
+        "updated_at": "2024-12-01T20:06:48.710Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Vixen Motor Company",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 133,
+    "fields": {
+        "created_at": "2024-12-01T20:06:54.788Z",
+        "updated_at": "2024-12-01T20:06:54.788Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Dacia",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 134,
+    "fields": {
+        "created_at": "2024-12-01T20:07:48.605Z",
+        "updated_at": "2024-12-01T20:07:48.605Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Laforza Automobile Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 135,
+    "fields": {
+        "created_at": "2024-12-01T20:07:55.795Z",
+        "updated_at": "2024-12-01T20:07:55.795Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Asc Incorporated",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 136,
+    "fields": {
+        "created_at": "2024-12-01T20:08:13.811Z",
+        "updated_at": "2024-12-29T13:05:39.772Z",
+        "created_by": 2,
+        "updated_by": 3,
+        "name": "Mahindra",
+        "logo": "make_logos/mahindra-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 137,
+    "fields": {
+        "created_at": "2024-12-01T20:08:30.136Z",
+        "updated_at": "2024-12-01T20:08:30.136Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "S And S Coach Company  E.P. Dutton",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 138,
+    "fields": {
+        "created_at": "2024-12-01T20:08:30.371Z",
+        "updated_at": "2024-12-01T20:08:30.371Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "E. P. Dutton, Inc.",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 139,
+    "fields": {
+        "created_at": "2024-12-01T20:08:32.842Z",
+        "updated_at": "2024-12-29T13:05:17.285Z",
+        "created_by": 2,
+        "updated_by": 2,
+        "name": "General Motors",
+        "logo": "make_logos/general-motors-logo.png",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 140,
+    "fields": {
+        "created_at": "2024-12-01T20:08:36.494Z",
+        "updated_at": "2024-12-01T20:08:36.494Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Azure Dynamics",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 141,
+    "fields": {
+        "created_at": "2024-12-01T20:08:44.689Z",
+        "updated_at": "2024-12-01T20:08:44.689Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Qvale",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 142,
+    "fields": {
+        "created_at": "2024-12-01T20:08:48.629Z",
+        "updated_at": "2024-12-01T20:08:48.629Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Jba Motorcars, Inc.",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 143,
+    "fields": {
+        "created_at": "2024-12-01T20:08:49.645Z",
+        "updated_at": "2024-12-01T20:08:49.645Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Isis Imports Ltd",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 144,
+    "fields": {
+        "created_at": "2024-12-01T20:09:01.354Z",
+        "updated_at": "2024-12-01T20:09:01.354Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "Excalibur Autos",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}, {
+    "model": "auto_app.make",
+    "pk": 145,
+    "fields": {
+        "created_at": "2024-12-01T20:09:09.683Z",
+        "updated_at": "2024-12-01T20:09:09.683Z",
+        "created_by": null,
+        "updated_by": null,
+        "name": "London Coach Co Inc",
+        "logo": "",
+        "number_of_vehicles": 0,
+        "number_of_models": 0
+    }
+}]
