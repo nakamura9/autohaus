@@ -7,9 +7,13 @@ from django.contrib.auth.models import User
 from auto_app.models import Seller
 from rest_framework.authtoken.models import Token
 from auto_app.utils import seller_json
+from django.http import HttpResponseRedirect
 
 def app(request):
     return render(request,'index.html')
+
+def redirect_to_app(request):
+    return HttpResponseRedirect('/app')
 
 
 def sign_up(request):

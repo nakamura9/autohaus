@@ -35,31 +35,31 @@ function Index() {
                 <div className={styles.buyTab}>
                     <Link to="/buy">
                         <div className={styles.buyButton} >
-                            <img src={sedan} alt="" />
+                            <img src={"/static/auto_app/img/sedan.png"} alt="Sedans" />
                             <h6>Sedans</h6>
                         </div>
                     </Link>
                     <Link to="/buy">
                         <div className={styles.buyButton}>
-                            <img src={pickup} alt="" />
+                            <img src={"/static/auto_app/img/truck.png"} alt="Trucks" />
                             <h6>Trucks</h6>
                         </div>
                     </Link>
                     <Link to="/buy">
                         <div className={styles.buyButton}>
-                            <img src={suv} alt="" />
+                            <img src={"/static/auto_app/img/suv-car.png"} alt="SUV" />
                             <h6>SUVs</h6>
                         </div>
                     </Link>
                     <Link to="/buy">
                         <div className={styles.buyButton}>
-                            <img src={truck} alt="" />
+                            <img src={"/static/auto_app/img/pickup-truck.png"} alt="Pickups" />
                             <h6>Commercial</h6>
                         </div>
                     </Link>
                     <Link to="/buy">
                         <div className={styles.buyButton}>
-                            <img src={hatchback} alt="" />
+                            <img src={"/static/auto_app/img/hatchback.png"} alt="" />
                             <h6>Hatchbacks</h6>
                         </div>
                     </Link>

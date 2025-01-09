@@ -28,6 +28,11 @@ faq_router.register(r'faq', FAQViewSet)
 
 urlpatterns = [
     path("", app, name="app"),
+    path("buy", app, name="app"),
+    path("sell", app, name="app"),
+    path("about", app, name="app"),
+    path("faq", app, name="app"),
+    path("contact", app, name="app"),
     path("api/search/<str:model>/", search, name="search"),
     path("api/create-vehicle/", create_vehicle, name="create-vehicle"),
     path("api/search-vehicles/", search_vehicles, name="search-vehicles"),

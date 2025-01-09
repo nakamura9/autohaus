@@ -1,3 +1,4 @@
-const url = "http://auto.bench.co.zw"
+const production = true
+const url = production ? "http://auto.bench.co.zw" : "http://localhost:8000"
 
-export {url}
+export {url, production}
