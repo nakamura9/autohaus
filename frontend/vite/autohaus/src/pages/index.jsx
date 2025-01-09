@@ -74,12 +74,67 @@ function Index() {
             
             </div>
             <div>
-                <h5>Featured Brands</h5>
+                <h4>Featured Brands</h4>
+                <div className={styles.brandsContainer}>
+                    <div className={styles.brands}>
+                    <div className={styles.brand}>
+                            <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/honda-logo.png`} alt="Honda" />
+                            </div>
+                            <h5>Honda</h5>
+                        </div>
+                        <div className={styles.brand}>
+                            <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/toyota-logo.png`} alt="Toyota" />
+                            </div>
+                            <h5>Toyota</h5>
+                        </div>
+                        <div className={styles.brand}>
+                            <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/volkswagen-logo.png`} alt="VW" />
+                            </div>
+                            <h5>Volkswagen</h5>
+                        </div>
+                        <div className={styles.brand}>
+                            <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/mercedes-benz-logo.png`} alt="Mercedes" />
+                            </div>
+                            <h5>Mercedes-Benz</h5>
+                        </div>
+                        <div className={styles.brand}>
+                            <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/ford-logo.png`} alt="Ford" />
+                            </div>
+                            <h5>Ford</h5>
+                        </div>
+                        <div className={styles.brand}>
+                        <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/bmw-logo.png`} alt="BMW" />
+                            </div>
+                            <h5>BMW</h5>
+                        </div>
+                        <div className={styles.brand}>
+                        <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/kia-logo.png`} alt="Kia" />
+                            </div>
+                            <h5>Kia</h5>
+                        </div>
+                        <div className={styles.brand}>
+                        <div className={styles.brandImg}>
+                                <img src={`${url}/make_logos/mazda-logo.png`} alt="Mazda" />
+                            </div>
+                            <h5>Mazda</h5>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
                 
             </div>
             
             <div>
-                <h5>Featured Listings</h5>
+                <h4>Featured Listings</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
                         {data.map(d => (
