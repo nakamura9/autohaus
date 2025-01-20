@@ -3,6 +3,7 @@ import styles from '../styles/contact.module.css'
 import axios from '../utils/http'
 import { url } from '../constants'
 import { Navigate } from 'react-router-dom';
+import Context from '../provider';
 
 
 const ContactPage = () => {
@@ -10,6 +11,7 @@ const ContactPage = () => {
     const [email, setEmail] = React.useState("")
     const [phone, setPhone] = React.useState("")
     const [message, setMessage] = React.useState("")
+    const context  = React.useContext(Context)
 
     const submit = () => {
         axios.post(`${url}/api/submit-contact/`, {
@@ -19,7 +21,7 @@ const ContactPage = () => {
             message: message,
         }).then(res => {
             if(res.data.id) {
-                alert("Successfully submitted contact")
+                context.toast("Successfully submitted contact")
                 return <Navigate to="/" />
             }
         })

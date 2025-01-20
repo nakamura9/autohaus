@@ -12,7 +12,7 @@ export default function Vehicle({photos, price, make, model, currency, id}) {
             <div className={styles.cardImg}>
                 {photos && photos.length > 0 && (
                     <Carousel infiniteLoop showIndicators={false} showThumbs={false}>
-                        {photos.map(p => (<img src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))}
+                        {photos.map((p, i) => (<img key={i} src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))}
                     </Carousel>
                 )}
                 {!photos || photos.length == 0 && (
@@ -21,10 +21,11 @@ export default function Vehicle({photos, price, make, model, currency, id}) {
             </div>
             <Link to={`/product/${id}`}>
                 <div className={styles.cardBody}>
-                    <p>
+                    <div>
                         <b className={styles.make}>{make.name}</b><br />
                         {model.name}<br />
-                    <div className={styles.cardPrice}>{currency ? currency.symbol : "USD"} {price}</div></p>
+                        <div className={styles.cardPrice}>{currency ? currency.symbol : "USD"} {price}</div>
+                    </div>
                 </div>
             </Link>
         </div>

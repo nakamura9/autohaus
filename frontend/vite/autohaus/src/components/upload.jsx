@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import styles from '../styles/components.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCar } from '@fortawesome/free-solid-svg-icons';
+import Context from '../provider';
 
 
 const ImageUploadWidget = ({ onUploadSuccess }) => {
@@ -9,6 +10,7 @@ const ImageUploadWidget = ({ onUploadSuccess }) => {
   const [preview, setPreview] = useState(null);
   const dropRef = useRef(null);
   const cameraInputRef = useRef(null);
+  const context = useContext(Context);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -59,7 +61,7 @@ const ImageUploadWidget = ({ onUploadSuccess }) => {
       reader.readAsDataURL(file);
 
     } else {
-      alert('Please upload an image file');
+      context.toast('Please upload an image file');
     }
   };
 

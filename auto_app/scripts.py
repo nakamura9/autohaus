@@ -74,7 +74,15 @@ def db_insert(model: Model):
         fuel_type=model.fuel,
         transmission=model.transmission,
         car_class=model.vehicle_size,
+        year=model.year
     )
+
+
+def update_year(index, year):
+    from auto_app.models import Model as VehicleModel
+    model = VehicleModel.objects.get(id=index)
+    model.year = year
+    model.save(update_fields=['year'])
 
 
 print(csv_path.exists())
@@ -86,7 +94,7 @@ def main():
     with open(csv_path, 'r') as f:
         reader = csv.reader(f, delimiter=';', quotechar='"')
         next(reader)  # Skip the header row
-        for row in reader:
+        for idx, row in enumerate(reader, start=1):
             make = row[MAKE_COLUMN]
             if not make:
                 break
@@ -113,7 +121,8 @@ def main():
             print(cleaned_data)
 
             # insert into db
-            db_insert(cleaned_data)
+            # db_insert(cleaned_data)
+            update_year(idx, cleaned_data.year)
 
 
 if __name__ == "__main__":

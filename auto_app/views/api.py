@@ -24,6 +24,12 @@ def search(request, model=None):
     klass = apps.get_model("auto_app", model)
     filters = Q()
 
+    if request.GET.get("id"):
+        qs = klass.objects.filter(id=request.GET['id'])
+        if qs.exists():
+            return JsonResponse({"results": [extract_fields(klass, qs.first())]})
+        return JsonResponse({"results": []})
+
     for field in klass.search_fields:
         filters.add(Q(**{f"{field}__icontains": request.GET.get("q")}), Q.OR)
 
@@ -43,13 +49,13 @@ def search_vehicles(request):
         filters.add(Q(model__id=request.GET.get('model')), Q.AND)
 
     if request.GET.get('transmission'):
-        filters.add(Q(transmission=request.GET.get('transmission')), Q.AND)
+        filters.add(Q(transmission__iexact=request.GET.get('transmission')), Q.AND)
 
     if request.GET.get('drivetrain'):
-        filters.add(Q(drivetrain=request.GET.get('drivetrain')), Q.AND)
+        filters.add(Q(drivetrain__iexact=request.GET.get('drivetrain')), Q.AND)
 
     if request.GET.get('fuel_type'):
-        filters.add(Q(fuel_type=request.GET.get('fuel_type')), Q.AND)
+        filters.add(Q(fuel_type__iexact=request.GET.get('fuel_type')), Q.AND)
 
     if request.GET.get('min_year'):
         filters.add(Q(year__gte=request.GET.get('min_year')), Q.AND)
@@ -60,13 +66,13 @@ def search_vehicles(request):
     if request.GET.get('min_mileage'):
         filters.add(Q(mileage__gte=request.GET.get('min_mileage')), Q.AND)
 
-    if request.GET.get('max_mileage'):
+    if request.GET.get('max_mileage') and request.GET['max_mileage'] != '0':
         filters.add(Q(mileage__lte=request.GET.get('max_mileage')), Q.AND)
 
     if request.GET.get('min_price'):
         filters.add(Q(price__gte=request.GET.get('min_price')), Q.AND)
 
-    if request.GET.get('max_price'):
+    if request.GET.get('max_price') and request.GET['max_price'] != '0':
         filters.add(Q(price__lte=request.GET.get('max_price')), Q.AND)
 
     order_by = request.GET.get('sort_by') or 'price'
@@ -81,17 +87,22 @@ def create_vehicle(request):
         data['model'] = Model.objects.get(pk=data['model'])
         data['city'] = City.objects.get(pk=data['location'])
         # check if email or phone is registered
-        data['seller'] = Seller.objects.create(
+        existing_sellers = Seller.objects.filter(Q(email=data['email']) | Q(phone_number=data['phone']))
+        if existing_sellers.exists():
+            seller = existing_sellers.first()
+        else:
+            seller = Seller.objects.create(
             name=data['name'],
             phone_number=data['phone'],
             email=data['email'],
-            address='hidden',
+            address='hidden', # todo fix
             city=data['city'],
             state=str(data['city']),
             zip_code="00263",
             country=data['country'],
             whatsapp=True
         )
+        data['seller'] = seller
         data['year'] = data['model'].year
 
         del data['name']
@@ -103,17 +114,33 @@ def create_vehicle(request):
         images = copy.deepcopy(data['images'])
         del data['images']
 
-        vehicle = Vehicle(**data)
-        vehicle.save()
+        if data.get('id'):
+            vehicle = Vehicle.objects.get(pk=data['id'])
+            vehicle.__dict__.update(**data)
+            vehicle.save()
+
+            # finding deleted photos
+            existing_photos = set(vehicle.photos.values_list('pk', flat=True))
+            submitted_existing_photos = set([i['id'] for i in images if i.get('id')])
+            ids_to_delete = existing_photos.difference(submitted_existing_photos)
+            for id in ids_to_delete:
+                VehiclePhoto.objects.get(pk=id).delete()
+
+        else:
+            vehicle = Vehicle(**data)
+            vehicle.save()
 
         for i, image in enumerate(images):
+            if image.get('id'):
+                # skipping because existing photo being updated.
+                continue
             VehiclePhoto.objects.create(
                 vehicle=vehicle,
                 photo=base64_file(image.get('src'))[0],
                 is_main=i == 0
             )
 
-        return JsonResponse({"status": "success"})
+        return JsonResponse({"status": "success", "id": vehicle.pk})
     return JsonResponse({"status": "error"})
 
 
@@ -144,9 +171,10 @@ def update_account(request):
         seller.recovery_email = data.get('recovery_email')
         seller.phone_number = data.get('phone')
         seller.country = data.get('country')
-        seller.city = data.get('city')
+        seller.city_id = data.get('city')
         if data.get('photo'):
-            seller.photo = base64_file(data.get('photo', {}).get('src'))[0]
+            if isinstance(data.get('photo'), dict):
+                seller.photo = base64_file(data.get('photo', {}).get('src'))[0]
 
         seller.save()
         return JsonResponse({"status": "success"})
@@ -197,3 +225,19 @@ def saved_listings(request):
     saved = SavedListing.objects.filter(user=request.user)
     vehicles = [s.vehicle for s in saved]
     return JsonResponse(VehicleSerializer(vehicles, many=True).data, safe=False)
+
+
+def remove_saved_listing(request, id=None):
+    if request.method == "POST":
+        SavedListing.objects.get(pk=id).delete()
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})
+
+
+def remove_listing(request, id=None):
+    if request.method == "POST":
+        Vehicle.objects.get(pk=id).delete()
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error"})

@@ -13,6 +13,7 @@ const LoginScreen = () => {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [errors, setErrors] = React.useState([])
+    const context = React.useContext(Context)
 
     const submit = (context) => {
         const config = {
@@ -26,11 +27,11 @@ const LoginScreen = () => {
             email: email,
             password: password
         }, config).then((data) => {
-            console.log(data.data)
             if(data.data.success) {
                 localStorage.setItem('user_token', data.data.token);
                 context.setUser(data.data.user)
                 context.toggleLogin()
+                context.toast("Logged in successfully")
             }
             if( data.data.errors) {
                 Object.keys(data.data.errors).forEach(key => {
@@ -42,7 +43,7 @@ const LoginScreen = () => {
             }
         }).catch(err => {
             console.log(err)
-            alert("Cannot login")
+            context.toast("Cannot login")
         })
     }
 
@@ -51,7 +52,7 @@ const LoginScreen = () => {
     }, [email, password])
 
     return (
-        <Context.Consumer>{context => (
+        
             <div className={styles.overlay}  style={{display: context.loginVisible ? 'block': 'none'}}>
             <div className={styles.card}>
                 <div className={styles.close} onClick={context.toggleLogin}>
@@ -70,7 +71,6 @@ const LoginScreen = () => {
                 </form>
             </div>
         </div>    
-        )}</Context.Consumer>
         
     )
 }

@@ -124,3 +124,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+.brandLink {
+    text-decoration: none;
+    color: #333
+}

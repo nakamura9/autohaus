@@ -174,3 +174,97 @@ output {
 .label {
     color: black
 }
+
+.listing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: rgba(50, 50, 93, 0.1) 0px 2px 5px -1px, rgba(0, 0, 0, 0.1) 0px 1px 3px -1px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.listing:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(50, 50, 93, 0.15) 0px 4px 8px -2px, rgba(0, 0, 0, 0.15) 0px 2px 5px -2px;
+}
+
+.listing img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.listing .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.listing h3 {
+    color: #010038;
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.listing h4 {
+    margin-bottom: 0px;
+}
+
+.listing p {
+    text-align: left;
+    margin-bottom: 0;
+    margin-left: 1rem;
+}
+
+.listing .price {
+    color: #1363DF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-bottom: 8px;
+    text-align: right;
+}
+
+.listing .details {
+    display: flex;
+    gap: 16px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.listing .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.listing .actions button {
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    width: auto;
+    outline: 0;
+    border: 0;
+    border-radius: 4px;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .listing {
+        flex-direction: column;
+    }
+
+    .listing img {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+

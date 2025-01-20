@@ -3,11 +3,11 @@ from auto_app.views import (
     app, search, create_vehicle, search_vehicles,
     sign_up, login, submit_contact, get_user_details,
     save_listing, saved_listings, account_listings, reset_password, delete_account,
-    update_account
+    update_account, remove_saved_listing, remove_listing
 )
 from auto_app.views.serializers import (
     VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet,
-    FAQViewSet
+    FAQViewSet, CityViewSet
 )
 
 
@@ -15,6 +15,8 @@ from rest_framework.routers import DefaultRouter
 
 vehicle_router = DefaultRouter()
 vehicle_router.register(r'vehicle', VehicleViewSet)
+city_router = DefaultRouter()
+city_router.register(r'city', CityViewSet)
 make_router = DefaultRouter()
 make_router.register(r'make', MakeViewSet)
 seller_router = DefaultRouter()
@@ -41,6 +43,16 @@ urlpatterns = [
     path("api/update-account/", update_account, name="update-account"),
     path("api/account-listings/", account_listings, name="my-listings"),
     path("api/save-listing/", save_listing, name="save-listing"),
+    path(
+        "api/saved-listings/delete/<int:id>/",
+        remove_saved_listing,
+        name="delete-saved-listing"
+    ),
+    path(
+        "api/listings/delete/<int:id>/",
+        remove_listing,
+        name="delete-listing"
+    ),
     path("api/saved-listings/", saved_listings, name="saved-listings"),
     path("api/submit-contact/", submit_contact, name="submit-contact"),
     path("api/login/", login, name="log-in"),
@@ -52,3 +64,4 @@ urlpatterns += seller_router.urls
 urlpatterns += model_router.urls
 urlpatterns += vehicle_photo_router.urls
 urlpatterns += faq_router.urls
+urlpatterns += city_router.urls

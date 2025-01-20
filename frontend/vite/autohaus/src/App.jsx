@@ -18,6 +18,7 @@ import ProductPage from './pages/product';
 import FAQPage from './pages/faq';
 import React from 'react'
 import axios from './utils/http'
+import styles from './styles/components.module.css'
 
 const router = createBrowserRouter([
   {
@@ -62,9 +63,11 @@ function App() {
   const [appState, setAppState] = React.useState({
     loginVisible: false,
     signUpVisible: false,
-    accountMenu: true,
+    accountMenu: false,
     accountVisible: false,
-    user: null
+    user: null,
+    toastVisible: false,
+    toastMessage: ''
   })
 
   React.useEffect(() => {
@@ -107,10 +110,21 @@ function App() {
       signOut: () => {
         localStorage.removeItem('user_token')
         setAppState((prevAppState, _) => ({...prevAppState, user: null}))
+      },
+      toast: (msg) => {
+        setAppState((prevAppState, _) => ({...prevAppState, toastVisible: true, toastMessage: msg}))
+        setTimeout(() => {
+          setAppState((prevAppState, _) => ({...prevAppState, toastVisible: false, toastMessage: ""}))
+        }, 3000)
       }
+
+
 
     }}>
       <RouterProvider router={router} />
+      {appState.toastVisible && <div className={styles.toast}>
+        {appState.toastMessage}
+      </div>}
     </Context.Provider>
   );
 }

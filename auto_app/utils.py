@@ -23,7 +23,7 @@ def seller_json(user):
             'last_name': user.last_name,
             'phone': user.seller.phone_number,
             'country': user.seller.country,
-            'city': user.seller.city,
+            'city': user.seller.city.pk,
             'whatsapp': user.seller.whatsapp,
             'photo': user.seller.photo.url if user.seller.photo else None
         }

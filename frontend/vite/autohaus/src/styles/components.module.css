@@ -463,3 +463,17 @@
     border-radius: 4px;
 }
 
+.toast {
+    padding: 1rem;
+    position: fixed;
+    bottom: 15%;
+    width: 300px;
+    left: calc(50vw - 150px);
+    box-sizing: border-box;
+    background-color: #141510;
+    color: #ccc;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    text-align: center;
+    border-radius: 1rem;
+    z-index: 2000;
+}

@@ -130,3 +130,8 @@
     background-color: white;
     color: #010038;
 }
+
+.primaryAttributes img {
+    width: 80%;
+    height: auto;
+}

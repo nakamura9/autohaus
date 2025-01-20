@@ -7,9 +7,7 @@ import styles from '../styles/faq.module.css'
 
 const FAQQuestion = ({question, answer}) => {
     const [open, setOpen] = React.useState(false)
-    React.useEffect(() => {
-        console.log(open)
-    }, [open])
+
     return (
     <div className={styles.faq}>
         <div  className={styles.faqQuestion} onClick={() => setOpen(!open)}>
@@ -25,7 +23,6 @@ const FAQPage = () => {
 
     React.useEffect(() => {
         axios.get(`${url}/faq/`).then(res => {
-            console.log(res.data)
             if(res.data && res.data.results) {
                 setFAQ(res.data.results)
                 setLoading(false)

@@ -16,6 +16,7 @@ const SignUpScreen = () => {
     const [phone, setPhone] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [repeatPassword, setRepeatPassword] = React.useState('')
+    const context = React.useContext(Context)
 
     const submit = () => {
         const config = {
@@ -33,15 +34,16 @@ const SignUpScreen = () => {
             password: password,
             repeat_password: repeatPassword
         }, config).then(res => {
-            console.log(res)
+            context.toast("Signed up successfully")
+            context.toggleSignUp()
         }).catch(err => {
             console.log(err)
+            context.toast("Error signing up")
         })
     }
 
     return (
-        <Context.Consumer>{context => (
-            <div  className={styles.overlay} style={{display: context.signUpVisible ? 'block': 'none'}}>
+        <div  className={styles.overlay} style={{display: context.signUpVisible ? 'block': 'none'}}>
             <div className={styles.card}>
                 <div className={styles.close} onClick={context.toggleSignUp}>
                     <FontAwesomeIcon icon={faTimes} size={"2x"} color="white" />
@@ -67,8 +69,6 @@ const SignUpScreen = () => {
                 </form>
             </div>
         </div>
-        )}</Context.Consumer>
-        
     )
 }
 

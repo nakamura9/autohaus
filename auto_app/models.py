@@ -18,7 +18,7 @@ class Seller(BaseModel):
     email = models.EmailField()
     recovery_email = models.EmailField(blank=True, default="")
     address = models.TextField()
-    city = models.CharField(max_length=100)
+    city = models.ForeignKey('auto_app.City', on_delete=models.SET_NULL, related_name='seller_city', null=True)
     state = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=20)
     country = models.CharField(max_length=100)
@@ -76,8 +76,8 @@ class Model(BaseModel):
 
     def __str__(self) -> str:
         if self.year:
-            return f"{self.make} {self.name} ({self.year})"
-        return f"{self.make} {self.name}"
+            return self.name
+        return self.name
 
 
 class Currency(BaseModel):
@@ -93,6 +93,7 @@ class Vehicle(BaseModel):
     price = models.DecimalField(max_digits=16, decimal_places=2, default=0)
     currency = models.ForeignKey('auto_app.Currency', on_delete=models.SET_NULL, null=True, related_name='currency')
     mileage = models.IntegerField()
+    city = models.ForeignKey('auto_app.City', on_delete=models.SET_NULL, related_name='city', null=True)
     transmission = models.CharField(max_length=50, choices=[
         ('automatic', 'Automatic'),
         ('manual', 'Manual'),

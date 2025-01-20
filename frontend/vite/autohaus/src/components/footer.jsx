@@ -5,7 +5,6 @@ import { faInstagram as faInstagr, faFacebook, faWhatsapp, faInstagram } from "@
 import { faQuestion, faList } from "@fortawesome/free-solid-svg-icons"
 
 export default function Footer(props) {
-    console.log({props})
     return (
         <footer className={styles.footer}>
             <div>
@@ -26,9 +25,9 @@ export default function Footer(props) {
             <div>
                 <h5>Categories</h5>
                 <ul>
-                    <li><Link to={`/buy/?make=3`}>Honda</Link></li>
-                    <li><Link to={`/buy/?make=4`}>Toyota</Link></li>
-                    <li><Link to={`/buy/?make=5`}>Mercedes</Link></li>
+                    <li><Link to={`/buy/?make=14`}>Honda</Link></li>
+                    <li><Link to={`/buy/?make=28`}>Toyota</Link></li>
+                    <li><Link to={`/buy/?make=32`}>Mercedes</Link></li>
                     <li><Link to={`/buy/?min_year=2020`}>Newer Cars</Link></li>
                     <li><Link to={`/buy/?max_year=2014`}>Older Vehicles</Link></li>
                     <li><Link to={`/buy/?transmisssion=manual`}>Manual</Link></li>

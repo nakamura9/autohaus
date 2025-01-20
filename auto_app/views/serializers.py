@@ -1,11 +1,13 @@
 from rest_framework import viewsets
 from auto_app.serializers import (
     VehicleSerializer, MakeSerializer, VehiclePhotoSerializer,
-    ModelSerializer , SellerSerializer, FAQCategorySerializer
+    ModelSerializer , SellerSerializer, FAQCategorySerializer,
+    CitySerializer
 )
 import django_filters 
 from auto_app.models import (
-    Vehicle, Make, VehiclePhoto, Model, Seller, FAQCategory
+    Vehicle, Make, VehiclePhoto, Model, Seller, FAQCategory,
+    City
 )
 
 
@@ -24,6 +26,10 @@ class MakeViewSet(viewsets.ModelViewSet):
 class VehiclePhotoViewSet(viewsets.ModelViewSet):
     queryset = VehiclePhoto.objects.all()
     serializer_class = VehiclePhotoSerializer
+
+class CityViewSet(viewsets.ModelViewSet):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
 
 
 class ModelViewSet(viewsets.ModelViewSet):

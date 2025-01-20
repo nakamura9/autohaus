@@ -7,30 +7,53 @@ import {useParams} from 'react-router-dom'
 import axios from '../utils/http';
 import { url } from '../constants';
 import styles from '../styles/product.module.css'
-import {faBottleWater, faCar, faCarAlt, faEnvelope, faImage, faImagePortrait, faMap, faMessage, faPhone, faSave, faSms} from '@fortawesome/free-solid-svg-icons'
+import {faBottleWater, faCar, faCarAlt, faEnvelope, faImage, faImagePortrait, faMap, faMessage, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import Context from '../provider';
+import { useContext } from 'react';
 
 const ProductPage = () => {
     const [product, setProduct] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
+    const [saved, setSaved] = React.useState(false)
     const {id} = useParams()
+    const context = useContext(Context)
 
 
     React.useEffect(() => {
         axios.get(`${url}/vehicle/${id}/`).then(res => {
             setProduct(res.data)
+            setSaved(res.data.is_saved)
             setLoading(false)
         })
     }, [id])
 
-    const saveListing = () => {
-        axios.post(`${url}/api/save-listing/`, {
-            vehicle: id
-        }).then(res => {
-            if(res.data.success){
-                alert("Listing saved")
-            }
-        })
+    const toggleListing = () => {
+        if(saved) { 
+            axios.post(`${url}/api/saved-listings/delete/${product.saved_listing_id}/`).then((data) => {
+                if(!data.data.status == "success") {
+                    context.toast("Cannot get remove saved listing")
+                } else {
+                    setSaved(false)
+                    context.toast("Removed Saved Listing")
+                }
+            }).catch(err => {
+                context.toast("Cannot get remove saved listing")
+            })
+        } else {
+            axios.post(`${url}/api/save-listing/`, {
+                vehicle: id
+            }).then(res => {
+                console.log(res.data)
+                if(res.data.status == "success"){
+                    setSaved(true)
+                    context.toast("Listing saved")
+                } else {
+                    context.toast("Cannot save listing")
+                }
+            })
+        }
+        
     }
 
     if(loading) 
@@ -86,7 +109,8 @@ const ProductPage = () => {
             <div className={styles.column}>
                 <div className={styles.productHeader}>
                     <div>
-                        <img src={product.make.logo} alt={product.make.name} width={64} height={64} />
+                        {!product.make.logo && <FontAwesomeIcon icon={faImage} size={"3x"} />}
+                        {product.make.logo && <img src={product.make.logo} alt={product.make.name} width={64} height={64} />}
                     </div>
                     <div>
                         <b>{product.make.name}</b>
@@ -94,8 +118,8 @@ const ProductPage = () => {
                         <h4 style={{textAlign: "right", color: "#47b5ff", fontSize: "1.5rem", marginTop: "0px", marginBottom: "1rem"}}>$18,000.00</h4>
                     </div>
                 </div>
-                <button onClick={saveListing} className={styles.saveButton}>
-                    <FontAwesomeIcon icon={faSave}  /> Save 
+                <button onClick={toggleListing} className={styles.saveButton} style={{backgroundColor: saved ? "crimson" : null}}>
+                    <FontAwesomeIcon icon={saved ? faTrash : faSave}  /> {saved ? "Remove" : "Save"} 
                 </button>
                 <div className={styles.sellerDetails}>
                     <div className={styles.sellerImage}>
@@ -109,28 +133,28 @@ const ProductPage = () => {
                 </div>
                 <div className={styles.primaryAttributes}>
                     <div>
-                        <FontAwesomeIcon icon={faMap} size="3x" />
+                        <img src={`${url}/static/auto_app/img/dashboard.png`} />
                         <div className={styles.attrContainer}>
                             <span className={styles.attrName}>Mileage</span>
                             <span className={styles.attrValue}>{product.mileage} KM</span>
                         </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon={faBottleWater} size="3x" />
+                    <img src={`${url}/static/auto_app/img/gasoline-pump.png`} />
                         <div className={styles.attrContainer}>
                             <span className={styles.attrName}>Fuel</span>
                             <span className={styles.attrValue}>{product.fuel_type}</span>
                         </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon={faCar} size="3x"/>
+                        <img src={`${url}/static/auto_app/img/axle.png`} />
                         <div className={styles.attrContainer}>
                             <span className={styles.attrName}>Drivetrain</span>
                             <span className={styles.attrValue}>{product.drivetrain.replaceAll("_", " ")}</span>
                         </div>
                     </div>
                     <div>
-                        <FontAwesomeIcon  icon={faCarAlt} size="3x"/>
+                        <img src={`${url}/static/auto_app/img/reduced.png`} />
                         <div className={styles.attrContainer}>
                             <span className={styles.attrName}>Engine</span>
                             <span className={styles.attrValue}>{product.engine}</span>

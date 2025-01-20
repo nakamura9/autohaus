@@ -29,6 +29,11 @@ class VehiclePhotoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = '__all__'
+
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
@@ -36,6 +41,25 @@ class VehicleSerializer(serializers.ModelSerializer):
         depth = 1
 
     photos = VehiclePhotoSerializer(many=True)
+    is_saved = serializers.SerializerMethodField()
+    saved_listing_id = serializers.SerializerMethodField()
+
+    def get_is_saved(self, obj):
+        if not self.context.get('request'):
+            return False
+        if not self.context['request'].user.is_authenticated:
+            return False
+        return SavedListing.objects.filter(vehicle=obj, user=self.context['request'].user).exists()
+
+    def get_saved_listing_id(self, obj):
+        if not self.context.get('request'):
+            return None
+        if not self.context['request'].user.is_authenticated:
+            return None
+        listing = SavedListing.objects.filter(vehicle=obj, user=self.context['request'].user)
+        if listing.exists():
+            return listing.first().id
+        return None
 
 
 class FAQSerializer(serializers.ModelSerializer):

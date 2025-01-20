@@ -2,16 +2,24 @@ import axios from '../utils/http';
 import React from 'react'
 import {url} from '../constants'
 import styles from '../styles/index.module.css'
-import Search from '../components/search';
 import Vehicle from '../components/card';
-import sedan from '../assets/images/sedan.png'
-import hatchback from '../assets/images/hatchback.png'
-import pickup from '../assets/images/pickup-truck.png'
-import suv from '../assets/images/suv-car.png'
-import truck from '../assets/images/truck.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+
+
+const Brand = ({name, logo, query}) => {
+    return (
+        <Link className={styles.brandLink} to={`/buy?${query}`}>
+            <div className={styles.brand}>
+                <div className={styles.brandImg}>
+                    <img src={`${url}${logo}`} alt={name} />
+                </div>
+                <h5>{name}</h5>
+            </div>
+        </Link>
+    )
+}
 
 
 function Index() {
@@ -19,7 +27,6 @@ function Index() {
 
     React.useEffect(() => {
         axios.get(`${url}/vehicle/`).then((response) => {
-            console.log(response.data)
             setData(response.data.results)
         })
     }, [])
@@ -33,37 +40,37 @@ function Index() {
             </ul>
             <div className={styles.tabs}>
                 <div className={styles.buyTab}>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton} >
                             <img src={"/static/auto_app/img/sedan.png"} alt="Sedans" />
                             <h6>Sedans</h6>
                         </div>
                     </Link>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton}>
                             <img src={"/static/auto_app/img/truck.png"} alt="Trucks" />
                             <h6>Trucks</h6>
                         </div>
                     </Link>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton}>
                             <img src={"/static/auto_app/img/suv-car.png"} alt="SUV" />
                             <h6>SUVs</h6>
                         </div>
                     </Link>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton}>
                             <img src={"/static/auto_app/img/pickup-truck.png"} alt="Pickups" />
                             <h6>Commercial</h6>
                         </div>
                     </Link>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton}>
                             <img src={"/static/auto_app/img/hatchback.png"} alt="" />
                             <h6>Hatchbacks</h6>
                         </div>
                     </Link>
-                    <Link to="/buy">
+                    <Link className={styles.brandLink} to="/buy">
                         <div className={styles.buyButton}>
                             <FontAwesomeIcon icon={faQuestionCircle} size={"3x"} />
                             <h6>Other</h6>
@@ -77,57 +84,47 @@ function Index() {
                 <h4>Featured Brands</h4>
                 <div className={styles.brandsContainer}>
                     <div className={styles.brands}>
-                    <div className={styles.brand}>
-                            <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/honda-logo.png`} alt="Honda" />
-                            </div>
-                            <h5>Honda</h5>
-                        </div>
-                        <div className={styles.brand}>
-                            <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/toyota-logo.png`} alt="Toyota" />
-                            </div>
-                            <h5>Toyota</h5>
-                        </div>
-                        <div className={styles.brand}>
-                            <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/volkswagen-logo.png`} alt="VW" />
-                            </div>
-                            <h5>Volkswagen</h5>
-                        </div>
-                        <div className={styles.brand}>
-                            <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/mercedes-benz-logo.png`} alt="Mercedes" />
-                            </div>
-                            <h5>Mercedes-Benz</h5>
-                        </div>
-                        <div className={styles.brand}>
-                            <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/ford-logo.png`} alt="Ford" />
-                            </div>
-                            <h5>Ford</h5>
-                        </div>
-                        <div className={styles.brand}>
-                        <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/bmw-logo.png`} alt="BMW" />
-                            </div>
-                            <h5>BMW</h5>
-                        </div>
-                        <div className={styles.brand}>
-                        <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/kia-logo.png`} alt="Kia" />
-                            </div>
-                            <h5>Kia</h5>
-                        </div>
-                        <div className={styles.brand}>
-                        <div className={styles.brandImg}>
-                                <img src={`${url}/make_logos/mazda-logo.png`} alt="Mazda" />
-                            </div>
-                            <h5>Mazda</h5>
-                        </div>
-                        
-                        
-                        
+                        <Brand 
+                            name="Honda"
+                            query="make=14"
+                            logo="/make_logos/honda-logo.png"
+                        />
+                        <Brand 
+                            name="Toyota"
+                            query="make=28"
+                            logo="/make_logos/toyota-logo.png"
+                        />
+                        <Brand
+                            name="Volkswagen"
+                            query="make=38"
+                            logo="/make_logos/volkswagen-logo.png"
+                        />
+                        <Brand 
+                            name="Mercedes"
+                            query="make=32"
+                            logo="/make_logos/mercedes-benz-logo.png"
+                        />
+                        <Brand
+                            name="Ford"
+                            query="make=9"
+                            logo="/make_logos/ford-logo.png"
+                        />
+                        <Brand
+                            name="BMW"
+                            query="make=27"
+                            logo="/make_logos/bmw-logo.png"
+                        />
+                        <Brand
+                            name="Kia"
+                            query="make=20"
+                            logo="/make_logos/kia-logo.png"
+                        />
+                        <Brand
+                            name="Mazda"
+                            query="make=4"
+                            logo="/make_logos/mazda-logo.png"
+                        />
+                    
                     </div>
                 </div>
                 
@@ -137,8 +134,8 @@ function Index() {
                 <h4>Featured Listings</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
-                        {data.map(d => (
-                            <Vehicle {...d} />
+                        {data.map((d, i) => (
+                            <Vehicle {...d} key={i}/>
                         ))}
                     </div>
                 </div>
