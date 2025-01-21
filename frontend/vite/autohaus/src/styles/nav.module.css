@@ -123,3 +123,72 @@
     background-color: #47B5FF;
     color: white
 }
+
+.mobileMenu {
+    width: 60px;
+    margin-left: calc(100% - 60px);
+}
+
+.mobileMenu button {
+    background: transparent;
+    border: 0px;
+    height: 48px;
+    width: 100%;
+    color: white
+}
+
+.mobileMenuContainer {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    height: 100%;
+    top: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mobileMenuContainer > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 1rem
+}
+
+.mobileMenuLinks {
+    list-style-type: none;
+    padding-left: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 8rem;
+}
+
+.mobileMenuLinks li {
+    padding: 2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.mobileMenuLinks a:visited,
+.mobileMenuLinks a {
+    text-decoration: none;
+    color: #333
+}
+
+@media (max-width: 575px) {
+    .navContent {
+        width: 100% !important;
+        /* padding-left: 1rem; */
+        padding-right: 1.5rem;
+        margin: 0px;
+    }
+    .navMenu {
+        right: 0px
+    }
+}
+
+/* Style mobileMenu */

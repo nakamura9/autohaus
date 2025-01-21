@@ -62,3 +62,10 @@
     background-color: #efefef;
     margin-right: 4px;
 }
+
+@media (max-width: 575px) {
+    .searchContainer {
+        width: calc(100% - 1.5rem);
+        margin-left: 0.75rem
+    }    
+}

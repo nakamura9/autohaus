@@ -1,7 +1,8 @@
 .hero {
     background-color: #010038;
     color: #F58533;
-    padding: 2rem
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .main {
@@ -21,7 +22,6 @@
     color: #010038;
     background-color: #F58533;
     padding: 4px;
-    margin-top: 2rem;
     text-align: center;
     font-weight: bold;
     border: 2px solid #F58533;
@@ -55,9 +55,10 @@
 
 .buyTab {
     display: flex;
-    padding-left: 24px;
-    padding-bottom: 24px;
-    padding-top: 48px;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    gap: 12px
 }
 
 .buyButton {
@@ -66,7 +67,6 @@
     background-color: #F58533;
     color: #010038;
     border-radius: 8px;
-    margin-right: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,4 +128,24 @@
 .brandLink {
     text-decoration: none;
     color: #333
+}
+
+@media (max-width: 575px) {
+    .main {
+        width: 100%;
+    }
+
+    .buyTab {
+        flex-wrap: wrap;
+    }
+
+    .brandImg {
+        width: 100px;
+        height: 100px;
+
+    }
+
+    .brandImg img {
+        width: 100px;
+    }
 }

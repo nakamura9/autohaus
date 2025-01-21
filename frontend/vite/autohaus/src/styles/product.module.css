@@ -1,10 +1,14 @@
 .container {
+    
+}
+
+.row {
     display: flex;
     gap: 36px
 }
 
 .column {
- flex: 1   
+ flex: 1;
 }
 
 .primaryAttributes {
@@ -134,4 +138,10 @@
 .primaryAttributes img {
     width: 80%;
     height: auto;
+}
+
+@media (max-width: 575px) {
+    .row {
+        flex-direction: column;
+    }
 }

@@ -477,3 +477,31 @@
     border-radius: 1rem;
     z-index: 2000;
 }
+
+@media (max-width: 575px) {
+    .conditionButtons > div {
+        width: 120px;
+    }
+
+    .uploadContainer {
+        width: 100%;
+    }
+
+    .fieldGroupFields input {
+        width: 72px;
+    }
+
+    .fieldGroup {
+        width: 168px;
+    }
+
+    .card {
+        width: 148px;
+        min-width: 148px;
+        height: 284px
+    }
+
+    .card img {
+        width: 148px
+    }
+}

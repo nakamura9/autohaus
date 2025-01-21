@@ -61,50 +61,14 @@ const ProductPage = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.row}>
             <div className={styles.column}>
                 <div className={styles.carousel}>
                     <Carousel>
                     {product.photos.map(p => (<img src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))}
                     </Carousel>
                 </div>
-                <div className={styles.secondaryAttributes}>
-                    <h5>Vehicle Attributes</h5>
-                    <div className={styles.table}>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Make</div>
-                            <div className={styles.tableCol}>{product.make.name}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Model</div>
-                            <div className={styles.tableCol}>{product.model.name}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Year</div>
-                            <div className={styles.tableCol}>{product.year}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Transmission</div>
-                            <div className={styles.tableCol}>{product.transmission}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Fuel Type</div>
-                            <div className={styles.tableCol}>{product.fuel_type}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Drivetrain</div>
-                            <div className={styles.tableCol}>{product.drivetrain}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Engine</div>
-                            <div className={styles.tableCol}>{product.engine}</div>
-                        </div>
-                        <div  className={styles.tableRow}>
-                            <div className={styles.tableCol}>Car Class</div>
-                            <div className={styles.tableCol}>{product.car_class}</div>
-                        </div>
-                        
-                    </div>
-                </div>
+                
             </div>
             <div className={styles.column}>
                 <div className={styles.productHeader}>
@@ -177,6 +141,49 @@ const ProductPage = () => {
                         <FontAwesomeIcon icon={faSms} size="2x"  />
                     </button>
                     </div>
+                </div>
+                </div>
+            </div>
+            <div className={styles.row}>
+                <div className={styles.column}>
+                    <div className={styles.secondaryAttributes}>
+                            <h5>Vehicle Attributes</h5>
+                            <div className={styles.table}>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Make</div>
+                                    <div className={styles.tableCol}>{product.make.name}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Model</div>
+                                    <div className={styles.tableCol}>{product.model.name}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Year</div>
+                                    <div className={styles.tableCol}>{product.year}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Transmission</div>
+                                    <div className={styles.tableCol}>{product.transmission}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Fuel Type</div>
+                                    <div className={styles.tableCol}>{product.fuel_type}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Drivetrain</div>
+                                    <div className={styles.tableCol}>{product.drivetrain}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Engine</div>
+                                    <div className={styles.tableCol}>{product.engine}</div>
+                                </div>
+                                <div  className={styles.tableRow}>
+                                    <div className={styles.tableCol}>Car Class</div>
+                                    <div className={styles.tableCol}>{product.car_class}</div>
+                                </div>
+                                
+                            </div>
+                        </div>
                 </div>
             </div>
     </div>

@@ -138,3 +138,14 @@ label {
     border: 2px solid #F58533;
     background-color: #F58533;
 }
+
+@media (max-width: 575px) {
+    .sellContainer {
+        padding-bottom: 5rem;
+    }
+
+    .inputContainer {
+        width: calc( 100% - 2rem);
+        margin-right: 
+    }
+}

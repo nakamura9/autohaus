@@ -2,7 +2,6 @@
     background-color: #010038;
     border-radius: 12px;
     padding: 12px;
-    
 }
 
 .searchFields {
@@ -25,8 +24,6 @@
     font-weight: bold;
     margin-top: 12px;
 }
-
-
 
 .search input::placeholder {
     color: #F58533;
@@ -73,4 +70,10 @@
 .results {
     display: flex;
     flex-wrap: wrap;
+}
+
+@media (max-width: 575px) {
+    .inputContainer {
+        width: 168px;
+    }
 }

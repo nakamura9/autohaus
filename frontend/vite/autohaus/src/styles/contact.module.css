@@ -39,3 +39,10 @@
     display: block;
     border-radius: 8px;
 }
+
+@media (max-width: 575px) {
+    .ContactPage {
+        width: calc(100% - 24px);
+        margin: 2rem
+    }
+}
