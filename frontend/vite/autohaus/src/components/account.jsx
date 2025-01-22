@@ -227,6 +227,7 @@ const AccountScreen = () => {
                                     <h3>{listing.model.name}</h3>
                                     <p className={styles.price}>{listing.price}</p>
                                     <div className={styles.actions}>
+                                    <button  onClick={() => {context.toggleAccount(); navigate(`/product/${listing.id}`)}}>View</button>
                                         <button 
                                             onClick={() => removeSavedListing(listing.id)}
                                             style={{background: 'white', color: 'crimson', border: "2px solid crimson"}}

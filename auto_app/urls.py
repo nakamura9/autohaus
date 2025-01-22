@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from auto_app.views import (
     app, search, create_vehicle, search_vehicles,
     sign_up, login, submit_contact, get_user_details,
@@ -35,6 +35,7 @@ urlpatterns = [
     path("about", app, name="app"),
     path("faq", app, name="app"),
     path("contact", app, name="app"),
+    re_path(r"product/*", app, name="app"),
     path("api/search/<str:model>/", search, name="search"),
     path("api/create-vehicle/", create_vehicle, name="create-vehicle"),
     path("api/search-vehicles/", search_vehicles, name="search-vehicles"),
