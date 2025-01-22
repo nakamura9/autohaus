@@ -11,6 +11,19 @@ def base64_file(data, name=None):
 
 
 def seller_json(user):
+    if not user.is_authenticated:
+        return None
+    
+    if not user.seller:
+        return {
+            'user': {
+                'id': user.pk,
+                'username': user.username,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email
+            } 
+        }
     return {
         'user': {
             'id': user.pk,
@@ -19,11 +32,9 @@ def seller_json(user):
             'last_name': user.last_name,
             'email': user.email,
             'recovery_email': user.seller.recovery_email,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
             'phone': user.seller.phone_number,
             'country': user.seller.country,
-            'city': user.seller.city.pk,
+            'city': user.seller.city.pk if user.seller.city else None,
             'whatsapp': user.seller.whatsapp,
             'photo': user.seller.photo.url if user.seller.photo else None
         }
