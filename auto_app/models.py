@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 
 # Create your models here.
@@ -28,6 +29,10 @@ class Seller(BaseModel):
 
     def __str__(self) -> str:
         return self.name
+
+    @property
+    def num_ads(self):
+        return Vehicle.objects.filter(seller=self).count()
 
 
 class Make(BaseModel):
@@ -138,6 +143,17 @@ class Vehicle(BaseModel):
     def __str__(self) -> str:
         return str(self.model)
 
+    def related_listings(self):
+        return Vehicle.objects.filter(Q(
+            Q(Q(make=self.make) & Q(model=self.model)) | 
+            Q(price__range=(self.price - 1000, self.price + 1000)) |
+            Q(year__range=(self.year - 2, self.year + 2)) |
+            Q(fuel_type=self.fuel_type) |
+            Q(transmission=self.transmission) |
+            Q(drivetrain=self.drivetrain) |
+            Q(body_type=self.body_type)
+        )).exclude(pk=self.pk)[:10]
+
 
 class VehiclePhoto(BaseModel):
     vehicle = models.ForeignKey('auto_app.Vehicle', on_delete=models.CASCADE, related_name='photos')
@@ -184,3 +200,8 @@ class ContactEntry(models.Model):
 class SavedListing(models.Model):
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     vehicle = models.ForeignKey("auto_app.Vehicle", on_delete=models.CASCADE)
+
+
+class SavedSearch(models.Model):
+    user = models.OneToOneField("auth.User", on_delete=models.CASCADE)
+    filters = models.TextField()

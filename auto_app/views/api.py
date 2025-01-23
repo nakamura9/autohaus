@@ -4,11 +4,11 @@ from django.db.models import Q
 import json
 from auto_app.models import (
     Vehicle, Make, Model, Seller, City, VehiclePhoto, Vehicle, ContactEntry,
-    SavedListing
+    SavedListing, SavedSearch
 )
 from django.views.decorators.csrf import csrf_exempt
 import copy
-from auto_app.utils import base64_file
+from auto_app.utils import base64_file, process_search
 from auto_app.serializers import VehicleSerializer
 
 
@@ -41,42 +41,19 @@ def search(request, model=None):
 
 
 def search_vehicles(request):
-    filters = Q()
-    if request.GET.get('make'):
-        filters.add(Q(make__id=request.GET.get('make')), Q.AND)
+    results = process_search(request.GET)
 
-    if request.GET.get('model'):
-        filters.add(Q(model__id=request.GET.get('model')), Q.AND)
+    if not request.user.is_anonymous:
+        saved_search, _ = SavedSearch.objects.get_or_create(user=request.user)
+        json_string = saved_search.filters or """{"searches": []}"""
+        search_list = json.loads(json_string)['searches']
+        if len(search_list) > 9:
+            search_list = search_list[1:]
+        saved_search.filters = json.dumps({
+            'searches': search_list + [request.GET]
+        })
+        saved_search.save()
 
-    if request.GET.get('transmission'):
-        filters.add(Q(transmission__iexact=request.GET.get('transmission')), Q.AND)
-
-    if request.GET.get('drivetrain'):
-        filters.add(Q(drivetrain__iexact=request.GET.get('drivetrain')), Q.AND)
-
-    if request.GET.get('fuel_type'):
-        filters.add(Q(fuel_type__iexact=request.GET.get('fuel_type')), Q.AND)
-
-    if request.GET.get('min_year'):
-        filters.add(Q(year__gte=request.GET.get('min_year')), Q.AND)
-
-    if request.GET.get('max_year'):
-        filters.add(Q(year__lte=request.GET.get('max_year')), Q.AND)
-
-    if request.GET.get('min_mileage'):
-        filters.add(Q(mileage__gte=request.GET.get('min_mileage')), Q.AND)
-
-    if request.GET.get('max_mileage') and request.GET['max_mileage'] != '0':
-        filters.add(Q(mileage__lte=request.GET.get('max_mileage')), Q.AND)
-
-    if request.GET.get('min_price'):
-        filters.add(Q(price__gte=request.GET.get('min_price')), Q.AND)
-
-    if request.GET.get('max_price') and request.GET['max_price'] != '0':
-        filters.add(Q(price__lte=request.GET.get('max_price')), Q.AND)
-
-    order_by = request.GET.get('sort_by') or 'price'
-    results = Vehicle.objects.filter(filters).order_by(order_by)
     return JsonResponse(VehicleSerializer(results, many=True).data, safe=False)
 
 
@@ -167,7 +144,7 @@ def update_account(request):
         user.first_name = data.get('first_name')
         user.last_name = data.get('last_name')
         user.save()
-        seller.whatsapp = data.get('whatsapp') == "true"
+        seller.whatsapp = data.get('whatsapp')
         seller.recovery_email = data.get('recovery_email')
         seller.phone_number = data.get('phone')
         seller.country = data.get('country')
@@ -241,3 +218,30 @@ def remove_listing(request, id=None):
         return JsonResponse({"status": "success"})
     else:
         return JsonResponse({"status": "error"})
+
+
+def related_listings(request, id=None):
+    vehicle = Vehicle.objects.get(pk=id)
+    return JsonResponse(VehicleSerializer(vehicle.related_listings(), many=True).data, safe=False)
+
+
+def latest_listings(request, id=None):
+    vehicles = Vehicle.objects.all().order_by("created_at").reverse()[:10]
+    return JsonResponse(VehicleSerializer(vehicles, many=True).data, safe=False)
+
+
+def recommended_listings(request):
+    user = request.user
+    saved_vehicles = SavedListing.objects.filter(user=user)
+    recommended_vehicle_ids = []
+    for saved_vehicle in saved_vehicles:
+        recommended_vehicle_ids.extend([v.pk for v in saved_vehicle.vehicle.related_listings()])
+
+    saved_searches = SavedSearch.objects.filter(user=user).first()
+    for saved_search in json.loads(saved_searches.filters).get('searches'):
+        recommended_vehicle_ids.extend([v.pk for v in process_search(saved_search)])
+
+    unique_pks = set(recommended_vehicle_ids)
+    vehicles = Vehicle.objects.filter(pk__in=list(unique_pks)[:10])
+
+    return JsonResponse(VehicleSerializer(vehicles, many=True).data, safe=False)

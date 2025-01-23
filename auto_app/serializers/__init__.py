@@ -16,11 +16,18 @@ class ModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+
 class SellerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seller
         fields = '__all__'
         depth = 1
+
+    number_of_ads = serializers.SerializerMethodField()
+
+    def get_number_of_ads(self, obj):
+        return obj.num_ads
+
 
 
 class VehiclePhotoSerializer(serializers.ModelSerializer):
@@ -40,6 +47,7 @@ class VehicleSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 1
 
+    seller = SellerSerializer()
     photos = VehiclePhotoSerializer(many=True)
     is_saved = serializers.SerializerMethodField()
     saved_listing_id = serializers.SerializerMethodField()

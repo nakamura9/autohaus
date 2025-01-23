@@ -10,6 +10,8 @@ import axios from '../utils/http'
 import { url } from '../constants'
 import Context from '../provider'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Carousel } from 'react-responsive-carousel'
+
 
 
 const Tab = ({children, active}) => {
@@ -19,6 +21,65 @@ const Tab = ({children, active}) => {
     </div>
   )
 }
+
+const SamplePhotoCarousel = () => {
+  const slides = [
+    <div className={styles.tips}>
+      <h4>Tips for taking great photos</h4>
+      <ul>
+        <li>Use a well lit area, preferrably natural light and no flash.</li>
+        <li>Shoot against a uniform background.</li>
+        <li>Make sure your vehicle is fully visible.</li>
+        <li>Shoot the image in auto mode.</li>
+        <li>Make sure there are no blur or filter effects applied to the image.</li>
+      </ul>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/front.png`} alt="placeholder" />
+      </div>
+      <h5>Front View</h5>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/rear.png`} alt="placeholder" />
+      </div>
+      <h5>Rear View</h5>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/side.png`} alt="placeholder" />
+      </div>
+      <h5>Side View</h5>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/front three quarter.png`} alt="placeholder" />
+      </div>
+      <h5>Front Three Quarter View</h5>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/rear three quarter.png`} alt="placeholder" />
+      </div>
+      <h5>Rear Three Quarter View</h5>
+    </div>,
+    <div>
+      <div className={styles.carouselImg}>
+        <img src={`${url}/sample_car_photos/front.png`} alt="placeholder" />
+      </div>
+      <h5>Dashboard View</h5>
+    </div>
+  ]
+
+  return (
+    <div className={styles.imgCarousel}>
+      <Carousel  >
+        {slides.map((s, i) => (<div key={i}>{s}</div>))}
+        </Carousel>
+    </div>
+  )
+} 
 
 
 const SellPage = () => {
@@ -257,8 +318,11 @@ const SellPage = () => {
             value={condition} />
       </Tab>
       <Tab active={active == 1}>
+        <div className={styles.flex}>
         <ImageUploadWidget onUploadSuccess={(img) => setImages([...images, img])} />
-        <div className={styles.imgCarousel}>
+        <SamplePhotoCarousel />
+        </div>
+        <div className={styles.capturedPhotos}>
           {images.map((img, i) => (<div key={i} className={styles.imgContainer}>
             <div onClick={() => {
               const newImages = [...images]

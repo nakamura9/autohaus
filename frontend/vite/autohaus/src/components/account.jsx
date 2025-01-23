@@ -178,7 +178,7 @@ const AccountScreen = () => {
                                 <div className={styles.inputContainer}><input type="text" value={recoveryEmail}  onChange={e => setRecoveryEmail(e.target.value)} /></div>
                                 <div className={styles.inputContainer}>
                                     <label  className={styles.label}>Phone # on Whatsapp?</label>
-                                    <input type="checkbox" value={whatsapp}  onChange={e => setWhatsapp(e.target.value)} />
+                                    <input type="checkbox" checked={whatsapp}  onChange={e => setWhatsapp(!whatsapp)} />
                                 </div>
                                 
                                 <div className={styles.photoContainer}>

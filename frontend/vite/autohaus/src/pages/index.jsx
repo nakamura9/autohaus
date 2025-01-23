@@ -24,10 +24,15 @@ const Brand = ({name, logo, query}) => {
 
 function Index() {
     const [data, setData] = React.useState([])
+    const [recommendedListings, setRecommendedListings] = React.useState([])
 
     React.useEffect(() => {
-        axios.get(`${url}/vehicle/`).then((response) => {
-            setData(response.data.results)
+        axios.get(`${url}/api/latest-listings/`).then((response) => {
+            setData(response.data)
+        })
+
+        axios.get(`${url}/api/recommended-listings/`).then((response) => {
+            setRecommendedListings(response.data)
         })
     }, [])
 
@@ -130,10 +135,21 @@ function Index() {
             </div>
             
             <div>
-                <h4>Featured Listings</h4>
+                <h4>Latest Listings</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
                         {data.map((d, i) => (
+                            <Vehicle {...d} key={i}/>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Recommended for you</h4>
+                <div className={styles.listingsContainer}>
+                    <div className={styles.listings}>
+                        {recommendedListings.map((d, i) => (
                             <Vehicle {...d} key={i}/>
                         ))}
                     </div>

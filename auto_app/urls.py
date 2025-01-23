@@ -3,7 +3,8 @@ from auto_app.views import (
     app, search, create_vehicle, search_vehicles,
     sign_up, login, submit_contact, get_user_details,
     save_listing, saved_listings, account_listings, reset_password, delete_account,
-    update_account, remove_saved_listing, remove_listing
+    update_account, remove_saved_listing, remove_listing,
+    related_listings, recommended_listings, latest_listings
 )
 from auto_app.views.serializers import (
     VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet,
@@ -43,6 +44,9 @@ urlpatterns = [
     path("api/user-details/", get_user_details, name="user-details"),
     path("api/update-account/", update_account, name="update-account"),
     path("api/account-listings/", account_listings, name="my-listings"),
+    path("api/related-listings/<int:id>/", related_listings, name="related-listings"),
+    path("api/recommended-listings/", recommended_listings, name="recommended-listings"),
+    path("api/latest-listings/", latest_listings, name="latest-listings"),
     path("api/save-listing/", save_listing, name="save-listing"),
     path(
         "api/saved-listings/delete/<int:id>/",

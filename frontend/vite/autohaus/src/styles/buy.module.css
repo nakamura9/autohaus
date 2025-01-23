@@ -72,6 +72,26 @@
     flex-wrap: wrap;
 }
 
+.noResults {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.noResults img {
+    width: 128px;
+}
+
+.noResults p {
+    font-weight: bold;
+    color: crimson;
+    font-size: 1.5rem;
+}
+
+
 @media (max-width: 575px) {
     .inputContainer {
         width: 168px;

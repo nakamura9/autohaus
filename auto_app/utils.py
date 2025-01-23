@@ -1,4 +1,6 @@
 from django.core.files.base import ContentFile
+from django.db.models import Q
+from auto_app.models import Vehicle
 import base64
 
 def base64_file(data, name=None):
@@ -39,3 +41,42 @@ def seller_json(user):
             'photo': user.seller.photo.url if user.seller.photo else None
         }
     }
+
+
+def process_search(query_map):
+    filters = Q()
+    if query_map.get('make'):
+        filters.add(Q(make__id=query_map.get('make')), Q.AND)
+
+    if query_map.get('model'):
+        filters.add(Q(model__id=query_map.get('model')), Q.AND)
+
+    if query_map.get('transmission'):
+        filters.add(Q(transmission__iexact=query_map.get('transmission')), Q.AND)
+
+    if query_map.get('drivetrain'):
+        filters.add(Q(drivetrain__iexact=query_map.get('drivetrain')), Q.AND)
+
+    if query_map.get('fuel_type'):
+        filters.add(Q(fuel_type__iexact=query_map.get('fuel_type')), Q.AND)
+
+    if query_map.get('min_year'):
+        filters.add(Q(year__gte=query_map.get('min_year')), Q.AND)
+
+    if query_map.get('max_year'):
+        filters.add(Q(year__lte=query_map.get('max_year')), Q.AND)
+
+    if query_map.get('min_mileage'):
+        filters.add(Q(mileage__gte=query_map.get('min_mileage')), Q.AND)
+
+    if query_map.get('max_mileage') and query_map['max_mileage'] != '0':
+        filters.add(Q(mileage__lte=query_map.get('max_mileage')), Q.AND)
+
+    if query_map.get('min_price'):
+        filters.add(Q(price__gte=query_map.get('min_price')), Q.AND)
+
+    if query_map.get('max_price') and query_map['max_price'] != '0':
+        filters.add(Q(price__lte=query_map.get('max_price')), Q.AND)
+
+    order_by = query_map.get('sort_by') or 'price'
+    return Vehicle.objects.filter(filters).order_by(order_by)

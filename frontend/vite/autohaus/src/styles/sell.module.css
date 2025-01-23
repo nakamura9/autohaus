@@ -74,10 +74,52 @@ label {
 }
 
 
-.imgCarousel {
+.capturedPhotos {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+    margin-top: 24px
+}
+
+.imgCarousel {
+    border: 2px solid #F58533;
+    color: #F58533;
+    margin-left: 12px;
+    border-radius: 1rem;
+    min-height: 400px;
+}
+
+.tips {
+    min-height: 320px;
+    text-align: left;
+}
+
+.tips h4 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.tips h5 {
+    text-align: center;
+    font-size: 1.5rem !important;
+}
+
+.tips li {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+.carouselImg {
+    overflow: hidden;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.flex {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 .imageWrapper {
@@ -148,4 +190,23 @@ label {
         width: calc( 100% - 2rem);
         margin-right: 
     }
+
+    .flex {
+        flex-direction: column;
+     }
+
+     .imgCarousel {
+        width: 300px;
+        margin-left: 0px
+     }
+
+     .tips {
+        min-height: 200px;
+        max-width: 100%;
+     }
+
+     .tips li {
+        font-size: 1rem;
+        line-height: 1.4rem;
+     }
 }

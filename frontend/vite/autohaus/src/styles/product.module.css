@@ -140,6 +140,15 @@
     height: auto;
 }
 
+.listings {
+    display: flex;
+}
+
+.listingsContainer {
+    overflow-x: auto;
+}
+
+
 @media (max-width: 575px) {
     .row {
         flex-direction: column;

@@ -156,6 +156,10 @@ const BuyPage = () => {
         {results.map((vehicle, index) => (
             <Vehicle {...vehicle} key={index} />
         ))}
+        {results.length == 0 && <div className={styles.noResults}>
+            <img src={`/static/auto_app/img/searching.png`} alt="No Vehicles" />
+            <p>No results found</p>
+        </div>}
     </div>}
     </>)
 }

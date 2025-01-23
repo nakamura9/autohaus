@@ -7,14 +7,16 @@ import {useParams} from 'react-router-dom'
 import axios from '../utils/http';
 import { url } from '../constants';
 import styles from '../styles/product.module.css'
-import {faBottleWater, faCar, faCarAlt, faEnvelope, faImage, faImagePortrait, faMap, faMessage, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faImage, faImagePortrait, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Context from '../provider';
 import { useContext } from 'react';
+import Vehicle from '../components/card';
 
 const ProductPage = () => {
     const [product, setProduct] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
+    const [similarListings, setSimilarListings] = React.useState([])
     const [saved, setSaved] = React.useState(false)
     const {id} = useParams()
     const context = useContext(Context)
@@ -25,6 +27,11 @@ const ProductPage = () => {
             setProduct(res.data)
             setSaved(res.data.is_saved)
             setLoading(false)
+        })
+
+        axios.get(`${url}/api/related-listings/${id}/`).then(res => {
+            console.log(res.data)
+            setSimilarListings(res.data)
         })
     }, [id])
 
@@ -54,6 +61,22 @@ const ProductPage = () => {
             })
         }
         
+    }
+
+    const openWhatsapp = () => {
+        window.open(`https://wa.me/${product.seller.country}${product.seller.phone_number}?text=Hi, I am interested in your ${product.make.name} ${product.model.name}. Is it still available?`)
+    }
+
+    const openDialer = () => {
+        window.open(`tel:${product.seller.country}${product.seller.phone_number}`)
+    }
+
+    const openEmail = () => {
+        window.open(`mailto:${product.seller.email}`)
+    }
+
+    const openSMS = () => {
+        window.open(`sms:${product.seller.country}${product.seller.phone_number}`)
     }
 
     if(loading) 
@@ -92,7 +115,7 @@ const ProductPage = () => {
                     </div>
                     <div>
                         <h5>Seller: {product.seller.name}</h5>
-                        <p>Number of Ads: 1</p>
+                        <p>Number of Ads: {product.seller.number_of_ads}</p>
                     </div>
                 </div>
                 <div className={styles.primaryAttributes}>
@@ -128,13 +151,14 @@ const ProductPage = () => {
                 <div className={styles.contact}>
                     <h4>Contact Seller</h4>
                     <div>
-                    <button>
+                    
+                    {product.seller.whatsapp && (<button onClick={openWhatsapp} >
                         <FontAwesomeIcon icon={faWhatsapp} size="2x" color="#44FF44" />
-                    </button>
-                    <button>
+                    </button>)}
+                    <button onClick={openDialer}>
                         <FontAwesomeIcon icon={faPhone} size="2x" color="#007bff" />
                     </button>
-                    <button>
+                    <button onClick={openEmail}>
                         <FontAwesomeIcon icon={faEnvelope} size="2x" color="#ccc" />
                     </button>
                     <button>
@@ -184,6 +208,17 @@ const ProductPage = () => {
                                 
                             </div>
                         </div>
+                </div>
+            </div>
+            <h4>Related Listings</h4>
+
+            <div className={styles.row}>
+                <div className={styles.listingsContainer}>
+                    <div className={styles.listings}>
+                        {similarListings.map((d, i) => (
+                            <Vehicle {...d} key={i}/>
+                        ))}
+                    </div>
                 </div>
             </div>
     </div>
