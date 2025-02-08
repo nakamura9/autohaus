@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models import Q
+from auto_app.utils import upload_photo
+
+CDN_DOMAIN_NAME = "https://autohaus-mukuta.s3.af-south-1.amazonaws.com"
 
 
 # Create your models here.
@@ -160,6 +163,35 @@ class VehiclePhoto(BaseModel):
     photo = models.ImageField(upload_to='vehicle_photos/')
     thumbnail = models.ImageField(upload_to='vehicle_thumbnails/', null=True, blank=True)
     is_main = models.BooleanField(default=False)
+    cdn_photo = models.URLField(blank=True, null=True)
+    cdn_thumbnail = models.URLField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.cdn_photo or self.cdn_thumbnail:
+            super().save()
+            return
+
+        from PIL import Image
+        from io import BytesIO
+        from django.core.files.uploadedfile import InMemoryUploadedFile
+        import sys
+        im = Image.open(self.photo)
+        output = BytesIO()
+        # Resize/modify the image
+        im = im.resize((300, 300))
+        # after modifications, save it to the output
+        im.save(output, format='PNG', quality=100)
+        output.seek(0)
+        # change the imagefield value to be the newley modifed image value
+        self.thumbnail = InMemoryUploadedFile(output, 'ImageField', "%s_thumb.png" % self.photo.name.split('.')[0], 'image/png', sys.getsizeof(output), None)
+        super(VehiclePhoto, self).save(*args, **kwargs)
+        # upload the photo and thumbnail to s3 
+        # if upload_photo(self.photo.path, self.photo.name):
+        #     self.cdn_photo = f"{CDN_DOMAIN_NAME}/vehicle_photos/{self.photo.name}"
+        # if upload_photo(self.thumbnail.path, self.thumbnail.name):
+        #     self.cdn_thumbnail = f"{CDN_DOMAIN_NAME}/vehicle_thumbnails/{self.thumbnail.name}"
+
+        # self.save()
 
 
 class City(models.Model):

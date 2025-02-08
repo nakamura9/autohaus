@@ -139,6 +139,9 @@
 .tabs {
     display: flex;
     border-bottom: 1px solid #ccc;
+    padding-left: 0px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .tabs li.active,
@@ -255,6 +258,28 @@ output {
     border-radius: 4px;
 }
 
+.subscriptionTable {
+    width: 100%;
+    text-align: left;
+}
+
+.subscriptionTable th,
+.subscriptionTable td {
+    padding: 0.5rem
+}
+.subscriptionTable tbody tr:hover {
+    background-color: #efefef;
+}
+.subscriptionTable tr {
+    border-bottom: 1px solid #ccc;
+}
+.subscriptionTable thead tr {
+    background-color: #010038;
+    color: white;
+    border-collapse: collapse;
+}
+
+
 /* Responsive design for mobile devices */
 @media (max-width: 768px) {
     .listing {
@@ -264,6 +289,10 @@ output {
     .listing img {
         width: 100%;
         height: 200px;
+    }
+
+    .card {
+        width: 300px;
     }
 }
 

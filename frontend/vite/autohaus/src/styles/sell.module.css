@@ -181,6 +181,28 @@ label {
     background-color: #F58533;
 }
 
+.callToAction {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #47B5FF;
+    border-radius: 1rem;
+}
+
+.callToAction h5 {
+    margin-top: 0px
+}
+
+.callToAction button {
+    color: white;
+    border: 0px;
+    outline: 0px;
+    background-color: #010038;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.25rem;
+}
+
 @media (max-width: 575px) {
     .sellContainer {
         padding-bottom: 5rem;

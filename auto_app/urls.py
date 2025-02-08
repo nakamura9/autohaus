@@ -6,6 +6,7 @@ from auto_app.views import (
     update_account, remove_saved_listing, remove_listing,
     related_listings, recommended_listings, latest_listings
 )
+
 from auto_app.views.serializers import (
     VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet,
     FAQViewSet, CityViewSet

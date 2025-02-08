@@ -90,6 +90,7 @@ const BuyPage = () => {
     React.useEffect(search, [make, model, transmission, drivetrain, fuelType, minYear, maxYear])
 
     return (<>
+        <h2>Search for Vehicles</h2>
         <div className={styles.search}>
         <div>
             <h4>SEARCH</h4>

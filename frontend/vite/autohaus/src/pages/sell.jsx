@@ -66,7 +66,7 @@ const SamplePhotoCarousel = () => {
     </div>,
     <div>
       <div className={styles.carouselImg}>
-        <img src={`${url}/sample_car_photos/front.png`} alt="placeholder" />
+        <img src={`${url}/sample_car_photos/dashboard.png`} alt="placeholder" />
       </div>
       <h5>Dashboard View</h5>
     </div>
@@ -293,6 +293,12 @@ const SellPage = () => {
 
   return (
     <>
+    <h2>Sell Your Vehicle</h2>
+    <div className={styles.callToAction}>
+      <h5>Upgrade To Pro!</h5>
+      <p>To unlock more features such as priority listings, advanced analytics and the ability post unlimited ads, upgrade your account to pro. </p>
+      <button>Upgrade</button>
+    </div>
     <ul className={styles.sellTabs}>
       {tabs.map((t, i) => <li key={i} onClick={() => setActive(i)} className={i == active ? styles.active : null}>{t}</li>)}
     </ul>

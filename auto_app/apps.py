@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from auto_app import logging
 
 
 class AutoAppConfig(AppConfig):
@@ -7,5 +8,3 @@ class AutoAppConfig(AppConfig):
 
     def ready(self):
         from . import signals
-        
-        

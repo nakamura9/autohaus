@@ -1,7 +1,9 @@
 from django.core.files.base import ContentFile
 from django.db.models import Q
-from auto_app.models import Vehicle
 import base64
+import boto3
+from auto_app.logging import logger
+
 
 def base64_file(data, name=None):
     _format, _img_str = data.split(';base64,')
@@ -9,13 +11,13 @@ def base64_file(data, name=None):
     if not name:
         name = _name.split(":")[-1]
     filename = name
-    return ContentFile(base64.b64decode(_img_str), name=filename), filename
+    return ContentFile(base64.b64decode(_img_str), name=f"{filename}.{ext}"), filename
 
 
 def seller_json(user):
     if not user.is_authenticated:
         return None
-    
+
     if not user.seller:
         return {
             'user': {
@@ -44,6 +46,8 @@ def seller_json(user):
 
 
 def process_search(query_map):
+    from auto_app.models import Vehicle
+
     filters = Q()
     if query_map.get('make'):
         filters.add(Q(make__id=query_map.get('make')), Q.AND)
@@ -80,3 +84,19 @@ def process_search(query_map):
 
     order_by = query_map.get('sort_by') or 'price'
     return Vehicle.objects.filter(filters).order_by(order_by)
+
+
+def upload_photo(file_path, name):
+    try:
+        logger.info(f"Tryging to upload {file_path}  {name}")
+        session = boto3.Session(profile_name="autohaus")
+        s3 = session.client('s3', region_name='af-south-1')
+        existing = f"Existing buckets: {[b for b in s3.list_buckets()]}"
+        logger.info(existing)
+        s3.upload_file(file_path, 'autohaus-mukuta', name)
+    except Exception as e:
+        logger.error(f"Failed to upload file {name}: {str(e)}")
+        return False
+    else:
+        logger.info("Uploaded file successfully")
+        return True

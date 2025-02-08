@@ -2,7 +2,6 @@ from auto_app.models import *
 from rest_framework import serializers
 
 
-
 class MakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make

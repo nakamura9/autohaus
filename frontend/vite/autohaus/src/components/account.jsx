@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFacebook, faGoogle} from '@fortawesome/free-brands-svg-icons'
-import {faImage, faImagePortrait, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faImage, faTimes} from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 import styles from '../styles/account.module.css'
 import Context from '../provider'
@@ -25,7 +24,9 @@ const AccountScreen = () => {
     const [myListings, setMyListings] = React.useState("")
     const [savedListings, setSavedListings] = React.useState("")
     const [activeTab, setActiveTab] = React.useState("my-details")
-    const [errors, setErrors] = React.useState([])
+    const [plans, setPlans] = React.useState([])
+    const [subscriptionHistory, setSubscriptionHistory] = React.useState([])
+    const [activeSubscription, setActiveSubscription] = React.useState(null)
 
     
     const context = React.useContext(Context)
@@ -46,13 +47,14 @@ const AccountScreen = () => {
         setCountry(context.user.country)
     }, [context])
 
-    
-
     React.useEffect(() => {
         if(activeTab == "my-listings"){
             getAccountListings()
         }else if(activeTab == "saved-listings"){
             getSavedListings()
+        } else if (activeTab == "subscriptions"){
+            getPlans()
+            getSubscriptionHistory()
         }
     }, [activeTab])
 
@@ -66,7 +68,6 @@ const AccountScreen = () => {
 
     const getAccountListings = () => {
         axios.get(`${url}/api/account-listings/`).then((data) => {
-            console.log(data.data)
             setMyListings(data.data)
         }).catch(err => {
             context.toast("Cannot get Account Listings")
@@ -122,6 +123,24 @@ const AccountScreen = () => {
         })
     }
 
+    const getPlans = () => {
+        axios.get(`${url}/billing/plans/`).then((data) => {
+            setPlans(data.data)
+        }).catch(err => {
+            context.toast("Cannot retrieve available subscription plans")
+        })
+    }
+
+    const getSubscriptionHistory = () => {
+        axios.get(`${url}/billing/subscription-history/`).then((data) => {
+            console.log(data.data)
+            setSubscriptionHistory(data.data)
+        }).catch(err => {
+            context.toast("Cannot retrieve subscription history")
+        })
+    }
+
+
     return (
         <div className={styles.overlay}  style={{display: context.accountVisible ? 'block': 'none'}}>
             <div className={styles.card}>
@@ -129,15 +148,19 @@ const AccountScreen = () => {
                     <li 
                         onClick={() => setActiveTab("my-details")} 
                         className={activeTab == "my-details" ? styles.active : ""}
-                    >My Details</li>
+                    >Details</li>
                     <li 
                         onClick={() => setActiveTab("my-listings")} 
                         className={activeTab == "my-listings" ? styles.active : ""}
-                    >My Listings</li>
+                    >Listings</li>
                     <li 
                         onClick={() => setActiveTab("saved-listings")} 
                         className={activeTab == "saved-listings" ? styles.active : ""}
-                    >Saved Listings</li>
+                    >Saved&nbsp;Listings</li>
+                    <li 
+                        onClick={() => setActiveTab("subscriptions")} 
+                        className={activeTab == "subscriptions" ? styles.active : ""}
+                    >Subscriptions</li>
                 </ul>
                 <div className={styles.close} onClick={context.toggleAccount}>
                     <FontAwesomeIcon icon={faTimes} size={"2x"} color="white" />
@@ -236,6 +259,56 @@ const AccountScreen = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                    <div style={{display: activeTab == "subscriptions" ? "block" : "none"}}>
+                        <h2>Subscriptions</h2>
+                        <h5>Available Plans</h5>
+                        {plans && plans.map((plan, index) => (
+                            <div key={index} className={styles.plan}>
+                                <p>{plan.name}</p>
+                                <p>{plan.price}</p>
+                                <p>{plan.description}</p>
+                                <button onClick={() => {
+                                    context.toggleAccount()
+                                    axios.post(`${url}/billing/checkout/${plan.id}/`)
+                                        .then(res => {
+                                            if(res.data.success) {
+                                                context.toast(`Subscribed to ${plan.name} successfully`)
+                                                location.href = res.data.url
+                                            } else {
+                                                context.toast("Cannot subscribe to plan")
+                                            }
+                                        })
+                                        .catch(err => {
+                                            context.toast("Cannot subscribe to plan")
+                                        })
+                                }}>Subscribe</button>
+                            </div>
+                        ))}
+                        {activeSubscription && (<>
+                            <h5>Active Subscription</h5>
+
+                        </>)}
+                        <h5>Subscription History</h5>
+                        <table className={styles.subscriptionTable}>
+                            <thead>
+                                <tr>
+                                    <th>Plan</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {subscriptionHistory && subscriptionHistory.map((sub, index) => (
+                                    <tr key={index} className={styles.subscription}>
+                                        <td>{sub.plan.name}</td>
+                                        <td>{new Date(sub.created_at).toDateString()}</td>
+                                        <td>{sub.status}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        
                     </div>
                     
                 </div>

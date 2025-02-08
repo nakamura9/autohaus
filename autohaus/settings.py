@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'auto_app',
+    'billing',
 ]
 
 MIDDLEWARE = [
