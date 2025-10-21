@@ -105,7 +105,7 @@ def main():
             transmission = row[TRANSMISSION]
             vehicle_size = row[VEHICLE_SIZE]
             year = row[YEAR]
-            print(f"{make} {model} {engine} {drive} {fuel} {transmission} {vehicle_size}")
+            print(f"{make} {model} {engine} {drive} {fuel} {transmission} {vehicle_size} {year}")
             data = {
                 'make': make,
                 'model': model,
@@ -121,8 +121,8 @@ def main():
             print(cleaned_data)
 
             # insert into db
-            # db_insert(cleaned_data)
-            update_year(idx, cleaned_data.year)
+            db_insert(cleaned_data)
+            # update_year(idx, cleaned_data.year)
 
 
 if __name__ == "__main__":

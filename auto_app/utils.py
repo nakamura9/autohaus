@@ -25,9 +25,11 @@ def seller_json(user):
                 'username': user.username,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'email': user.email
+                'email': user.email,
+                'subscription': None
             } 
         }
+    subscription = None 
     return {
         'user': {
             'id': user.pk,
@@ -40,7 +42,8 @@ def seller_json(user):
             'country': user.seller.country,
             'city': user.seller.city.pk if user.seller.city else None,
             'whatsapp': user.seller.whatsapp,
-            'photo': user.seller.photo.url if user.seller.photo else None
+            'photo': user.seller.photo.url if user.seller.photo else None,
+            'subscription': subscription
         }
     }
 

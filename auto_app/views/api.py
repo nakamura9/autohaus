@@ -60,39 +60,37 @@ def search_vehicles(request):
 def create_vehicle(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        data['make'] = Make.objects.get(pk=data['make'])
-        data['model'] = Model.objects.get(pk=data['model'])
-        data['city'] = City.objects.get(pk=data['location'])
+        if data.get('make'):
+            data['make'] = Make.objects.get(pk=data['make'])
+        if data.get('model'):
+           data['model'] = Model.objects.get(pk=data['model'])
+           data['year'] = data['model'].year
+        if data.get('location'):
+            data['city'] = City.objects.get(pk=data['location'])
         # check if email or phone is registered
-        existing_sellers = Seller.objects.filter(Q(email=data['email']) | Q(phone_number=data['phone']))
-        if existing_sellers.exists():
-            seller = existing_sellers.first()
-        else:
-            seller = Seller.objects.create(
-            name=data['name'],
-            phone_number=data['phone'],
-            email=data['email'],
-            address='hidden', # todo fix
-            city=data['city'],
-            state=str(data['city']),
-            zip_code="00263",
-            country=data['country'],
-            whatsapp=True
-        )
-        data['seller'] = seller
-        data['year'] = data['model'].year
-
-        del data['name']
-        del data['phone']
-        del data['location']
-        del data['email']
-        del data['country']
-        del data['city']
-        images = copy.deepcopy(data['images'])
-        del data['images']
+        if data.get('phone') or data.get('email'):
+            existing_sellers = Seller.objects.filter(Q(email=data['email']) | Q(phone_number=data['phone']))
+            if existing_sellers.exists():
+                seller = existing_sellers.first()
+            else:
+                seller = Seller.objects.create(
+                name=data['name'],
+                phone_number=data['phone'],
+                email=data['email'],
+                address='hidden', # todo fix
+                city=data['city'],
+                state=str(data['city']),
+                zip_code="00263",
+                country=data['country'],
+                whatsapp=True
+            )
+            data['seller'] = seller
 
         if data.get('id'):
             vehicle = Vehicle.objects.get(pk=data['id'])
+            # If this was a temporary vehicle, update its status
+            if vehicle.temporary:
+                data['temporary'] = False
             vehicle.__dict__.update(**data)
             vehicle.save()
 
@@ -104,18 +102,14 @@ def create_vehicle(request):
                 VehiclePhoto.objects.get(pk=id).delete()
 
         else:
+            del data['name']
+            del data['phone']
+            del data['location']
+            del data['email']
+            del data['country']
+            del data['city']
             vehicle = Vehicle(**data)
             vehicle.save()
-
-        for i, image in enumerate(images):
-            if image.get('id'):
-                # skipping because existing photo being updated.
-                continue
-            VehiclePhoto.objects.create(
-                vehicle=vehicle,
-                photo=base64_file(image.get('src'))[0],
-                is_main=i == 0
-            )
 
         return JsonResponse({"status": "success", "id": vehicle.pk})
     return JsonResponse({"status": "error"})

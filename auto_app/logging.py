@@ -72,8 +72,10 @@ class CloudWatchLogger:
         self.logger.critical(message)
 
 
-logger = CloudWatchLogger(
+'''logger = CloudWatchLogger(
     log_group_name='Autohaus',
     log_stream_name='app-logs',
     region='af-south-1'
-)
+)'''
+
+logger = logging.getLogger(__file__)

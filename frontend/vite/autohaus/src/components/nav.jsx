@@ -2,8 +2,9 @@ import React from 'react'
 import Context from '../provider'
 import styles from '../styles/nav.module.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faBars, faTimes, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faTimes, faUser, faCarSide, faDollarSign, faCircleInfo, faEnvelope, faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { url } from '../constants'
 
 
 const NavBar = ({toggleSignUp}) => {
@@ -19,7 +20,7 @@ const NavBar = ({toggleSignUp}) => {
         <div className={styles.nav}>
             <div className={styles.navTop}>
                 <div className={styles.navContent}>
-                <Link to="/"><h1>AutoHaus</h1></Link>
+                <Link to="/"><img className="w-auto h-12" src={`${url}/static/auto_app/img/logo.JPG`} alt="Zim Forward" /></Link>
                 <div className={styles.navMenuContainer}>
                     <button className={styles.accountBtn} onClick={context.toggleAccountMenu}><FontAwesomeIcon color="white"  icon={faUser} /></button>
                     {context.accountMenu && <div  className={styles.navMenu}>
@@ -37,12 +38,11 @@ const NavBar = ({toggleSignUp}) => {
             <div className={styles.navContent}>
                 {!mobile && 
                     <ul className={styles.navLinks}>
-                        <li><Link to="/buy">Buy</Link></li>
-                        <li><Link to="/sell">Sell</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/contact">Contact Us</Link></li>
-                        <li><Link to="/faq">FAQ</Link></li>
-                        
+                        <li><Link to="/buy"><FontAwesomeIcon icon={faCarSide} className="mr-2" /> Buy</Link></li>
+                        <li><Link to="/sell"><FontAwesomeIcon icon={faDollarSign} className="mr-2" /> Sell</Link></li>
+                        <li><Link to="/about"><FontAwesomeIcon icon={faCircleInfo} className="mr-2" /> About</Link></li>
+                        <li><Link to="/contact"><FontAwesomeIcon icon={faEnvelope} className="mr-2" /> Contact Us</Link></li>
+                        <li><Link to="/faq"><FontAwesomeIcon icon={faQuestionCircle} className="mr-2" /> FAQ</Link></li>
                     </ul>
                 }
                 {mobile && 
@@ -51,11 +51,11 @@ const NavBar = ({toggleSignUp}) => {
                         {mobileMenu && <div className={styles.mobileMenuContainer} onClick={() => setMobileMenu(false)}>
                                 <div><FontAwesomeIcon icon={faTimes} size="2x" /></div>
                                 <ul className={styles.mobileMenuLinks}>
-                                        <li><Link to="/buy">Buy</Link></li>
-                                        <li><Link to="/sell">Sell</Link></li>
-                                        <li><Link to="/about">About</Link></li>
-                                        <li><Link to="/contact">Contact Us</Link></li>
-                                        <li><Link to="/faq">FAQ</Link></li>
+                                        <li><Link to="/buy"><FontAwesomeIcon icon={faCarSide} className="mr-2" /> Buy</Link></li>
+                                        <li><Link to="/sell"><FontAwesomeIcon icon={faDollarSign} className="mr-2" /> Sell</Link></li>
+                                        <li><Link to="/about"><FontAwesomeIcon icon={faCircleInfo} className="mr-2" /> About</Link></li>
+                                        <li><Link to="/contact"><FontAwesomeIcon icon={faEnvelope} className="mr-2" /> Contact Us</Link></li>
+                                        <li><Link to="/faq"><FontAwesomeIcon icon={faQuestionCircle} className="mr-2" /> FAQ</Link></li>
                                     </ul>
                             </div>}
                     </div>

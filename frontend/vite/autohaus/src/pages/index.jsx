@@ -47,31 +47,31 @@ function Index() {
                     <div className={styles.buyTab}>
                         <Link className={styles.brandLink} to="/buy">
                             <div className={styles.buyButton} >
-                                <img src={"/static/auto_app/img/sedan.png"} alt="Sedans" />
+                                <img src={url + "/static/auto_app/img/sedan.png"} alt="Sedans" />
                                 <h6>Sedans</h6>
                             </div>
                         </Link>
                         <Link className={styles.brandLink} to="/buy">
                             <div className={styles.buyButton}>
-                                <img src={"/static/auto_app/img/truck.png"} alt="Trucks" />
+                                <img src={url + "/static/auto_app/img/truck.png"} alt="Trucks" />
                                 <h6>Trucks</h6>
                             </div>
                         </Link>
                         <Link className={styles.brandLink} to="/buy">
                             <div className={styles.buyButton}>
-                                <img src={"/static/auto_app/img/suv-car.png"} alt="SUV" />
+                                <img src={url + "/static/auto_app/img/suv-car.png"} alt="SUV" />
                                 <h6>SUVs</h6>
                             </div>
                         </Link>
                         <Link className={styles.brandLink} to="/buy">
                             <div className={styles.buyButton}>
-                                <img src={"/static/auto_app/img/pickup-truck.png"} alt="Pickups" />
+                                <img src={url + "/static/auto_app/img/pickup-truck.png"} alt="Pickups" />
                                 <h6>Commercial</h6>
                             </div>
                         </Link>
                         <Link className={styles.brandLink} to="/buy">
                             <div className={styles.buyButton}>
-                                <img src={"/static/auto_app/img/hatchback.png"} alt="" />
+                                <img src={url + "/static/auto_app/img/hatchback.png"} alt="" />
                                 <h6>Hatchbacks</h6>
                             </div>
                         </Link>
@@ -85,7 +85,7 @@ function Index() {
                 </div>
             </div>
             <div>
-                <h4>Featured Brands</h4>
+                <h4 className="text-xl my-4">Featured Brands</h4>
                 <div className={styles.brandsContainer}>
                     <div className={styles.brands}>
                         <Brand 
@@ -135,7 +135,7 @@ function Index() {
             </div>
             
             <div>
-                <h4>Latest Listings</h4>
+                <h4 className="text-xl my-4">Latest Listings</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
                         {data.map((d, i) => (
@@ -146,7 +146,7 @@ function Index() {
             </div>
 
             <div>
-                <h4>Recommended for you</h4>
+                <h4 className="text-xl my-4">Recommended for you</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
                         {recommendedListings.map((d, i) => (

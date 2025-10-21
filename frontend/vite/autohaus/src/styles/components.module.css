@@ -441,20 +441,23 @@
 }
 
 .fieldGroup {
-    width: 200px;
+    width: 240px;
+    min-width: 240px;
     box-sizing: border-box;
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .fieldGroupFields {
     display: flex;
     flex-direction: row;
-    width: 200px;
-    gap: 4px
+    width: 240px;
+    min-width: 240px;
+    gap: 4px;
+    margin-top: 4px;
 }
 
 .fieldGroupFields input {
-    width: 84px;
+    width: 106px;
     border: 2px solid #F58533;
     color: #F58533;
     padding: 4px;
@@ -475,7 +478,7 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     text-align: center;
     border-radius: 1rem;
-    z-index: 2000;
+    z-index: 10001;
 }
 
 @media (max-width: 575px) {

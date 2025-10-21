@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom'
 import axios from '../utils/http';
 import { url } from '../constants';
 import styles from '../styles/product.module.css'
-import { faEnvelope, faImage, faImagePortrait, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faEyeSlash, faHandshake, faImage, faImagePortrait, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Context from '../provider';
 import { useContext } from 'react';
@@ -114,8 +114,15 @@ const ProductPage = () => {
                     {!product.seller.photo && <FontAwesomeIcon icon={faImagePortrait} size={"3x"} />}
                     </div>
                     <div>
-                        <h5>Seller: {product.seller.name}</h5>
-                        <p>Number of Ads: {product.seller.number_of_ads}</p>
+                        <div className="font-bold">
+                            {
+                            product.seller.is_dealer 
+                            ? <><FontAwesomeIcon icon={faHandshake} /> Dealer</> 
+                            : <><FontAwesomeIcon icon={faEyeSlash} /> Private Seller</>}
+                        </div>
+                        <h5 className="text-lg mb-0">Seller: {product.seller.name}</h5>
+                        <p className="text-sm">Number of Ads: {product.seller.number_of_ads}</p>
+                        <button className="uppercase text-sm font-bold my-3 p-2 rounded-sm">View Other Listings </button>
                     </div>
                 </div>
                 <div className={styles.primaryAttributes}>

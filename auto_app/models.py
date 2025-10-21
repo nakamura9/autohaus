@@ -23,8 +23,7 @@ class Seller(BaseModel):
     recovery_email = models.EmailField(blank=True, default="")
     address = models.TextField()
     city = models.ForeignKey('auto_app.City', on_delete=models.SET_NULL, related_name='seller_city', null=True)
-    state = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=20)
+    state = models.CharField(max_length=100, blank=True, default="")
     country = models.CharField(max_length=100)
     whatsapp = models.BooleanField(blank=True, null=True, default=False)
     photo = models.ImageField(upload_to="seller_photos/", null=True)
@@ -58,6 +57,7 @@ class Model(BaseModel):
     search_fields = ["name", "make__name"]
     search_map = {
         "description": "make",
+        "thumb": "logo",
     }
 
     make = models.ForeignKey('auto_app.Make', on_delete=models.CASCADE, related_name='models')
@@ -84,8 +84,12 @@ class Model(BaseModel):
 
     def __str__(self) -> str:
         if self.year:
-            return self.name
+            return f"{self.name} ({self.year})"
         return self.name
+    
+    @property
+    def logo(self):
+        return self.make.logo
 
 
 class Currency(BaseModel):
@@ -139,9 +143,12 @@ class Vehicle(BaseModel):
         ("New", "New"),
         ("Needs Work", "Needs Work"),
     ], default="Good")
+    chassis_number = models.CharField(max_length=32, blank=True, default="")
+    model_number = models.CharField(max_length=32, blank=True, default="")
     published = models.BooleanField(default=False)
     published_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, default="")
+    temporary = models.BooleanField(default=False)  # Flag for temporary vehicles during image upload
 
     def __str__(self) -> str:
         return str(self.model)

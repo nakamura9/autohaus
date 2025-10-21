@@ -65,6 +65,7 @@ function App() {
     signUpVisible: false,
     accountMenu: false,
     accountVisible: false,
+    accountActiveTab: "my-details",
     user: null,
     toastVisible: false,
     toastMessage: ''
@@ -116,6 +117,9 @@ function App() {
         setTimeout(() => {
           setAppState((prevAppState, _) => ({...prevAppState, toastVisible: false, toastMessage: ""}))
         }, 3000)
+      },
+      setAccountTab: (tab) => {
+        setAppState((prevAppState, _) => ({...prevAppState, accountActiveTab: tab}))
       }
 
 

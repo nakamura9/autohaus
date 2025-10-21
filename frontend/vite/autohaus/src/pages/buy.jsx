@@ -15,6 +15,7 @@ const BuyPage = () => {
     const [loading, setLoading] = React.useState(false)
     const [make, setMake] = React.useState(null)
     const [model, setModel] = React.useState(null)
+    const [modelFilters, setModelFilters] = React.useState({})
     const [transmission, setTransmission] = React.useState("")
     const [fuelType, setFuelType] = React.useState("")
     const [drivetrain, setDrivetrain] = React.useState("")
@@ -89,14 +90,33 @@ const BuyPage = () => {
 
     React.useEffect(search, [make, model, transmission, drivetrain, fuelType, minYear, maxYear])
 
+    const handleMakeChange = (value) => {
+        setMake(value)
+        setModel(null)
+        if(value)
+            setModelFilters({make: value});
+    }
+
     return (<>
-        <h2>Search for Vehicles</h2>
         <div className={styles.search}>
         <div>
             <h4>SEARCH</h4>
             <div className={styles.searchFields}>
-                <Search label={"Make"} placeholder={"Make"} model={"make"} onChange={setMake} value={make} />
-                <Search label="Model" placeholder={"Model"} model={"model"} onChange={setModel} value={model}/>
+                <Search 
+                    label={"Make"} 
+                    placeholder={"Make"} 
+                    model={"make"} 
+                    onChange={handleMakeChange} 
+                    value={make} 
+                />
+                <Search 
+                    label="Model" 
+                    placeholder={"Model"} 
+                    model={"model"} 
+                    onChange={setModel} 
+                    value={model} 
+                    filters={modelFilters} 
+                />
                 <div>
                     <label>Transmission</label>
                     
@@ -158,7 +178,7 @@ const BuyPage = () => {
             <Vehicle {...vehicle} key={index} />
         ))}
         {results.length == 0 && <div className={styles.noResults}>
-            <img src={`/static/auto_app/img/searching.png`} alt="No Vehicles" />
+            <img src={`${url}/static/auto_app/img/searching.png`} alt="No Vehicles" />
             <p>No results found</p>
         </div>}
     </div>}

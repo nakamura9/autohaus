@@ -58,7 +58,7 @@ const LoginScreen = () => {
                 <div className={styles.close} onClick={context.toggleLogin}>
                     <FontAwesomeIcon icon={faTimes} size={"2x"} color="white" />
                 </div>
-                <h1>AutoHaus</h1>
+                <img className="w-auto h-36" src={`${url}/static/auto_app/img/logo.JPG`} alt="Zim Forward" />
                 <form>
                     {errors.length > 0 && <div className={styles.errors}>{errors.map(e => <p>{e}</p>)}</div>}
                     <input type="text" placeholder="Username" value={email} onChange={e => setEmail(e.target.value)} />

@@ -13,7 +13,6 @@
     background-color: white;
     position: relative;
     width: 400px;
-    
     margin: 10vh auto;
     padding: 24px;
     border-radius: 16px;
@@ -140,7 +139,7 @@
     display: flex;
     border-bottom: 1px solid #ccc;
     padding-left: 0px;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -159,7 +158,6 @@
 .tabs li:last-child {
     border-right: 1px solid #ccc;
     border-top-right-radius: 6px;
-
 }
 
 .tabs li:first-child {
@@ -279,6 +277,25 @@ output {
     border-collapse: collapse;
 }
 
+.plan {
+    max-width: 248px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.plan p {
+    text-align: left;
+}
+
+
+.plan button {
+    margin-top: 24px;
+}
+
+.plan em {
+    margin-bottom: 20px
+}
 
 /* Responsive design for mobile devices */
 @media (max-width: 768px) {

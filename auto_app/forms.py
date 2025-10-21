@@ -12,6 +12,7 @@ class SignUpForm(forms.Form):
     repeat_password = forms.CharField(widget=forms.PasswordInput, required=True)
     phone = forms.CharField(max_length=20)
     country = forms.CharField(max_length=100)
+    city = forms.CharField(max_length=100)
 
     def clean(self):
         cleaned_data = super().clean()

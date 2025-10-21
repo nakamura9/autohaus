@@ -30,6 +30,7 @@ class Subscription(BaseModel):
         ('expired', 'Expired'),
         ('pending_payment', 'Pending Payment')
     ], default='inactive')
+    activated = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return "%s - %06d" % (self.user.username, Subscription.objects.filter(plan=self.plan).count())

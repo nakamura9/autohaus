@@ -14,9 +14,11 @@ const SignUpScreen = () => {
     const [lastName, setLastName] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [phone, setPhone] = React.useState('')
+    const [city, setCity] = React.useState("")
     const [password, setPassword] = React.useState('')
     const [repeatPassword, setRepeatPassword] = React.useState('')
     const context = React.useContext(Context)
+    const [errors, setErrors] = React.useState({})
 
     const submit = () => {
         const config = {
@@ -32,10 +34,16 @@ const SignUpScreen = () => {
             phone: phone,
             country: country,
             password: password,
-            repeat_password: repeatPassword
+            repeat_password: repeatPassword,
+            city: city
         }, config).then(res => {
-            context.toast("Signed up successfully")
-            context.toggleSignUp()
+            if(!res.data.success) {
+                    setErrors(res.data.errors)
+            } else {
+                context.toast("Signed up successfully")
+                context.toggleSignUp()
+            }
+            
         }).catch(err => {
             console.log(err)
             context.toast("Error signing up")
@@ -48,8 +56,10 @@ const SignUpScreen = () => {
                 <div className={styles.close} onClick={context.toggleSignUp}>
                     <FontAwesomeIcon icon={faTimes} size={"2x"} color="white" />
                 </div>
-                <h1>AutoHaus</h1>
+                <img className="w-auto h-36" src={`${url}/static/auto_app/img/logo.JPG`} alt="Zim Forward" />
+                                
                 <form>
+                    {Object.keys(errors).length > 0 && <div className={styles.errors}>{Object.keys(errors).map(key => <p><b>{key}</b><br />{errors[key]}</p>)}</div>}
                     <div className={styles.name}>
                         <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
                         <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
@@ -61,6 +71,7 @@ const SignUpScreen = () => {
                         <input type="text" placeholder="Phone Number" value={phone} onChange={e => setPhone(e.target.value)} />
                     </div>
                     <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="text" placeholder="City" value={city} onChange={e => setCity(e.target.value)} />
                     <input type="password" placeholder="Repeat Password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
                     <button onClick={submit} type="button">SIGN UP</button>
                     <a className={styles.google}><FontAwesomeIcon icon={faGoogle} /> SIGN UP WITH GOOGLE </a>

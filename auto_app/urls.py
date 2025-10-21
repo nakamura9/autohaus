@@ -6,6 +6,7 @@ from auto_app.views import (
     update_account, remove_saved_listing, remove_listing,
     related_listings, recommended_listings, latest_listings
 )
+from auto_app.views import image_upload
 
 from auto_app.views.serializers import (
     VehicleViewSet, MakeViewSet, SellerViewSet, ModelViewSet, VehiclePhotoViewSet,
@@ -15,20 +16,14 @@ from auto_app.views.serializers import (
 
 from rest_framework.routers import DefaultRouter
 
-vehicle_router = DefaultRouter()
-vehicle_router.register(r'vehicle', VehicleViewSet)
-city_router = DefaultRouter()
-city_router.register(r'city', CityViewSet)
-make_router = DefaultRouter()
-make_router.register(r'make', MakeViewSet)
-seller_router = DefaultRouter()
-seller_router.register(r'seller', SellerViewSet)
-model_router = DefaultRouter()
-model_router.register(r'model', ModelViewSet)
-vehicle_photo_router = DefaultRouter()
-vehicle_photo_router.register(r'vehicle_photo', VehiclePhotoViewSet)
-faq_router = DefaultRouter()
-faq_router.register(r'faq', FAQViewSet)
+router = DefaultRouter()
+router.register(r'vehicle', VehicleViewSet)
+router.register(r'city', CityViewSet)
+router.register(r'make', MakeViewSet)
+router.register(r'seller', SellerViewSet)
+router.register(r'model', ModelViewSet)
+router.register(r'vehicle_photo', VehiclePhotoViewSet)
+router.register(r'faq', FAQViewSet)
 
 urlpatterns = [
     path("", app, name="app"),
@@ -62,12 +57,7 @@ urlpatterns = [
     path("api/saved-listings/", saved_listings, name="saved-listings"),
     path("api/submit-contact/", submit_contact, name="submit-contact"),
     path("api/login/", login, name="log-in"),
+    path("api/upload-vehicle-image/", image_upload.upload_vehicle_image, name="upload-vehicle-image"),
 ]
 
-urlpatterns += vehicle_router.urls
-urlpatterns += make_router.urls
-urlpatterns += seller_router.urls
-urlpatterns += model_router.urls
-urlpatterns += vehicle_photo_router.urls
-urlpatterns += faq_router.urls
-urlpatterns += city_router.urls
+urlpatterns += router.urls

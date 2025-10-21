@@ -88,6 +88,7 @@ const SellPage = () => {
   const [active, setActive]  = React.useState(0)
   // form params
   const [images, setImages ] = React.useState([])
+  const [uploadProgress, setUploadProgress] = React.useState(0)
   const [country, setCountry] = React.useState("ZW")
   const [make, setMake] = React.useState(null)
   const [model, setModel] = React.useState(null)
@@ -98,6 +99,8 @@ const SellPage = () => {
   const [condition, setCondition] = React.useState("Non-Runner")
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
+  const [modelNumber, setModelNumber] = React.useState('')
+  const [chassisNumber, setChassisNumber] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [city, setCity] = React.useState(null)
   const [price, setPrice] = React.useState(0)
@@ -253,6 +256,8 @@ const SellPage = () => {
     setMileage(null)
     setCondition("Non-Runner")
     setName('')
+    setModelNumber('')
+    setChassisNumber('')
     setEmail('')
     setPhone('')
     setCity(null)
@@ -262,48 +267,99 @@ const SellPage = () => {
     setID(null)
   }
 
-  const submit = () => {
-    const payload = {
-      images: images,
-      country: country,
-      make: make,
-      model: model,
-      fuel_type: fuelType,
-      transmission: transmission,
-      mileage: mileage,
-      condition: condition,
-      name: name,
-      email: email,
-      phone: phone,
-      location: city,
-      price: price,
-      negotiable: negotiable,
-      description: description,
-      id: id
+    const uploadImage = async (image, vehicleId, isMain = false) => {
+    try {
+      const response = await axios.post(`${url}/api/upload-vehicle-image/`, {
+        vehicle_id: vehicleId,
+        photo: image.src,
+        is_main: isMain
+      })
+      return response.data
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      throw error
     }
-    if(!validate()) 
-      return;
+  }
 
-    axios.post(`${url}/api/create-vehicle/`, payload).then((data) => {
-      on_submit(data.data.id)
-    }).catch(err => {
-      context.toast("Cannot submit vehicle")
-    })
+  const submit = async () => {
+    if (!validate()) return
+
+    try {
+      setUploadProgress(0)
+      
+      // Create vehicle with user's data, marked as temporary
+      const initialPayload = {
+        temporary: true,
+        country: country,
+        make: make,
+        model: model,
+        fuel_type: fuelType,
+        transmission: transmission,
+        mileage: mileage,
+        condition: condition,
+        name: name,
+        email: email,
+        phone: phone,
+        location: city,
+        price: price,
+        negotiable: negotiable,
+        description: description,
+        model_number: modelNumber,
+        chassis_number: chassisNumber
+      }
+      
+      const vehicleResponse = await axios.post(`${url}/api/create-vehicle/`, initialPayload)
+      const vehicleId = vehicleResponse.data.id
+      
+      // Upload all images to this vehicle
+      for (let i = 0; i < images.length; i++) {
+        await uploadImage(
+          images[i], 
+          vehicleId,
+          i === 0 // first image is main
+        )
+        setUploadProgress((i + 1) / images.length * 100)
+      }
+
+      // Finally, just mark it as permanent
+      const payload = {
+        id: vehicleId,
+        temporary: false
+      }
+
+      const response = await axios.post(`${url}/api/create-vehicle/`, payload)
+      setUploadProgress(0)
+      on_submit(response.data.id)
+    } catch (err) {
+      console.error(err)
+      context.toast("Error submitting vehicle")
+    }
+  }
+
+  const toggleUpgrade = () => {
+    context.setAccountTab('subscriptions')
+    context.toggleAccount()
   }
 
   return (
     <>
-    <h2>Sell Your Vehicle</h2>
-    <div className={styles.callToAction}>
+    {context.user && !context?.user?.subscription && <div className={styles.callToAction}>
       <h5>Upgrade To Pro!</h5>
       <p>To unlock more features such as priority listings, advanced analytics and the ability post unlimited ads, upgrade your account to pro. </p>
-      <button>Upgrade</button>
-    </div>
+      <button onClick={toggleUpgrade}>Upgrade</button>
+    </div>}
+    {!context.user && <div className="m-4 p-3 border-2 border-gray-200 rounded-md">
+      <p>To sell vehicles on Zim Forward, register for a free account.</p>
+      <button className="text-black bg-amber-500 font-bold mt-4 px-4 py-2 rounded-sm mr-2" onClick={context.toggleSignUp}>Register</button>
+      <button className="text-black  font-bold mt-4 px-4 py-2 rounded-sm" onClick={context.toggleLogin}>Login</button>
+    </div>}
+    
+    {context.user && (<>
     <ul className={styles.sellTabs}>
       {tabs.map((t, i) => <li key={i} onClick={() => setActive(i)} className={i == active ? styles.active : null}>{t}</li>)}
     </ul>
     
-    <div  className={styles.sellContainer}>
+    <div className={styles.sellContainer}>
       <Tab active={active == 0} >
           <div style={{marginLeft: "8px", marginBottom: "12px"}}>
             <Search label="Make" model="make" placeholder={"Search Makes"} onChange={handleMake} propId={make} /><br />
@@ -325,8 +381,19 @@ const SellPage = () => {
       </Tab>
       <Tab active={active == 1}>
         <div className={styles.flex}>
-        <ImageUploadWidget onUploadSuccess={(img) => setImages([...images, img])} />
-        <SamplePhotoCarousel />
+          <div>
+            <ImageUploadWidget onUploadSuccess={(img) => setImages([...images, img])} />
+            {uploadProgress > 0 && (
+              <div className={styles.uploadProgress}>
+                <div 
+                  className={styles.progressBar} 
+                  style={{width: `${uploadProgress}%`}}
+                ></div>
+                <span>Uploading: {Math.round(uploadProgress)}%</span>
+              </div>
+            )}
+          </div>
+          <SamplePhotoCarousel />
         </div>
         <div className={styles.capturedPhotos}>
           {images.map((img, i) => (<div key={i} className={styles.imgContainer}>
@@ -342,33 +409,52 @@ const SellPage = () => {
         </div>
       </Tab>
       <Tab active={active == 2}>
-        <label htmlFor="name_field">Name</label>
-        <div className={styles.inputContainer}>
-          <input type="text" id="name_field" onChange={e => setName(e.target.value)} value={name} />
-        </div>
-        <label htmlFor="email_field">Email</label>
-        <div className={styles.inputContainer}>
-          <input type="email" id="email_field" value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
-        <label htmlFor="phone_field">Phone</label>
-        <div className={styles.inputContainer}>
-          <CountrySelect value={country} onChange={(e) => setCountry(e.target.value)} />
-          <input type="text" id="phone_field" value={phone} onChange={e => setPhone(e.target.value)} />
-        </div>
-        <label htmlFor="city_field">City</label>
-        <Search model="city" placeholder={"Search Cities"} onChange={setCity} propId={city} />
-        <br />
-        <label htmlFor="price_field">Price</label>
-        <div className={styles.inputContainer}>
-          <input value={price} type="text" id="price_field" onChange={e => setPrice(e.target.value)} />
-        </div>
-        <label htmlFor="price_field">Negotiable</label>
-        <div className={styles.inputContainer}>
-          <input checked={negotiable} type="checkbox" id="price_field" onChange={e => setNegotiable(e.target.value == "on" )} />
-        </div>
-        <label htmlFor="description_field">Description</label>
-        <div className={styles.inputContainer}>
-          <textarea value={description} id="description_field" onChange={e => setDescription(e.target.value)} />
+        <div className="flex flex-wrap">
+            <div className='flex-1'>
+              <h5 className="text-white mb-3">Seller Details</h5>  
+              <label htmlFor="name_field">Name</label>
+              <div className={styles.inputContainer}>
+                <input type="text" id="name_field" onChange={e => setName(e.target.value)} value={name} />
+              </div>
+              <label htmlFor="email_field">Email</label>
+              <div className={styles.inputContainer}>
+                <input type="email" id="email_field" value={email} onChange={e => setEmail(e.target.value)} />
+              </div>
+              <label htmlFor="phone_field">Phone</label>
+              <div className={styles.inputContainer}>
+                <CountrySelect value={country} onChange={(e) => setCountry(e.target.value)} />
+                <input type="text" id="phone_field" value={phone} onChange={e => setPhone(e.target.value)} />
+              </div>
+              <label htmlFor="city_field">City</label>
+              <Search model="city" placeholder={"Search Cities"} onChange={setCity} propId={city} />
+              
+            </div>
+            <div className="flex-1">
+              <h5 className="text-white mb-3">Product Details</h5>
+              <label htmlFor="chassis_number_field">Chassis Number</label>
+              <div className={styles.inputContainer}>
+                <input value={chassisNumber} type="text" id="chassis_number_field" onChange={e => setChassisNumber(e.target.value)} />
+              </div>
+              <label htmlFor="model_number_field">Model Number</label>
+              <div className={styles.inputContainer}>
+                <input value={modelNumber} type="text" id="model_number_field" onChange={e => setModelNumber(e.target.value)} />
+              </div>
+              <label htmlFor="price_field">Price</label>
+              <div className={styles.inputContainer}>
+                <input value={price} type="text" id="price_field" onChange={e => setPrice(e.target.value)} />
+              </div>
+              <label htmlFor="price_field">Negotiable</label>
+              <div className={styles.inputContainer}>
+                <input checked={negotiable} type="checkbox" id="price_field" onChange={e => setNegotiable(e.target.value == "on" )} />
+              </div>
+            </div>
+            <div className='flex-1'>
+              <h5 className="text-white mb-3">Description</h5>
+              <label htmlFor="description_field">Description</label>
+              <div className={styles.inputContainer}>
+                <textarea rows={8} value={description} id="description_field" onChange={e => setDescription(e.target.value)} />
+              </div>
+            </div>
         </div>
       </Tab>
       <div className={styles.sellFooter}>
@@ -377,7 +463,7 @@ const SellPage = () => {
             <button onClick={submit}>Submit</button>
         
       </div>    
-    </div>
+    </div></>)}
     </>
   )
 }

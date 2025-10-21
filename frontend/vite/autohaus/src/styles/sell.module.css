@@ -1,10 +1,11 @@
 .inputContainer {
     border: 2px solid #F58533;
-    width: 196px;
+    width: 240px;
     border-radius: 4px;
     display: flex;
     padding: 4px;
     margin: 12px;
+    margin-left: 0px !important;
     color: #F58533;
 }
 
@@ -109,6 +110,10 @@ label {
     line-height: 2.5rem;
 }
 
+.tips ul {
+    margin: 18px;
+}
+
 .carouselImg {
     overflow: hidden;
     margin: 1rem;
@@ -190,6 +195,32 @@ label {
 
 .callToAction h5 {
     margin-top: 0px
+}
+
+.tab {
+    padding-bottom: 3rem;
+}
+
+.uploadProgress {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: #1a1a1a;
+    border-radius: 4px;
+    position: relative;
+}
+
+.progressBar {
+    height: 4px;
+    background: #F58533;
+    transition: width 0.3s ease;
+}
+
+.uploadProgress span {
+    display: block;
+    text-align: center;
+    color: #F58533;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
 }
 
 .callToAction button {
