@@ -49,6 +49,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     seller = SellerSerializer()
     photos = VehiclePhotoSerializer(many=True)
     is_saved = serializers.SerializerMethodField()
+    private_seller = serializers.SerializerMethodField()
     saved_listing_id = serializers.SerializerMethodField()
 
     def get_is_saved(self, obj):
@@ -67,6 +68,9 @@ class VehicleSerializer(serializers.ModelSerializer):
         if listing.exists():
             return listing.first().id
         return None
+    
+    def get_private_seller(self, obj):
+        return not obj.seller.is_dealer
 
 
 class FAQSerializer(serializers.ModelSerializer):

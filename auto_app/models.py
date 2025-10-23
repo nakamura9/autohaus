@@ -17,6 +17,12 @@ class BaseModel(models.Model):
 
 
 class Seller(BaseModel):
+    search_fields = ["name"]
+    search_map = {
+        "thumb": "photo",
+        "description": "city",
+    }
+
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
@@ -28,6 +34,7 @@ class Seller(BaseModel):
     whatsapp = models.BooleanField(blank=True, null=True, default=False)
     photo = models.ImageField(upload_to="seller_photos/", null=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='seller', null=True)
+    is_dealer = models.BooleanField(default=False, blank=True)
 
     def __str__(self) -> str:
         return self.name

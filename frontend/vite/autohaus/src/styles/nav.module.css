@@ -20,6 +20,12 @@
     margin: 0px auto;
 }
 
+.navContent img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .navTop {
     background-color: #010038;
     color: white !important;

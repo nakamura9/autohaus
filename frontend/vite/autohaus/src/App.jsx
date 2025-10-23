@@ -15,6 +15,7 @@ import ContactPage from './pages/contact';
 import SellPage from './pages/sell';
 import BuyPage from './pages/buy';
 import ProductPage from './pages/product';
+import SellerPage from './pages/seller';
 import FAQPage from './pages/faq';
 import React from 'react'
 import axios from './utils/http'
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductPage />
+      },
+      {
+        path: "/seller/:id",
+        element: <SellerPage />
       },
     ]
   }

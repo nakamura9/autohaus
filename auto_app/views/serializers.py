@@ -1,4 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from django.db.models import Count
 from auto_app.serializers import (
     VehicleSerializer, MakeSerializer, VehiclePhotoSerializer,
     ModelSerializer , SellerSerializer, FAQCategorySerializer,
@@ -43,6 +46,13 @@ class ModelViewSet(viewsets.ModelViewSet):
 class SellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
+
+    @action(detail=False, methods=['get'])
+    def top(self, request):
+        """Return top sellers ordered by number of ads (descending)."""
+        qs = Seller.objects.annotate(number_of_ads=Count('seller')).filter(number_of_ads__gt=0).order_by('-number_of_ads')[:10]
+        serializer = self.get_serializer(qs, many=True, context={'request': request})
+        return Response(serializer.data)
 
 
 class FAQViewSet(viewsets.ModelViewSet):

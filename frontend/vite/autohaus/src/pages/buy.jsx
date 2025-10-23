@@ -16,6 +16,7 @@ const BuyPage = () => {
     const [make, setMake] = React.useState(null)
     const [model, setModel] = React.useState(null)
     const [modelFilters, setModelFilters] = React.useState({})
+    const [seller, setSeller] = React.useState(null)
     const [transmission, setTransmission] = React.useState("")
     const [fuelType, setFuelType] = React.useState("")
     const [drivetrain, setDrivetrain] = React.useState("")
@@ -35,6 +36,7 @@ const BuyPage = () => {
         const params = {
             make: make,
             model: model,
+            seller: seller,
             transmission: transmission,
             fuel_type: fuelType,
             drivetrain: drivetrain,
@@ -46,6 +48,8 @@ const BuyPage = () => {
             max_price: maxPrice,
             sort_by: sortBy
         }
+        // only include seller if set
+        if(!seller) delete params.seller
         axios.get(`${url}/api/search-vehicles/`, {
             params: params
         }).then(res => {
@@ -69,6 +73,9 @@ const BuyPage = () => {
                     case "model":
                         setModel(value)
                         break;
+                    case "seller":
+                        setSeller(value)
+                        break;
                     case "min_year":
                         setMinYear(value)
                         break;
@@ -88,7 +95,7 @@ const BuyPage = () => {
     React.useEffect(filterOnURLParams, [])
     React.useEffect(filterOnURLParams, [location])
 
-    React.useEffect(search, [make, model, transmission, drivetrain, fuelType, minYear, maxYear])
+    React.useEffect(search, [make, model, transmission, drivetrain, fuelType, minYear, maxYear, minMileage, maxMileage, minPrice, maxPrice, sortBy, seller])
 
     const handleMakeChange = (value) => {
         setMake(value)
@@ -116,6 +123,14 @@ const BuyPage = () => {
                     onChange={setModel} 
                     value={model} 
                     filters={modelFilters} 
+                />
+                <Search
+                    label={"Seller"}
+                    placeholder={"Dealer"}
+                    model={"seller"}
+                    onChange={setSeller}
+                    value={seller}
+                    filters={{is_dealer: true}}
                 />
                 <div>
                     <label>Transmission</label>

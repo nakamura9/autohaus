@@ -12,6 +12,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Context from '../provider';
 import { useContext } from 'react';
 import Vehicle from '../components/card';
+import {Link} from 'react-router-dom'
 
 const ProductPage = () => {
     const [product, setProduct] = React.useState(null)
@@ -122,7 +123,7 @@ const ProductPage = () => {
                         </div>
                         <h5 className="text-lg mb-0">Seller: {product.seller.name}</h5>
                         <p className="text-sm">Number of Ads: {product.seller.number_of_ads}</p>
-                        <button className="uppercase text-sm font-bold my-3 p-2 rounded-sm">View Other Listings </button>
+                        <Link to={`/seller/${product.seller.id}`} className="uppercase text-sm font-bold my-3 p-2 rounded-sm">View Other Listings </Link>
                     </div>
                 </div>
                 <div className={styles.primaryAttributes}>

@@ -6,7 +6,13 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { url } from '../constants'
 import { Link } from 'react-router-dom'
 
-export default function Vehicle({photos, price, make, model, currency, id}) {
+export default function Vehicle({photos, price, make, model, currency, id, tags, negotiable, private_seller}) {
+    const allTags = [...(tags || [])]
+    if(negotiable)
+        allTags.push("Negotiable");
+    if(private_seller)
+        allTags.push("Private Seller")
+
     return (
         <div className={styles.card}>
             <div className={styles.cardImg}>
@@ -17,6 +23,13 @@ export default function Vehicle({photos, price, make, model, currency, id}) {
                 )}
                 {!photos || photos.length == 0 && (
                     <FontAwesomeIcon icon={faImage} size="8x" color="#ccc" />
+                )}
+                {allTags && allTags.length > 0 && (
+                    <div className={styles.cardTags}>
+                        {allTags.map((tag, i) => (
+                            <span key={i} className={styles.cardTag}>{tag}</span>
+                        ))}
+                    </div>
                 )}
             </div>
             <Link to={`/product/${id}`}>

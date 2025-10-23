@@ -3,6 +3,7 @@ import React from 'react'
 import {url} from '../constants'
 import styles from '../styles/index.module.css'
 import Vehicle from '../components/card';
+import SellerCard from '../components/sellerCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -34,7 +35,16 @@ function Index() {
         axios.get(`${url}/api/recommended-listings/`).then((response) => {
             setRecommendedListings(response.data)
         })
+
+        // fetch top sellers from backend
+        axios.get(`${url}/seller/top/`).then(res => {
+            if(res.data && Array.isArray(res.data)){
+                setTopSellers(res.data)
+            }
+        }).catch(err => console.error(err))
     }, [])
+
+    const [topSellers, setTopSellers] = React.useState([])
 
     return (
         <main className={styles.main} >
@@ -134,12 +144,24 @@ function Index() {
                 
             </div>
             
+            
             <div>
                 <h4 className="text-xl my-4">Latest Listings</h4>
                 <div className={styles.listingsContainer}>
                     <div className={styles.listings}>
                         {data.map((d, i) => (
-                            <Vehicle {...d} key={i}/>
+                            <Vehicle {...d}  key={i}/>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h4 className="text-xl my-4">Top Dealers</h4>
+                <div className={styles.listingsContainer}>
+                    <div className={styles.listings}>
+                        {topSellers.map((s, i) => (
+                            <SellerCard {...s} key={i} />
                         ))}
                     </div>
                 </div>
