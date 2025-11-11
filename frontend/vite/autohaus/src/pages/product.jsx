@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom'
 import axios from '../utils/http';
 import { url } from '../constants';
 import styles from '../styles/product.module.css'
-import { faEnvelope, faEyeSlash, faHandshake, faImage, faImagePortrait, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faCar, faEnvelope, faEyeSlash, faHandshake, faImage, faImagePortrait, faPhone, faSave, faSms, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Context from '../provider';
 import { useContext } from 'react';
@@ -89,10 +89,15 @@ const ProductPage = () => {
             <div className={styles.column}>
                 <div className={styles.carousel}>
                     <Carousel>
-                    {product.photos.map(p => (<img src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))}
+                    {product.photos.length > 0
+                        ? product.photos.map(p => (<img src={p.photo.indexOf("http") > -1 ? p.photo : `${url}${p.photo}`} loading="lazy" />))
+                        : <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px', backgroundColor: '#f0f0f0'}}>
+                            <FontAwesomeIcon icon={faCar} size="10x" color="#ccc" />
+                          </div>
+                    }
                     </Carousel>
                 </div>
-                
+
             </div>
             <div className={styles.column}>
                 <div className={styles.productHeader}>

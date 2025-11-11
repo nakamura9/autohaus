@@ -147,12 +147,12 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold mb-1">Email</h3>
-                                        <a href="mailto:info@autohaus.com" className="text-blue-100 hover:text-white transition">
-                                            info@autohaus.com
+                                        <a href="mailto:info@zimforward.com" className="text-blue-100 hover:text-white transition">
+                                            info@zimforward.com
                                         </a>
                                         <br />
-                                        <a href="mailto:support@autohaus.com" className="text-blue-100 hover:text-white transition">
-                                            support@autohaus.com
+                                        <a href="mailto:support@zimforward.com" className="text-blue-100 hover:text-white transition">
+                                            support@zimforward.com
                                         </a>
                                     </div>
                                 </div>

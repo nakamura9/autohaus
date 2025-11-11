@@ -1,0 +1,527 @@
+[
+  {
+    "model": "auto_app.city",
+    "pk": 1,
+    "fields": {
+      "name": "Harare"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 2,
+    "fields": {
+      "name": "Bulawayo"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 3,
+    "fields": {
+      "name": "Chitungwiza"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 4,
+    "fields": {
+      "name": "Mutare"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 5,
+    "fields": {
+      "name": "Gweru"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 6,
+    "fields": {
+      "name": "Kwekwe"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 7,
+    "fields": {
+      "name": "Kadoma"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 8,
+    "fields": {
+      "name": "Masvingo"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 9,
+    "fields": {
+      "name": "Chinhoyi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 10,
+    "fields": {
+      "name": "Norton"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 11,
+    "fields": {
+      "name": "Marondera"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 12,
+    "fields": {
+      "name": "Ruwa"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 13,
+    "fields": {
+      "name": "Chegutu"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 14,
+    "fields": {
+      "name": "Zvishavane"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 15,
+    "fields": {
+      "name": "Bindura"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 16,
+    "fields": {
+      "name": "Victoria Falls"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 17,
+    "fields": {
+      "name": "Hwange"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 18,
+    "fields": {
+      "name": "Redcliff"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 19,
+    "fields": {
+      "name": "Beitbridge"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 20,
+    "fields": {
+      "name": "Kariba"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 21,
+    "fields": {
+      "name": "Karoi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 22,
+    "fields": {
+      "name": "Chipinge"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 23,
+    "fields": {
+      "name": "Shurugwi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 24,
+    "fields": {
+      "name": "Chiredzi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 25,
+    "fields": {
+      "name": "Gokwe"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 26,
+    "fields": {
+      "name": "Rusape"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 27,
+    "fields": {
+      "name": "Chivhu"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 28,
+    "fields": {
+      "name": "Gwanda"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 29,
+    "fields": {
+      "name": "Shamva"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 30,
+    "fields": {
+      "name": "Mvuma"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 31,
+    "fields": {
+      "name": "Glendale"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 32,
+    "fields": {
+      "name": "Lupane"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 33,
+    "fields": {
+      "name": "Plumtree"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 34,
+    "fields": {
+      "name": "Mazowe"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 35,
+    "fields": {
+      "name": "Gutu"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 36,
+    "fields": {
+      "name": "Bikita"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 37,
+    "fields": {
+      "name": "Mount Darwin"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 38,
+    "fields": {
+      "name": "Raffingora"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 39,
+    "fields": {
+      "name": "Mutoko"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 40,
+    "fields": {
+      "name": "Macheke"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 41,
+    "fields": {
+      "name": "Beatrice"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 42,
+    "fields": {
+      "name": "Triangle"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 43,
+    "fields": {
+      "name": "Epworth"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 44,
+    "fields": {
+      "name": "Centenary"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 45,
+    "fields": {
+      "name": "Mvurwi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 46,
+    "fields": {
+      "name": "Concession"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 47,
+    "fields": {
+      "name": "Hauna"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 48,
+    "fields": {
+      "name": "Murewa"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 49,
+    "fields": {
+      "name": "Mhangura"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 50,
+    "fields": {
+      "name": "Chakari"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 51,
+    "fields": {
+      "name": "Esigodini"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 52,
+    "fields": {
+      "name": "Tsholotsho"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 53,
+    "fields": {
+      "name": "Nkayi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 54,
+    "fields": {
+      "name": "Insiza"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 55,
+    "fields": {
+      "name": "Matobo"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 56,
+    "fields": {
+      "name": "Umzingwane"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 57,
+    "fields": {
+      "name": "Binga"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 58,
+    "fields": {
+      "name": "Nyanga"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 59,
+    "fields": {
+      "name": "Chimanimani"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 60,
+    "fields": {
+      "name": "Penhalonga"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 61,
+    "fields": {
+      "name": "Odzi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 62,
+    "fields": {
+      "name": "Headlands"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 63,
+    "fields": {
+      "name": "Dorowa"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 64,
+    "fields": {
+      "name": "Zaka"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 65,
+    "fields": {
+      "name": "Chivi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 66,
+    "fields": {
+      "name": "Mwenezi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 67,
+    "fields": {
+      "name": "Mashava"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 68,
+    "fields": {
+      "name": "Lalapanzi"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 69,
+    "fields": {
+      "name": "Makonde"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 70,
+    "fields": {
+      "name": "Hurungwe"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 71,
+    "fields": {
+      "name": "Alaska"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 72,
+    "fields": {
+      "name": "Guruve"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 73,
+    "fields": {
+      "name": "Umguza"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 74,
+    "fields": {
+      "name": "Gwanda Urban"
+    }
+  },
+  {
+    "model": "auto_app.city",
+    "pk": 75,
+    "fields": {
+      "name": "Dete"
+    }
+  }
+]

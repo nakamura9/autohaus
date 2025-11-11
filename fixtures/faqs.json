@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "Buying",
-      "description": "Questions about purchasing vehicles on Autohaus"
+      "description": "Questions about purchasing vehicles on ZimForward"
     }
   },
   {
@@ -12,7 +12,7 @@
     "pk": 2,
     "fields": {
       "name": "Selling",
-      "description": "Questions about listing and selling vehicles on Autohaus"
+      "description": "Questions about listing and selling vehicles on ZimForward"
     }
   },
   {
@@ -46,7 +46,7 @@
     "fields": {
       "category": 1,
       "question": "Can I negotiate the price of a vehicle?",
-      "answer": "Many sellers on Autohaus are open to price negotiation. Look for listings marked as 'Negotiable' to know which sellers are willing to discuss pricing. You can contact the seller directly through their provided contact information to discuss the price and arrange a viewing."
+      "answer": "Many sellers on ZimForward are open to price negotiation. Look for listings marked as 'Negotiable' to know which sellers are willing to discuss pricing. You can contact the seller directly through their provided contact information to discuss the price and arrange a viewing."
     }
   },
   {
@@ -73,7 +73,7 @@
     "fields": {
       "category": 2,
       "question": "Is there a fee to list my vehicle?",
-      "answer": "Autohaus offers flexible listing options. Basic listings for private sellers may be free or have a nominal fee, while premium features such as featured placement, multiple photos, and extended listing duration may have additional costs. Dealers typically have subscription plans. Check our pricing page for current rates and packages."
+      "answer": "ZimForward offers flexible listing options. Basic listings for private sellers may be free or have a nominal fee, while premium features such as featured placement, multiple photos, and extended listing duration may have additional costs. Dealers typically have subscription plans. Check our pricing page for current rates and packages."
     }
   },
   {
@@ -100,7 +100,7 @@
     "fields": {
       "category": 3,
       "question": "How are payments processed?",
-      "answer": "Autohaus is a marketplace platform that connects buyers and sellers. We do not process payments directly. Payment arrangements are made between the buyer and seller. We recommend meeting in person, inspecting the vehicle thoroughly, and using secure payment methods such as bank transfers or cashier's checks. Never send money before seeing the vehicle in person."
+      "answer": "ZimForward is a marketplace platform that connects buyers and sellers. We do not process payments directly. Payment arrangements are made between the buyer and seller. We recommend meeting in person, inspecting the vehicle thoroughly, and using secure payment methods such as bank transfers or cashier's checks. Never send money before seeing the vehicle in person."
     }
   },
   {
@@ -109,7 +109,7 @@
     "fields": {
       "category": 4,
       "question": "How do I know if a seller is trustworthy?",
-      "answer": "Look for verified dealer badges on listings, which indicate the seller has been verified by Autohaus. Read any available reviews or ratings. Always arrange to meet the seller in a public place, bring someone with you, and thoroughly inspect the vehicle. Check the vehicle's history report and verify all documentation. If something feels off, trust your instincts and walk away."
+      "answer": "Look for verified dealer badges on listings, which indicate the seller has been verified by ZimForward. Read any available reviews or ratings. Always arrange to meet the seller in a public place, bring someone with you, and thoroughly inspect the vehicle. Check the vehicle's history report and verify all documentation. If something feels off, trust your instincts and walk away."
     }
   },
   {

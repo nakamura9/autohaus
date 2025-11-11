@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styles from '../styles/buy.module.css'
 import Search from '../components/search'
 import FieldGroup from '../components/field_group'
@@ -31,7 +31,7 @@ const BuyPage = () => {
     const location = useLocation()
 
 
-    const search = () => {
+    const search = useCallback(() => {
         setLoading(true)
         const params = {
             make: make,
@@ -59,43 +59,54 @@ const BuyPage = () => {
             context.toast("Cannot search vehicles")
             setLoading(false)
         })
-    }
+    }, [make, model, seller, transmission, fuelType,
+            drivetrain,
+            minYear,
+            maxYear,
+            minMileage,
+            maxMileage,
+            minPrice,
+            maxPrice,
+            sortBy])
 
-    const filterOnURLParams = () => {
-        if(window.location.search.length > 0 ) {
-            const args = window.location.search.replace("?", "").split("&")
-            args.forEach(arg => {
-                const [name, value] = arg.split("=")
-                switch(name) {
-                    case "make":
-                        setMake(value)
-                        break;
-                    case "model":
-                        setModel(value)
-                        break;
-                    case "seller":
-                        setSeller(value)
-                        break;
-                    case "min_year":
-                        setMinYear(value)
-                        break;
-                    case "max_year":
-                        setMaxYear(value)
-                        break;
-                    case "transmission":
-                        setTransmission(value)
-                        break;
-                    default:
-                        break;
-                }
-            })
-        }
-    }
 
-    React.useEffect(filterOnURLParams, [])
+    const filterOnURLParams = useCallback(() => {
+        const searchParams = new URLSearchParams(window.location.search)
+        console.log({searchParams})
+
+        // Only update state if params exist to avoid unnecessary renders
+        const paramMake = searchParams.get('make')
+        const paramModel = searchParams.get('model')
+        const paramSeller = searchParams.get('seller')
+        const paramTransmission = searchParams.get('transmission')
+        const paramFuelType = searchParams.get('fuel_type')
+        const paramDrivetrain = searchParams.get('drivetrain')
+        const paramMinYear = searchParams.get('min_year')
+        const paramMaxYear = searchParams.get('max_year')
+        const paramMinMileage = searchParams.get('min_mileage')
+        const paramMaxMileage = searchParams.get('max_mileage')
+        const paramMinPrice = searchParams.get('min_price')
+        const paramMaxPrice = searchParams.get('max_price')
+        const paramSortBy = searchParams.get('sort_by')
+
+        if (paramMake) setMake(paramMake)
+        if (paramModel) setModel(paramModel)
+        if (paramSeller) setSeller(paramSeller)
+        if (paramTransmission) setTransmission(paramTransmission)
+        if (paramFuelType) setFuelType(paramFuelType)
+        if (paramDrivetrain) setDrivetrain(paramDrivetrain)
+        if (paramMinYear) setMinYear(Number(paramMinYear))
+        if (paramMaxYear) setMaxYear(Number(paramMaxYear))
+        if (paramMinMileage) setMinMileage(Number(paramMinMileage))
+        if (paramMaxMileage) setMaxMileage(Number(paramMaxMileage))
+        if (paramMinPrice) setMinPrice(Number(paramMinPrice))
+        if (paramMaxPrice) setMaxPrice(Number(paramMaxPrice))
+        if (paramSortBy) setSortBy(paramSortBy)
+
+        search()
+    }, [])
+
     React.useEffect(filterOnURLParams, [location])
-
-    React.useEffect(search, [make, model, transmission, drivetrain, fuelType, minYear, maxYear, minMileage, maxMileage, minPrice, maxPrice, sortBy, seller])
 
     const handleMakeChange = (value) => {
         setMake(value)

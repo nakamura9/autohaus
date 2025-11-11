@@ -97,9 +97,9 @@ const AccountScreen = () => {
             country: country,
             photo: photo,
             whatsapp: whatsapp,
-        }).then((data) => {
-            if(data.data.success){
-                context.setUser(data.data.user)
+        }).then((resp) => {
+            if(resp.data.status == "success"){
+                context.setUser(resp.data.user)
                 context.toggleAccount()
                 context.toast("Account details updated successfully")
             }else {
