@@ -1,3 +1,4 @@
+# Utility functions for auto_app
 from django.core.files.base import ContentFile
 from django.db.models import Q
 import base64

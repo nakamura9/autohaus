@@ -20,6 +20,15 @@ import FAQPage from './pages/faq';
 import React from 'react'
 import axios from './utils/http'
 import styles from './styles/components.module.css'
+import useStore from './store'
+
+// CMS Imports
+import CMSRoot from './cms/components/CMSRoot';
+import CMSHome from './cms/pages/Home';
+import CMSList from './cms/pages/List';
+import CMSCreate from './cms/pages/Create';
+import CMSUpdate from './cms/pages/Update';
+import CMSDashboard from './cms/pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -60,11 +69,39 @@ const router = createBrowserRouter([
         element: <SellerPage />
       },
     ]
+  },
+  {
+    path: "/cms",
+    element: <CMSRoot />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/cms",
+        element: <CMSHome />
+      },
+      {
+        path: "/cms/dashboard",
+        element: <CMSDashboard />
+      },
+      {
+        path: "/cms/list/:entity",
+        element: <CMSList />
+      },
+      {
+        path: "/cms/create/:entity",
+        element: <CMSCreate />
+      },
+      {
+        path: "/cms/update/:entity/:id/",
+        element: <CMSUpdate />
+      },
+    ]
   }
 ])
 
 
 function App() {
+  const { logout: zustandLogout, user: zustandUser, isAuthenticated, setUser: setZustandUser } = useStore()
   const [appState, setAppState] = React.useState({
     loginVisible: false,
     signUpVisible: false,
@@ -82,14 +119,30 @@ function App() {
   }, [appState])
 
   React.useEffect(() => {
-    if(!(appState && appState.user)) {
+    // If we have a Zustand user but no context user, sync them
+    if(zustandUser && !appState.user) {
+      setAppState((prevAppState) => ({...prevAppState, user: zustandUser}))
+    }
+
+    // If no user in either store, try to restore from token
+    if(!(appState && appState.user) && !isAuthenticated) {
       const token = localStorage.getItem('user_token')
       if(token) {
-        axios.get(`${url}/api/user-details/`, 
+        axios.get(`${url}/api/auth/current-user/`,
         ).then(res => {
-          setAppState((prevAppState, _) => ({...prevAppState, user: res.data.user}))
+          if(res.data.success) {
+            // Update both stores
+            setAppState((prevAppState, _) => ({...prevAppState, user: res.data.user}))
+            // If we have tokens in Zustand, just update user. Otherwise, use the access token from localStorage
+            if(!isAuthenticated) {
+              setZustandUser(res.data.user, token, null)
+            }
+          }
         }).catch(err => {
           console.log(err)
+          // Token might be expired, clear it
+          localStorage.removeItem('user_token')
+          zustandLogout()
         })
       }
     }
@@ -116,6 +169,8 @@ function App() {
       signOut: () => {
         localStorage.removeItem('user_token')
         setAppState((prevAppState, _) => ({...prevAppState, user: null}))
+        // Also clear Zustand store
+        zustandLogout()
       },
       toast: (msg) => {
         setAppState((prevAppState, _) => ({...prevAppState, toastVisible: true, toastMessage: msg}))

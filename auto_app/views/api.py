@@ -226,6 +226,8 @@ def latest_listings(request, id=None):
 
 def recommended_listings(request):
     user = request.user
+    if not user.is_authenticated:
+        return JsonResponse([], safe=False)
     saved_vehicles = SavedListing.objects.filter(user=user)
     recommended_vehicle_ids = []
     for saved_vehicle in saved_vehicles:

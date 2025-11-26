@@ -2,19 +2,24 @@ import React from 'react'
 import Context from '../provider'
 import styles from '../styles/nav.module.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faBars, faTimes, faUser, faCarSide, faDollarSign, faCircleInfo, faEnvelope, faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faTimes, faUser, faCarSide, faDollarSign, faCircleInfo, faEnvelope, faQuestionCircle, faCog} from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { url } from '../constants'
+import useStore from '../store'
 
 
 const NavBar = ({toggleSignUp}) => {
     const [mobile, setMobile] = React.useState(false)
     const [mobileMenu, setMobileMenu] = React.useState(false)
+    const { user: cmsUser } = useStore()
     React.useEffect(() => {
         setMobile(window.innerWidth < 575)
 
     }, [])
     const context = React.useContext(Context)
+
+    // Check if user has CMS access
+    const hasCMSAccess = cmsUser?.is_cms_user || cmsUser?.is_superuser
 
     return (
         <div className={styles.nav}>
@@ -36,16 +41,17 @@ const NavBar = ({toggleSignUp}) => {
             </div>
             <div className={styles.navBottom}>
             <div className={styles.navContent}>
-                {!mobile && 
+                {!mobile &&
                     <ul className={[styles.navLinks, "!ml-48"].join(" ")}>
                         <li><Link to="/buy"><FontAwesomeIcon icon={faCarSide} className="mr-2" /> Buy</Link></li>
                         <li><Link to="/sell"><FontAwesomeIcon icon={faDollarSign} className="mr-2" /> Sell</Link></li>
                         <li><Link to="/about"><FontAwesomeIcon icon={faCircleInfo} className="mr-2" /> About</Link></li>
                         <li><Link to="/contact"><FontAwesomeIcon icon={faEnvelope} className="mr-2" /> Contact</Link></li>
                         <li><Link to="/faq"><FontAwesomeIcon icon={faQuestionCircle} className="mr-2" /> FAQ</Link></li>
+                        {hasCMSAccess && <li><Link to="/cms"><FontAwesomeIcon icon={faCog} className="mr-2" /> CMS</Link></li>}
                     </ul>
                 }
-                {mobile && 
+                {mobile &&
                     <div className={styles.mobileMenu}>
                         <button onClick={() => setMobileMenu(!mobileMenu)} className={styles.mobileMenuBtn}><FontAwesomeIcon size="2x" icon={faBars} /></button>
                         {mobileMenu && <div className={styles.mobileMenuContainer} onClick={() => setMobileMenu(false)}>
@@ -56,6 +62,7 @@ const NavBar = ({toggleSignUp}) => {
                                         <li><Link to="/about"><FontAwesomeIcon icon={faCircleInfo} className="mr-2" /> About</Link></li>
                                         <li><Link to="/contact"><FontAwesomeIcon icon={faEnvelope} className="mr-2" /> Contact Us</Link></li>
                                         <li><Link to="/faq"><FontAwesomeIcon icon={faQuestionCircle} className="mr-2" /> FAQ</Link></li>
+                                        {hasCMSAccess && <li><Link to="/cms"><FontAwesomeIcon icon={faCog} className="mr-2" /> CMS</Link></li>}
                                     </ul>
                             </div>}
                     </div>

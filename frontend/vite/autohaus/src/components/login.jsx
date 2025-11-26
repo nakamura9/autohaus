@@ -6,50 +6,57 @@ import styles from '../styles/login.module.css'
 import Context from '../provider'
 import axios from '../utils/http'
 import { url } from '../constants'
+import useStore from '../store'
 
 
 
 const LoginScreen = () => {
-    const [email, setEmail] = React.useState("")
+    const [username, setUsername] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [errors, setErrors] = React.useState([])
     const context = React.useContext(Context)
+    const { setUser: setStoreUser } = useStore()
 
     const submit = (context) => {
         const config = {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            withCredentials: true
+              'Content-Type': 'application/json'
+            }
           }
 
-        axios.post(`${url}/api/login/`, {
-            email: email,
+        axios.post(`${url}/api/auth/login/`, {
+            username: username,
             password: password
         }, config).then((data) => {
             if(data.data.success) {
-                localStorage.setItem('user_token', data.data.token);
+                // Store JWT tokens in Zustand store
+                setStoreUser(data.data.user, data.data.access, data.data.refresh);
+
+                // Also keep old token for backward compatibility with existing code
+                localStorage.setItem('user_token', data.data.access);
+
+                // Update context user for existing components
                 context.setUser(data.data.user)
                 context.toggleLogin()
                 context.toast("Logged in successfully")
-            }
-            if( data.data.errors) {
-                Object.keys(data.data.errors).forEach(key => {
-                    
-                    setErrors(prev => [...prev, ...data.data.errors[key]])
-                })
-            } else {
-                setErrors(prev => [])
+                setErrors([])
+            } else if(data.data.error) {
+                setErrors([data.data.error])
             }
         }).catch(err => {
             console.log(err)
+            if(err.response?.data?.error) {
+                setErrors([err.response.data.error])
+            } else {
+                setErrors(["Cannot login. Please check your credentials."])
+            }
             context.toast("Cannot login")
         })
     }
 
     React.useEffect(() => {
         setErrors([])
-    }, [email, password])
+    }, [username, password])
 
     return (
         
@@ -60,8 +67,8 @@ const LoginScreen = () => {
                 </div>
                 <img className="w-auto h-36" src={`${url}/static/auto_app/img/logo.JPG`} alt="Zim Forward" />
                 <form>
-                    {errors.length > 0 && <div className={styles.errors}>{errors.map(e => <p>{e}</p>)}</div>}
-                    <input type="text" placeholder="Username" value={email} onChange={e => setEmail(e.target.value)} />
+                    {errors.length > 0 && <div className={styles.errors}>{errors.map((e, idx) => <p key={idx}>{e}</p>)}</div>}
+                    <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                     <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                     <p><a>Forgotten Password?</a></p>
                     <button onClick={() => submit(context) } type="button">LOGIN</button>

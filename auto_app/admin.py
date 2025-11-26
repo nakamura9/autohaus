@@ -5,7 +5,8 @@ from django.urls import reverse
 from .models import (
     Vehicle, VehiclePhoto, Make, Model, Seller,
     Currency, City, FAQ, FAQCategory, ContactEntry,
-    SavedListing, SavedSearch
+    SavedListing, SavedSearch, Account, Role, RolePermission,
+    AuditLog, Setting, CMSImage
 )
 
 
@@ -162,7 +163,7 @@ class VehicleAdmin(admin.ModelAdmin):
 
 @admin.register(VehiclePhoto)
 class VehiclePhotoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'vehicle_link', 'photo_preview', 'thumbnail_preview', 'is_main', 'has_cdn', 'created_at')
+    list_display = ('id',  'photo_preview', 'thumbnail_preview', 'is_main', 'has_cdn', 'created_at')
     list_filter = (
         'is_main',
         ('vehicle__make', admin.RelatedOnlyFieldListFilter),
@@ -181,10 +182,6 @@ class VehiclePhotoAdmin(admin.ModelAdmin):
 
     autocomplete_fields = ['vehicle']
 
-    def vehicle_link(self, obj):
-        url = reverse("admin:auto_app_vehicle_change", args=[obj.vehicle.id])
-        return format_html('<a href="{}">{}</a>', url, obj.vehicle)
-    vehicle_link.short_description = "Vehicle"
 
     def photo_preview(self, obj):
         if obj.photo:
@@ -497,6 +494,143 @@ class SavedSearchAdmin(admin.ModelAdmin):
             return obj.filters[:100] + "..."
         return obj.filters
     filters_preview.short_description = "Filters"
+
+
+# CMS Models Admin
+
+class RolePermissionInline(admin.TabularInline):
+    model = RolePermission
+    extra = 1
+    fields = ('entity', 'can_read', 'can_write', 'can_delete')
+
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'phone', 'is_cms_user', 'role', 'created_at')
+    list_filter = ('is_cms_user', 'role')
+    search_fields = ('user__username', 'user__email', 'phone')
+    list_per_page = 50
+
+    fields = (
+        'user',
+        'phone',
+        'is_cms_user',
+        'role',
+        ('created_at', 'updated_at'),
+    )
+    readonly_fields = ('created_at', 'updated_at')
+    autocomplete_fields = ['user', 'role']
+
+
+@admin.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'role_name', 'group', 'account_count', 'created_at')
+    search_fields = ('role_name',)
+    list_per_page = 50
+
+    fields = (
+        'role_name',
+        'group',
+        ('created_at', 'updated_at'),
+    )
+    readonly_fields = ('created_at', 'updated_at')
+    inlines = [RolePermissionInline]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.annotate(_account_count=Count('accounts'))
+
+    def account_count(self, obj):
+        return obj._account_count
+    account_count.short_description = "Accounts"
+    account_count.admin_order_field = '_account_count'
+
+
+@admin.register(RolePermission)
+class RolePermissionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'role', 'entity', 'can_read', 'can_write', 'can_delete')
+    list_filter = ('role', 'can_read', 'can_write', 'can_delete')
+    search_fields = ('role__role_name', 'entity__model')
+    list_per_page = 50
+
+    fields = (
+        'role',
+        'entity',
+        'can_read',
+        'can_write',
+        'can_delete',
+        ('created_at', 'updated_at'),
+    )
+    readonly_fields = ('created_at', 'updated_at')
+    autocomplete_fields = ['role']
+
+
+@admin.register(AuditLog)
+class AuditLogAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'model_name', 'model_id', 'created_by', 'created_at')
+    list_filter = (
+        'model_name',
+        ('created_at', admin.DateFieldListFilter),
+    )
+    search_fields = ('title', 'changes', 'created_by__username')
+    list_per_page = 50
+
+    fields = (
+        'title',
+        ('model_name', 'model_id'),
+        'changes',
+        ('created_by', 'created_at'),
+    )
+    readonly_fields = ('created_at', 'updated_at', 'created_by', 'updated_by')
+
+    def has_add_permission(self, request):
+        # Audit logs should only be created automatically
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        # Audit logs should not be edited
+        return False
+
+
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'key', 'value_preview', 'created_at')
+    search_fields = ('key', 'value')
+    list_per_page = 50
+
+    fields = (
+        'key',
+        'value',
+        ('created_at', 'updated_at'),
+    )
+    readonly_fields = ('created_at', 'updated_at')
+
+    def value_preview(self, obj):
+        if len(obj.value) > 100:
+            return obj.value[:100] + "..."
+        return obj.value
+    value_preview.short_description = "Value"
+
+
+@admin.register(CMSImage)
+class CMSImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'image_preview', 'width', 'height')
+    search_fields = ('name',)
+    list_per_page = 50
+
+    fields = (
+        'name',
+        'image',
+        'image_preview',
+        ('width', 'height'),
+    )
+    readonly_fields = ('image_preview', 'width', 'height')
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height: 100px;"/>', obj.image.url)
+        return "No image"
+    image_preview.short_description = "Preview"
 
 
 # Customize admin site header and title
