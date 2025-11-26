@@ -4,3 +4,7 @@ env/
 **/node_modules/
 
 vehicle_photos/
+vehicle_thumbnails/
+cms_images/
+seller_photos/
+sample_car_photos/
