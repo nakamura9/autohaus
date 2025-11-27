@@ -1,124 +1,165 @@
-[
-  {
-    "model": "auto_app.faqcategory",
-    "pk": 1,
-    "fields": {
-      "name": "Buying",
-      "description": "Questions about purchasing vehicles on ZimForward"
-    }
-  },
-  {
-    "model": "auto_app.faqcategory",
-    "pk": 2,
-    "fields": {
-      "name": "Selling",
-      "description": "Questions about listing and selling vehicles on ZimForward"
-    }
-  },
-  {
-    "model": "auto_app.faqcategory",
-    "pk": 3,
-    "fields": {
-      "name": "Account & Payments",
-      "description": "Questions about user accounts and payment processes"
-    }
-  },
-  {
-    "model": "auto_app.faqcategory",
-    "pk": 4,
-    "fields": {
-      "name": "Safety & Trust",
-      "description": "Questions about safety, verification, and trust on the platform"
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 1,
-    "fields": {
-      "category": 1,
-      "question": "How do I search for a specific vehicle?",
-      "answer": "You can use our advanced search tool on the Buy page to filter vehicles by make, model, price range, year, mileage, transmission type, fuel type, and drivetrain. Simply select your preferred criteria and click 'Filter' to see matching results."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 2,
-    "fields": {
-      "category": 1,
-      "question": "Can I negotiate the price of a vehicle?",
-      "answer": "Many sellers on ZimForward are open to price negotiation. Look for listings marked as 'Negotiable' to know which sellers are willing to discuss pricing. You can contact the seller directly through their provided contact information to discuss the price and arrange a viewing."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 3,
-    "fields": {
-      "category": 1,
-      "question": "What is the difference between a dealer and a private seller?",
-      "answer": "Dealers are verified businesses that sell multiple vehicles and often provide warranties, financing options, and after-sales services. Private sellers are individuals selling their personal vehicles, typically at lower prices but without the additional services dealers offer. Listings are clearly tagged to show whether they're from dealers or private sellers."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 4,
-    "fields": {
-      "category": 2,
-      "question": "How do I list my vehicle for sale?",
-      "answer": "To list your vehicle, navigate to the 'Sell' page and fill out the listing form with details about your vehicle including make, model, year, mileage, price, condition, and upload clear photos. Once submitted, your listing will be reviewed and published on the platform. Make sure to provide accurate information and quality photos to attract potential buyers."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 5,
-    "fields": {
-      "category": 2,
-      "question": "Is there a fee to list my vehicle?",
-      "answer": "ZimForward offers flexible listing options. Basic listings for private sellers may be free or have a nominal fee, while premium features such as featured placement, multiple photos, and extended listing duration may have additional costs. Dealers typically have subscription plans. Check our pricing page for current rates and packages."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 6,
-    "fields": {
-      "category": 2,
-      "question": "How long will my listing stay active?",
-      "answer": "Standard listings remain active for 60 days from the publication date. You can renew your listing before it expires to keep it active. Premium listings may have extended durations. You can also edit or remove your listing at any time through your account dashboard."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 7,
-    "fields": {
-      "category": 3,
-      "question": "Do I need an account to browse listings?",
-      "answer": "No, you can browse all vehicle listings without creating an account. However, having an account allows you to save your favorite listings, save your search preferences, receive personalized recommendations, and contact sellers more easily. Creating an account is free and only takes a minute."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 8,
-    "fields": {
-      "category": 3,
-      "question": "How are payments processed?",
-      "answer": "ZimForward is a marketplace platform that connects buyers and sellers. We do not process payments directly. Payment arrangements are made between the buyer and seller. We recommend meeting in person, inspecting the vehicle thoroughly, and using secure payment methods such as bank transfers or cashier's checks. Never send money before seeing the vehicle in person."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 9,
-    "fields": {
-      "category": 4,
-      "question": "How do I know if a seller is trustworthy?",
-      "answer": "Look for verified dealer badges on listings, which indicate the seller has been verified by ZimForward. Read any available reviews or ratings. Always arrange to meet the seller in a public place, bring someone with you, and thoroughly inspect the vehicle. Check the vehicle's history report and verify all documentation. If something feels off, trust your instincts and walk away."
-    }
-  },
-  {
-    "model": "auto_app.faq",
-    "pk": 10,
-    "fields": {
-      "category": 4,
-      "question": "What should I check before buying a used vehicle?",
-      "answer": "Before purchasing, verify the vehicle's chassis number matches the documentation, check the service history, inspect for any damage or signs of poor maintenance, take it for a test drive, and consider getting a professional pre-purchase inspection. Verify the seller's identity and ownership documents. Check if the vehicle has any outstanding finance or has been reported stolen. Request a vehicle history report to check for accidents or major repairs."
-    }
+[{
+  "model": "auto_app.faqcategory",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.119Z",
+    "updated_at": "2025-11-15T19:48:06.132Z",
+    "created_by": null,
+    "updated_by": null,
+    "name": "Buying",
+    "description": "Questions about purchasing vehicles on Autohaus"
   }
-]
+}, {
+  "model": "auto_app.faqcategory",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.119Z",
+    "updated_at": "2025-11-15T19:48:06.132Z",
+    "created_by": null,
+    "updated_by": null,
+    "name": "Selling",
+    "description": "Questions about listing and selling vehicles on Autohaus"
+  }
+}, {
+  "model": "auto_app.faqcategory",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.119Z",
+    "updated_at": "2025-11-15T19:48:06.132Z",
+    "created_by": null,
+    "updated_by": null,
+    "name": "Account & Payments",
+    "description": "Questions about user accounts and payment processes"
+  }
+}, {
+  "model": "auto_app.faqcategory",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.119Z",
+    "updated_at": "2025-11-15T19:48:06.132Z",
+    "created_by": null,
+    "updated_by": null,
+    "name": "Safety & Trust",
+    "description": "Questions about safety, verification, and trust on the platform"
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 1,
+    "question": "How do I search for a specific vehicle?",
+    "answer": "You can use our advanced search tool on the Buy page to filter vehicles by make, model, price range, year, mileage, transmission type, fuel type, and drivetrain. Simply select your preferred criteria and click 'Filter' to see matching results."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 1,
+    "question": "Can I negotiate the price of a vehicle?",
+    "answer": "Many sellers on Autohaus are open to price negotiation. Look for listings marked as 'Negotiable' to know which sellers are willing to discuss pricing. You can contact the seller directly through their provided contact information to discuss the price and arrange a viewing."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 1,
+    "question": "What is the difference between a dealer and a private seller?",
+    "answer": "Dealers are verified businesses that sell multiple vehicles and often provide warranties, financing options, and after-sales services. Private sellers are individuals selling their personal vehicles, typically at lower prices but without the additional services dealers offer. Listings are clearly tagged to show whether they're from dealers or private sellers."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 4,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 2,
+    "question": "How do I list my vehicle for sale?",
+    "answer": "To list your vehicle, navigate to the 'Sell' page and fill out the listing form with details about your vehicle including make, model, year, mileage, price, condition, and upload clear photos. Once submitted, your listing will be reviewed and published on the platform. Make sure to provide accurate information and quality photos to attract potential buyers."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 5,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 2,
+    "question": "Is there a fee to list my vehicle?",
+    "answer": "Autohaus offers flexible listing options. Basic listings for private sellers may be free or have a nominal fee, while premium features such as featured placement, multiple photos, and extended listing duration may have additional costs. Dealers typically have subscription plans. Check our pricing page for current rates and packages."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 2,
+    "question": "How long will my listing stay active?",
+    "answer": "Standard listings remain active for 60 days from the publication date. You can renew your listing before it expires to keep it active. Premium listings may have extended durations. You can also edit or remove your listing at any time through your account dashboard."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 3,
+    "question": "Do I need an account to browse listings?",
+    "answer": "No, you can browse all vehicle listings without creating an account. However, having an account allows you to save your favorite listings, save your search preferences, receive personalized recommendations, and contact sellers more easily. Creating an account is free and only takes a minute."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 3,
+    "question": "How are payments processed?",
+    "answer": "Autohaus is a marketplace platform that connects buyers and sellers. We do not process payments directly. Payment arrangements are made between the buyer and seller. We recommend meeting in person, inspecting the vehicle thoroughly, and using secure payment methods such as bank transfers or cashier's checks. Never send money before seeing the vehicle in person."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 9,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 4,
+    "question": "How do I know if a seller is trustworthy?",
+    "answer": "Look for verified dealer badges on listings, which indicate the seller has been verified by Autohaus. Read any available reviews or ratings. Always arrange to meet the seller in a public place, bring someone with you, and thoroughly inspect the vehicle. Check the vehicle's history report and verify all documentation. If something feels off, trust your instincts and walk away."
+  }
+}, {
+  "model": "auto_app.faq",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-11-15T19:48:06.099Z",
+    "updated_at": "2025-11-15T19:48:06.111Z",
+    "created_by": null,
+    "updated_by": null,
+    "category": 4,
+    "question": "What should I check before buying a used vehicle?",
+    "answer": "Before purchasing, verify the vehicle's chassis number matches the documentation, check the service history, inspect for any damage or signs of poor maintenance, take it for a test drive, and consider getting a professional pre-purchase inspection. Verify the seller's identity and ownership documents. Check if the vehicle has any outstanding finance or has been reported stolen. Request a vehicle history report to check for accidents or major repairs."
+  }
+}]
