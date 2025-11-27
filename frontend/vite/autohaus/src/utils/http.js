@@ -1,8 +1,8 @@
 import axios from 'axios';
 import useStore from '../store';
-
+import { url } from '../constants';
 const authAxiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: url,
 });
 
 // Flag to prevent infinite refresh loops

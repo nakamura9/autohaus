@@ -43,6 +43,7 @@ urlpatterns = [
     path("about", app, name="app"),
     path("faq", app, name="app"),
     path("contact", app, name="app"),
+    path("cms/", app, name="app"),
     re_path(r"product/*", app, name="app"),
     path("api/search/<str:model>/", search, name="search"),
     path("api/create-vehicle/", create_vehicle, name="create-vehicle"),

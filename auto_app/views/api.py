@@ -234,8 +234,9 @@ def recommended_listings(request):
         recommended_vehicle_ids.extend([v.pk for v in saved_vehicle.vehicle.related_listings()])
 
     saved_searches = SavedSearch.objects.filter(user=user).first()
-    for saved_search in json.loads(saved_searches.filters).get('searches'):
-        recommended_vehicle_ids.extend([v.pk for v in process_search(saved_search)])
+    if saved_searches:
+        for saved_search in json.loads(saved_searches.filters).get('searches'):
+            recommended_vehicle_ids.extend([v.pk for v in process_search(saved_search)])
 
     unique_pks = set(recommended_vehicle_ids)
     vehicles = Vehicle.objects.filter(pk__in=list(unique_pks)[:10])
