@@ -76,7 +76,7 @@ def update_template(js_filename, css_filename):
 
 
 def main():
-    run_build()
+    #run_build()
     copy_assets()
     js_filename, css_filename = extract_bundle_names()
     update_template(js_filename, css_filename)
