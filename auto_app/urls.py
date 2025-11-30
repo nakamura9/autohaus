@@ -91,8 +91,3 @@ urlpatterns = [
 ]
 
 urlpatterns += router.urls
-
-# Catch-all route for React SPA - must be last
-urlpatterns += [
-    re_path(r'^.*$', app, name="spa-catchall"),
-]
