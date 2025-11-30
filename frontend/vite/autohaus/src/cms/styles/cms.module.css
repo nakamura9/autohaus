@@ -623,3 +623,35 @@
   color: #010038;
   margin-bottom: 20px;
 }
+
+/* Section Header with Controls */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #48B5FF;
+}
+
+.sectionHeader h2 {
+  font-size: 1.5rem;
+  color: #010038;
+  margin: 0;
+}
+
+.periodSelect {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #010038;
+  background-color: white;
+  cursor: pointer;
+}
+
+.periodSelect:focus {
+  outline: none;
+  border-color: #48B5FF;
+}

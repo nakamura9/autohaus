@@ -17,6 +17,7 @@ import BuyPage from './pages/buy';
 import ProductPage from './pages/product';
 import SellerPage from './pages/seller';
 import FAQPage from './pages/faq';
+import PaymentStatusPage from './pages/payment-status';
 import React from 'react'
 import axios from './utils/http'
 import styles from './styles/components.module.css'
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/seller/:id",
         element: <SellerPage />
+      },
+      {
+        path: "/payment-status",
+        element: <PaymentStatusPage />
       },
       {
         path: "/",

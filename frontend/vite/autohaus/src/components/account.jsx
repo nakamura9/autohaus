@@ -29,12 +29,12 @@ const AccountScreen = () => {
     const [phone, setPhone] = React.useState("")
     const [firstName, setFirstName] = React.useState("")
     const [lastName, setLastName] = React.useState("")
-    const [photo, setPhoto] = React.useState("")
-    const [city, setCity] = React.useState("")
+    const [photo, setPhoto] = React.useState(null)
+    const [city, setCity] = React.useState(null)
     const [country, setCountry] = React.useState("")
     const [whatsapp, setWhatsapp] = React.useState(false)
-    const [myListings, setMyListings] = React.useState("")
-    const [savedListings, setSavedListings] = React.useState("")
+    const [myListings, setMyListings] = React.useState([])
+    const [savedListings, setSavedListings] = React.useState([])
     // Using context for tab state instead of local state
     const [plans, setPlans] = React.useState([])
     const [subscriptionHistory, setSubscriptionHistory] = React.useState([])
@@ -47,16 +47,20 @@ const AccountScreen = () => {
         if(!context.user)
             return;
 
-        setRecoveryEmail(context.user.recovery_email)
-        setEmail(context.user.email)
-        setPhone(context.user.phone)
-        setFirstName(context.user.first_name)
-        setLastName(context.user.last_name)
-        setPhone(context.user.phone)
-        setCity(context.user.city)
-        setPhoto(`${url}${context.user.photo}`)
-        setWhatsapp(context.user.whatsapp)
-        setCountry(context.user.country)
+        setRecoveryEmail(context.user.recovery_email || "")
+        setEmail(context.user.email || "")
+        setPhone(context.user.phone || "")
+        setFirstName(context.user.first_name || "")
+        setLastName(context.user.last_name || "")
+        setCity(context.user.city || null)
+        // Only set photo if it exists and is a valid path
+        if (context.user.photo) {
+            setPhoto(`${url}${context.user.photo}`)
+        } else {
+            setPhoto(null)
+        }
+        setWhatsapp(context.user.whatsapp || false)
+        setCountry(context.user.country || "ZW")
     }, [context])
 
     React.useEffect(() => {
@@ -67,21 +71,36 @@ const AccountScreen = () => {
         } else if (context.accountActiveTab == "subscriptions"){
             getPlans()
             getSubscriptionHistory()
+            getActiveSubscription()
         }
     }, [context.accountActiveTab])
 
+    const getActiveSubscription = () => {
+        axios.get(`${url}/billing/active-plan/`).then((data) => {
+            if (data.data.has_active) {
+                setActiveSubscription(data.data.subscription)
+            } else {
+                setActiveSubscription(null)
+            }
+        }).catch(err => {
+            console.error("Cannot retrieve active subscription", err)
+        })
+    }
+
     const getSavedListings = () => {
         axios.get(`${url}/api/saved-listings/`).then((data) => {
-            setSavedListings(data.data)
+            setSavedListings(Array.isArray(data.data) ? data.data : [])
         }).catch(err => {
+            setSavedListings([])
             context.toast("Cannot get saved listings")
         })
     }
 
     const getAccountListings = () => {
         axios.get(`${url}/api/account-listings/`).then((data) => {
-            setMyListings(data.data)
+            setMyListings(Array.isArray(data.data) ? data.data : [])
         }).catch(err => {
+            setMyListings([])
             context.toast("Cannot get Account Listings")
         })
     }
@@ -126,29 +145,31 @@ const AccountScreen = () => {
 
     const deleteListing = (id) => {
         axios.post(`${url}/api/listings/delete/${id}/`).then((data) => {
-            if(!data.data.status == "success") {
-                context.toast("Cannot get remove  listing")
+            if(data.data.status !== "success") {
+                context.toast("Cannot remove listing")
             } else {
                 context.toast("Removed Listing")
             }
             getAccountListings()
         }).catch(err => {
-            context.toast("Cannot get remove saved listing")
+            context.toast("Cannot remove listing")
         })
     }
 
     const getPlans = () => {
         axios.get(`${url}/billing/plans/`).then((data) => {
-            setPlans(data.data)
+            setPlans(Array.isArray(data.data) ? data.data : [])
         }).catch(err => {
+            setPlans([])
             context.toast("Cannot retrieve available subscription plans")
         })
     }
 
     const getSubscriptionHistory = () => {
         axios.get(`${url}/billing/subscription-history/`).then((data) => {
-            setSubscriptionHistory(data.data)
+            setSubscriptionHistory(Array.isArray(data.data) ? data.data : [])
         }).catch(err => {
+            setSubscriptionHistory([])
             context.toast("Cannot retrieve subscription history")
         })
     }
@@ -233,24 +254,32 @@ const AccountScreen = () => {
                         )}
                     </div>
                     <div style={{display: context.accountActiveTab == "my-listings" ? "block" : "none"}}>
-                        
-                        <button className={"!w-36"} onClick={() => {
-                            context.toggleAccount()
-                            navigate("/sell")
-                        }} >Create Listing</button>
-                        {myListings.length == 0 && <EmptyList listLabel={"No Items"} />}
-                        {myListings && myListings.map((listing, index) => (
+
+                        {context.user?.has_subscription ? (
+                            <button className={"!w-36"} onClick={() => {
+                                context.toggleAccount()
+                                navigate("/cms/create/vehicle")
+                            }}>Create Listing</button>
+                        ) : (
+                            <button className={"!w-48"} onClick={() => {
+                                context.setAccountTab("subscriptions")
+                            }}>Subscribe to Create Listings</button>
+                        )}
+                        {myListings.length === 0 && <EmptyList listLabel={"No Items"} />}
+                        {myListings && myListings.length > 0 && myListings.map((listing, index) => (
                             <div key={index} className={styles.listing}>
                                 {listing.photos.length > 0 && <img src={`${url}${listing.photos[0].photo}`} alt="listing" />}
-                                {!listing.photos.length > 0 && <FontAwesomeIcon icon={faImage} size={"7x"} />}
+                                {listing.photos.length === 0 && <FontAwesomeIcon icon={faImage} size={"7x"} />}
                                 <div className={styles.content}>
-                                    <h4>{listing.make.name}</h4>
-                                    <h3>{listing.model.name}</h3>
+                                    <h4>{listing.make?.name}</h4>
+                                    <h3>{listing.model?.name}</h3>
                                     <p>{listing.description}</p>
                                     <p className={styles.price}>{listing.price}</p>
                                     <div className={styles.actions}>
-                                        <button  onClick={() => {context.toggleAccount(); navigate(`/product/${listing.id}`)}}>View</button>
-                                        <button style={{background: 'white', color: '#010038', border: "2px solid #010038"}} onClick={() => {context.toggleAccount(); navigate(`/sell/?listing=${listing.id}`)}}>Edit</button>
+                                        <button onClick={() => {context.toggleAccount(); navigate(`/product/${listing.id}`)}}>View</button>
+                                        {context.user?.has_subscription && (
+                                            <button style={{background: 'white', color: '#010038', border: "2px solid #010038"}} onClick={() => {context.toggleAccount(); navigate(`/cms/update/vehicle/${listing.id}`)}}>Edit</button>
+                                        )}
                                         <button style={{'backgroundColor': 'crimson'}} onClick={() => deleteListing(listing.id)}>Delete</button>
                                     </div>
                                 </div>
@@ -259,14 +288,14 @@ const AccountScreen = () => {
 
                     </div>
                     <div style={{display: context.accountActiveTab == "saved-listings" ? "block" : "none"}}>
-                        {savedListings.length == 0 && <EmptyList listLabel={"No Items"} />}
-                        {savedListings && savedListings.map((listing, index) => (
+                        {savedListings.length === 0 && <EmptyList listLabel={"No Items"} />}
+                        {savedListings && savedListings.length > 0 && savedListings.map((listing, index) => (
                             <div key={index} className={styles.listing}>
                                 {listing.photos.length > 0 && <img src={`${url}${listing.photos[0].photo}`} alt="listing" />}
-                                {!listing.photos.length > 0 && <FontAwesomeIcon icon={faImage} size={"7x"} />}
+                                {listing.photos.length === 0 && <FontAwesomeIcon icon={faImage} size={"7x"} />}
                                 <div className={styles.content}>
-                                    <h4>{listing.make.name}</h4>
-                                    <h3>{listing.model.name}</h3>
+                                    <h4>{listing.make?.name}</h4>
+                                    <h3>{listing.model?.name}</h3>
                                     <p className={styles.price}>{listing.price}</p>
                                     <div className={styles.actions}>
                                     <button  onClick={() => {context.toggleAccount(); navigate(`/product/${listing.id}`)}}>View</button>
@@ -303,10 +332,20 @@ const AccountScreen = () => {
                                 }}>Subscribe</button>
                             </div>
                         ))}
-                        {activeSubscription && (<>
-                            <h5>Active Subscription</h5>
-
-                        </>)}
+                        {activeSubscription && (
+                            <div className="bg-green-100 border border-green-400 rounded-lg p-4 mb-4">
+                                <h5 className="text-lg font-bold text-green-800 mb-2">Active Subscription</h5>
+                                <div className="text-green-700">
+                                    <p><strong>Plan:</strong> {activeSubscription.plan?.name}</p>
+                                    <p><strong>Status:</strong> {activeSubscription.status}</p>
+                                    <p><strong>Activated:</strong> {activeSubscription.activated ? new Date(activeSubscription.activated).toDateString() : 'N/A'}</p>
+                                    <p><strong>Expires:</strong> {activeSubscription.expires_at ? new Date(activeSubscription.expires_at).toDateString() : 'N/A'}</p>
+                                    {activeSubscription.days_remaining !== undefined && (
+                                        <p><strong>Days Remaining:</strong> {activeSubscription.days_remaining}</p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
                         <h5 className="text-lg text-bold text-blue-900 my-4">Subscription History</h5>
                         {subscriptionHistory.length == 0 && (
                             <EmptyList listLabel={"No Items"} />

@@ -70,8 +70,7 @@ const Home = () => {
     {
       title: 'User Management',
       models: [
-        { name: 'seller', label: 'Sellers', icon: faUsers, description: 'Manage sellers' },
-        { name: 'account', label: 'Accounts', icon: faUsers, description: 'User accounts' },
+        { name: 'seller', label: 'Sellers', icon: faUsers, description: 'Manage seller profiles' },
         { name: 'role', label: 'Roles', icon: faCog, description: 'User roles & permissions' },
       ],
     },
@@ -110,7 +109,7 @@ const Home = () => {
     <div className={styles.homePage}>
       <div className={styles.homeHeader}>
         <h1>Welcome, {user?.first_name || user?.username}!</h1>
-        <p>Manage your AutoHaus content from this dashboard</p>
+        <p>Manage your ZimForward content from this dashboard</p>
       </div>
 
       {/* Recent Activity */}
@@ -130,7 +129,7 @@ const Home = () => {
                 <div className={styles.activityContent}>
                   <div className={styles.activityTitle}>{activity.title}</div>
                   <div className={styles.activityMeta}>
-                    {activity.created_by?.username || 'System'} • {formatDate(activity.created_at)}
+                    {formatDate(activity.created_at)}
                   </div>
                 </div>
               </div>
@@ -142,15 +141,14 @@ const Home = () => {
       </div>
 
       {/* Model Categories */}
-      {modelCategories.map((category) => (
+      {modelCategories.map((category) => {
+        const permittedModels = category.models.filter(mod => hasPermission(mod.name, 'read'))
+        if (permittedModels.length === 0) return null;
+        return (
         <div key={category.title} className={styles.categorySection}>
           <h2 className={styles.categoryTitle}>{category.title}</h2>
           <div className={styles.modelGrid}>
-            {category.models.map((model) => {
-              const canRead = hasPermission(model.name, 'read');
-
-              if (!canRead) return null;
-
+            {permittedModels.map((model) => {
               return (
                 <Link
                   key={model.name}
@@ -169,7 +167,8 @@ const Home = () => {
             })}
           </div>
         </div>
-      ))}
+      )}
+    )}
     </div>
   );
 };

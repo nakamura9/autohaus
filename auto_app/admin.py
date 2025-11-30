@@ -6,7 +6,7 @@ from .models import (
     Vehicle, VehiclePhoto, Make, Model, Seller,
     Currency, City, FAQ, FAQCategory, ContactEntry,
     SavedListing, SavedSearch, Account, Role, RolePermission,
-    AuditLog, Setting, CMSImage
+    AuditLog, Setting, CMSImage, Impression
 )
 
 
@@ -312,6 +312,7 @@ class SellerAdmin(admin.ModelAdmin):
             'fields': (
                 'user',
                 'is_dealer',
+                'role'
             )
         }),
         ('System Information', {
@@ -631,6 +632,82 @@ class CMSImageAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 100px;"/>', obj.image.url)
         return "No image"
     image_preview.short_description = "Preview"
+
+
+@admin.register(Impression)
+class ImpressionAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'vehicle_link', 'ip_address', 'location_display',
+        'country_code', 'created_at'
+    )
+    list_filter = (
+        'country', 'country_code',
+        ('created_at', admin.DateFieldListFilter),
+        ('vehicle__seller', admin.RelatedOnlyFieldListFilter),
+    )
+    search_fields = (
+        'ip_address', 'city', 'region', 'country',
+        'vehicle__model__name', 'vehicle__make__name'
+    )
+    list_per_page = 100
+    date_hierarchy = 'created_at'
+
+    fieldsets = (
+        ('Vehicle Information', {
+            'fields': ('vehicle',)
+        }),
+        ('Visitor Information', {
+            'fields': (
+                'ip_address',
+                ('city', 'region'),
+                ('country', 'country_code'),
+                ('latitude', 'longitude'),
+            )
+        }),
+        ('Request Details', {
+            'fields': (
+                'user_agent',
+                'referrer',
+                'session_id',
+            )
+        }),
+        ('Timestamp', {
+            'fields': ('created_at',)
+        }),
+    )
+
+    readonly_fields = ('created_at',)
+
+    def vehicle_link(self, obj):
+        url = reverse("admin:auto_app_vehicle_change", args=[obj.vehicle.id])
+        return format_html(
+            '<a href="{}">{} {}</a>',
+            url, obj.vehicle.make.name, obj.vehicle.model.name
+        )
+    vehicle_link.short_description = "Vehicle"
+
+    def location_display(self, obj):
+        parts = []
+        if obj.city:
+            parts.append(obj.city)
+        if obj.region and obj.region != obj.city:
+            parts.append(obj.region)
+        if obj.country:
+            parts.append(obj.country)
+        return ", ".join(parts) if parts else "Unknown"
+    location_display.short_description = "Location"
+
+    def has_add_permission(self, request):
+        # Impressions should only be created automatically
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        # Impressions should not be edited
+        return False
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.select_related('vehicle', 'vehicle__make', 'vehicle__model', 'vehicle__seller')
 
 
 # Customize admin site header and title

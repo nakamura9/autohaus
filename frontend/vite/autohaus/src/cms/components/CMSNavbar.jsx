@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faHome,
+  faGlobe,
   faChartLine,
   faSignOutAlt,
   faUser,
@@ -38,9 +38,9 @@ const CMSNavbar = () => {
         </button>
 
         <div className={`${styles.navbarMenu} ${menuOpen ? styles.active : ''}`}>
-          <Link to="/cms" className={styles.navbarLink} onClick={() => setMenuOpen(false)}>
-            <FontAwesomeIcon icon={faHome} />
-            <span>Home</span>
+          <Link to="/" className={styles.navbarLink} onClick={() => setMenuOpen(false)}>
+            <FontAwesomeIcon icon={faGlobe} />
+            <span>Go To Site</span>
           </Link>
 
           <Link to="/cms/dashboard" className={styles.navbarLink} onClick={() => setMenuOpen(false)}>

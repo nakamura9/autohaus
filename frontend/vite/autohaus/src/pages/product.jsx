@@ -23,6 +23,28 @@ const ProductPage = () => {
     const context = useContext(Context)
 
 
+    // Generate or retrieve session ID for tracking unique visitors
+    const getSessionId = () => {
+        let sessionId = localStorage.getItem('autohaus_session_id')
+        if (!sessionId) {
+            sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+            localStorage.setItem('autohaus_session_id', sessionId)
+        }
+        return sessionId
+    }
+
+    // Record page impression
+    const recordImpression = (vehicleId) => {
+        axios.post(`${url}/api/impressions/record/`, {
+            vehicle_id: vehicleId,
+            referrer: document.referrer || '',
+            session_id: getSessionId()
+        }).catch(err => {
+            // Silently fail - don't interrupt user experience for analytics
+            console.debug('Impression recording failed:', err)
+        })
+    }
+
     React.useEffect(() => {
         axios.get(`${url}/vehicle/${id}/`).then(res => {
             setProduct(res.data)
@@ -34,6 +56,9 @@ const ProductPage = () => {
             console.log(res.data)
             setSimilarListings(res.data)
         })
+
+        // Record impression when page loads
+        recordImpression(id)
     }, [id])
 
     const toggleListing = () => {

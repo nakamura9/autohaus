@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(source env/Scripts/activate)",
+      "Bash(python manage.py check:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

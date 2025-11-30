@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
 
+
 class TokenAuthMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -23,7 +24,7 @@ class TokenAuthMiddleware:
 
             except Token.DoesNotExist:
                 return JsonResponse(
-                    {'error': 'Invalid or expired token'}, 
+                    {'error': 'Invalid or expired token'},
                     status=401
                 )
 

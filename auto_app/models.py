@@ -73,6 +73,11 @@ class BaseModel(models.Model):
             fields = [field.name for field in self._meta.get_fields()
                      if field.concrete and field.name not in ['created_by', 'updated_by']]
 
+        data['created_at'] = self.created_at
+        data['updated_at'] = self.updated_at
+        data['created_by'] = self.created_by
+        data['updated_by'] = self.updated_by
+
         for field in fields:
             if ":" in field:
                 # Handle child table relationships
@@ -116,38 +121,47 @@ class BaseModel(models.Model):
         fields = [
             {'fieldname': 'name', 'label': 'Name', 'fieldtype': 'char'}
         ]
-        field_order = [field.name for field in cls._meta.get_fields() if field.concrete]
-        for field_name in field_order:
-            if field_name in cls.list_fields:
-                field = {
-                    'fieldname': field_name,
-                    'label': cls._meta.get_field(field_name).verbose_name.title(),
-                }
-                field.update(to_field_json(field_name, cls))
-                fields.append(field)
+        for field_name in cls.list_fields:
+            field = {
+                'fieldname': field_name,
+                'label': cls._meta.get_field(field_name).verbose_name.title(),
+            }
+            field.update(to_field_json(field_name, cls))
+            fields.append(field)
 
         return fields
 
 
 class Seller(BaseModel):
+    """
+    Seller model - represents a subscribed user who can sell vehicles on the platform.
+    Combines previous Account + Seller functionality.
+    A Seller is only created after a valid subscription payment.
+    """
     search_fields = ["name"]
     search_map = {
         "thumb": "photo",
         "description": "city",
     }
+    list_fields = ['phone_number', 'email', 'is_cms_user']
 
+    # Basic info
     name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, blank=True, default="")
     email = models.EmailField()
     recovery_email = models.EmailField(blank=True, default="")
-    address = models.TextField()
-    city = models.ForeignKey('auto_app.City', on_delete=models.SET_NULL, related_name='seller_city', null=True)
+    address = models.TextField(blank=True, default="")
+    city = models.ForeignKey('auto_app.City', on_delete=models.SET_NULL, related_name='seller_city', null=True, blank=True)
     state = models.CharField(max_length=100, blank=True, default="")
-    country = models.CharField(max_length=100)
+    country = models.CharField(max_length=100, blank=True, default="ZW")
     whatsapp = models.BooleanField(blank=True, null=True, default=False)
-    photo = models.ImageField(upload_to="seller_photos/", null=True)
+    photo = models.ImageField(upload_to="seller_photos/", null=True, blank=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='seller', null=True)
     is_dealer = models.BooleanField(default=False, blank=True)
+
+    # CMS Access (merged from Account model)
+    is_cms_user = models.BooleanField(default=True, blank=True)  # Sellers are CMS users by default
+    role = models.ForeignKey('auto_app.Role', null=True, blank=True, on_delete=models.SET_NULL, related_name='sellers')
 
     def __str__(self) -> str:
         return self.name
@@ -156,6 +170,45 @@ class Seller(BaseModel):
     def num_ads(self):
         return Vehicle.objects.filter(seller=self).count()
 
+    def has_active_subscription(self):
+        """Check if seller has an active subscription"""
+        from billing.models import Subscription
+        return Subscription.objects.filter(
+            user=self.user,
+            status='active'
+        ).exists()
+
+    def get_active_subscription(self):
+        """Get the active subscription for this seller"""
+        from billing.models import Subscription
+        return Subscription.objects.filter(
+            user=self.user,
+            status='active'
+        ).first()
+
+    @classmethod
+    def form_fields(cls):
+        from auto_app.cms_forms import CMSFormBuilder
+        builder = CMSFormBuilder(cls)
+        builder.add_section()
+        builder.add_field('name')
+        builder.add_field('email')
+        builder.add_field('phone_number')
+        builder.add_column()
+        builder.add_field('user')
+        builder.add_field('is_cms_user')
+        builder.add_field('role')
+        builder.add_section()
+        builder.add_field('address')
+        builder.add_field('city')
+        builder.add_field('state')
+        builder.add_field('country')
+        builder.add_column()
+        builder.add_field('whatsapp')
+        builder.add_field('is_dealer')
+        builder.add_field('photo')
+        return builder.to_dict()
+
 
 class Make(BaseModel):
     search_fields = ["name"]
@@ -163,6 +216,8 @@ class Make(BaseModel):
         "thumb": "logo",
         "description": "name",
     }
+
+    list_fields = ["number_of_models"]
 
     name = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='make_logos/')
@@ -174,11 +229,12 @@ class Make(BaseModel):
 
 
 class Model(BaseModel):
-    search_fields = ["name", "make__name"]
+    search_fields = ["name", "make", "year"]
     search_map = {
         "description": "make",
         "thumb": "logo",
     }
+    list_fields = ["make", "number_of_vehicles"]
 
     make = models.ForeignKey('auto_app.Make', on_delete=models.CASCADE, related_name='models')
     name = models.CharField(max_length=255)
@@ -206,7 +262,7 @@ class Model(BaseModel):
         if self.year:
             return f"{self.name} ({self.year})"
         return self.name
-    
+
     @property
     def logo(self):
         return self.make.logo
@@ -427,13 +483,24 @@ class SavedSearch(BaseModel):
 
 # CMS Authentication and Permission Models
 
+# DEPRECATED: Account model is being phased out. Use Seller model instead.
+# This model is kept temporarily for migration purposes only.
+# All new code should use Seller.is_cms_user and Seller.role instead.
 class Account(BaseModel):
-    """User account with role-based permissions"""
+    """
+    DEPRECATED - Use Seller model instead.
+    User account with role-based permissions.
+    This functionality has been merged into the Seller model.
+    """
     name = models.CharField(max_length=255, blank=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='account')
     phone = models.CharField(max_length=255, blank=True)
     is_cms_user = models.BooleanField(default=False, blank=True)
     role = models.ForeignKey('auto_app.Role', null=True, blank=True, on_delete=models.SET_NULL, related_name='accounts')
+
+    class Meta:
+        verbose_name = "Account (Deprecated)"
+        verbose_name_plural = "Accounts (Deprecated)"
 
     def __str__(self):
         return f"{self.user.username}"
@@ -504,7 +571,7 @@ class AuditLog(BaseModel):
     model_id = models.PositiveIntegerField(null=True)
     changes = models.TextField()  # JSON
 
-    list_fields = ['title', 'model_name', 'created_at']
+    list_fields = ['title', 'model_name', 'created_at', 'created_by']
 
     def __str__(self):
         return self.title
@@ -555,3 +622,33 @@ class CMSImage(BaseModel):
             img = Image.open(self.image)
             self.width, self.height = img.size
         super().save(*args, **kwargs)
+
+
+class Impression(models.Model):
+    """
+    Tracks page views/impressions for vehicles.
+    Captures IP address and geolocation data for analytics.
+    """
+    vehicle = models.ForeignKey('auto_app.Vehicle', on_delete=models.CASCADE, related_name='impressions')
+    ip_address = models.GenericIPAddressField()
+    city = models.CharField(max_length=255, blank=True, default="")
+    region = models.CharField(max_length=255, blank=True, default="")
+    country = models.CharField(max_length=100, blank=True, default="")
+    country_code = models.CharField(max_length=10, blank=True, default="")
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    user_agent = models.TextField(blank=True, default="")
+    referrer = models.URLField(blank=True, default="")
+    session_id = models.CharField(max_length=64, blank=True, default="")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['vehicle', 'created_at']),
+            models.Index(fields=['ip_address']),
+            models.Index(fields=['created_at']),
+        ]
+
+    def __str__(self):
+        return f"{self.vehicle} - {self.ip_address} - {self.created_at}"

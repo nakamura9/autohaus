@@ -9,7 +9,8 @@ from auto_app.utils.permissions import (
     ReadPermission, WritePermission, DeletePermission, OwnerPermission,
     OwnerOrAdminFilterMixin
 )
-from auto_app.models import AuditLog, CMSImage, Vehicle
+import datetime
+from auto_app.models import AuditLog, CMSImage
 from django.contrib.contenttypes.models import ContentType
 from auto_app.models import RolePermission
 
@@ -81,7 +82,9 @@ class CMSCreateView(APIView):
             model_name=ContentType.objects.get_for_model(model),
             model_id=instance.pk,
             created_by=request.user,
-            updated_by=request.user
+            updated_by=request.user,
+            created_at=datetime.datetime.now(),
+            updated_at=datetime.datetime.now(),
         )
         return Response({
             "success": True,
@@ -246,7 +249,8 @@ class AuditTrailView(APIView):
         model = apps.get_model("auto_app", entity)
         logs = AuditLog.objects.filter(
             model_name=ContentType.objects.get_for_model(model),
-            model_id=id
+            model_id=id,
+            created_by=request.user
         ).order_by('-created_at')
 
         log_data = []
@@ -276,7 +280,6 @@ class CurrentUserRolePermissionsView(APIView):
 
         # Superusers have all permissions
         if request.user.is_superuser:
-            # Get all models in auto_app
             from django.contrib.contenttypes.models import ContentType
             all_models = ContentType.objects.filter(app_label='auto_app')
             permissions = [
@@ -294,15 +297,17 @@ class CurrentUserRolePermissionsView(APIView):
                 "permissions": permissions,
             })
 
-        account = getattr(request.user, "account", None)
-        if account is None or account.role is None:
+        # Use seller instead of account (Account model is deprecated)
+        seller = getattr(request.user, "seller", None)
+        if seller is None or seller.role is None:
             return Response({
                 "success": True,
                 "role": None,
-                "permissions": []
+                "permissions": [],
+                "has_active_subscription": False
             })
 
-        role = account.role
+        role = seller.role
         permissions_qs = RolePermission.objects.filter(role=role).select_related("entity")
 
         permissions = [
@@ -319,43 +324,78 @@ class CurrentUserRolePermissionsView(APIView):
             "success": True,
             "role": role.role_name,
             "permissions": permissions,
+            "has_active_subscription": seller.has_active_subscription(),
+            "is_cms_user": seller.is_cms_user,
         })
 
 
 class DashboardAPIView(APIView):
     """Dashboard statistics"""
     def get(self, request):
-        from auto_app.models import Vehicle, Seller, SavedListing, Make, Model as VehicleModel
+        from auto_app.models import Vehicle, Seller, SavedListing, Make, Model as VehicleModel, ContactEntry
+        from django.contrib.auth.models import User
         from django.db.models import Count
         from datetime import datetime, timedelta
 
-        # Basic stats
+        user = request.user
+        seller = Seller.objects.filter(user=request.user)
+        if not seller.exists():
+            return Response({
+                "success": False,
+                "error": "Seller profile not found"
+            }, status=403)
+
+        seller = seller.first()
+        is_admin = seller.role == "Admin" # Hardcoded, should be replaced later
+
+
+
+        # Determine the base queryset for vehicles based on user role
+        if is_admin:
+            vehicle_qs = Vehicle.objects.all()
+            saved_listings_qs = SavedListing.objects.all()
+        else:
+            # Non-admin users only see their own listings
+            vehicle_qs = Vehicle.objects.filter(seller=seller)
+            saved_listings_qs = SavedListing.objects.filter(user=user)
+
+        # Basic stats (filtered for non-admin users)
         stats = {
-            'total_vehicles': Vehicle.objects.count(),
-            'published_vehicles': Vehicle.objects.filter(published=True).count(),
-            'total_sellers': Seller.objects.count(),
-            'total_dealers': Seller.objects.filter(is_dealer=True).count(),
-            'total_saved_listings': SavedListing.objects.count(),
-            'total_makes': Make.objects.count(),
-            'total_models': VehicleModel.objects.count(),
+            'total_vehicles': vehicle_qs.count(),
+            'active_vehicles': vehicle_qs.filter(published=True).count(),
+            'total_saved_listings': saved_listings_qs.count(),
+            'is_admin': is_admin,
         }
 
-        # Recent changes
-        recent_logs = AuditLog.objects.all().order_by('-created_at')[:10]
+        # Admin-only stats
+        if is_admin:
+            stats['total_users'] = User.objects.count()
+            stats['total_sellers'] = Seller.objects.count()
+            stats['total_dealers'] = Seller.objects.filter(is_dealer=True).count()
+            stats['total_contact_entries'] = ContactEntry.objects.count()
+            stats['total_makes'] = Make.objects.count()
+            stats['total_models'] = VehicleModel.objects.count()
+
+        # Recent changes (filtered for non-admin)
+        if is_admin:
+            recent_logs = AuditLog.objects.all().order_by('-created_at')[:10]
+        else:
+            recent_logs = AuditLog.objects.filter(created_by=user).order_by('-created_at')[:10]
+
         stats['recent_changes'] = [{
             'title': log.title,
             'created_at': log.created_at.isoformat() if log.created_at else None,
         } for log in recent_logs]
 
-        # Vehicles by make (top 10)
-        vehicles_by_make = Vehicle.objects.values('make__name').annotate(
+        # Vehicles by make (top 10, filtered for non-admin)
+        vehicles_by_make = vehicle_qs.values('make__name').annotate(
             count=Count('id')
         ).order_by('-count')[:10]
         stats['vehicles_by_make'] = list(vehicles_by_make)
 
-        # Recent vehicles (last 7 days)
+        # Recent vehicles (last 7 days, filtered for non-admin)
         seven_days_ago = datetime.now() - timedelta(days=7)
-        stats['recent_vehicles'] = Vehicle.objects.filter(
+        stats['recent_vehicles'] = vehicle_qs.filter(
             created_at__gte=seven_days_ago
         ).count()
 

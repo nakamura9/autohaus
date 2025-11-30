@@ -4,7 +4,8 @@ from auto_app.views import (
     sign_up, login, submit_contact, get_user_details,
     save_listing, saved_listings, account_listings, reset_password, delete_account,
     update_account, remove_saved_listing, remove_listing,
-    related_listings, recommended_listings, latest_listings
+    related_listings, recommended_listings, latest_listings,
+    record_impression, impression_stats
 )
 from auto_app.views import image_upload
 
@@ -83,6 +84,10 @@ urlpatterns = [
     path("api/cms/search-input/", SearchInputView.as_view(), name="cms-search-input"),
     path("api/cms/photo-upload/<str:entity>/", PhotoUploadView.as_view(), name="cms-photo-upload"),
     path("api/cms/photo-delete/", PhotoDeleteView.as_view(), name="cms-photo-delete"),
+
+    # Impression tracking
+    path("api/impressions/record/", record_impression, name="record-impression"),
+    path("api/impressions/stats/", impression_stats, name="impression-stats"),
 ]
 
 urlpatterns += router.urls

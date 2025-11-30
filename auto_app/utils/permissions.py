@@ -4,6 +4,28 @@ from auto_app.models import RolePermission
 from django.contrib.auth.models import ContentType
 
 
+def has_active_subscription(user):
+    """Check if user has an active subscription"""
+    if user.is_superuser:
+        return True
+    seller = getattr(user, 'seller', None)
+    if not seller:
+        return False
+    return seller.has_active_subscription()
+
+
+class ActiveSubscriptionRequired(BasePermission):
+    """Permission class that requires an active subscription"""
+    message = 'You need an active subscription to perform this action.'
+
+    def has_permission(self, request, view):
+        if request.user.is_anonymous:
+            return False
+        if request.user.is_superuser:
+            return True
+        return has_active_subscription(request.user)
+
+
 class WritePermission(BasePermission):
     """Permission class for create/update operations"""
     message = 'You do not have permission to create/update this resource.'
@@ -14,18 +36,23 @@ class WritePermission(BasePermission):
         if request.user.is_superuser:
             return True
 
-        re_match = re.match(r"/api/cms/(?P<action>[a-z]+)/(?P<model>[a-z]+)/" , request.path)
+        re_match = re.match(r"/api/cms/(?P<action>[a-z]+)/(?P<model>[a-z]+)/", request.path)
         if re_match:
             action = re_match.group("action")
             if action not in ["create", "update"]:
                 return False
             model = re_match.group("model")
 
-            # Check if user has account and role
-            if not hasattr(request.user, 'account') or not request.user.account.role:
+            # Check if user has seller and role
+            if not hasattr(request.user, 'seller') or not request.user.seller.role:
                 return False
 
-            user_role = request.user.account.role
+            # Check for active subscription for write operations
+            if not has_active_subscription(request.user):
+                self.message = 'You need an active subscription to create or update content.'
+                return False
+
+            user_role = request.user.seller.role
             try:
                 permissions = RolePermission.objects.filter(
                     can_write=True,
@@ -48,18 +75,18 @@ class ReadPermission(BasePermission):
         if request.user.is_superuser:
             return True
 
-        re_match = re.match(r"/api/cms/list/(?P<model>[a-z]+)/$" , request.path)
+        re_match = re.match(r"/api/cms/list/(?P<model>[a-z]+)/$", request.path)
         if re_match:
             model = re_match.group("model")
 
             if model == "auditlog":
                 return True
 
-            # Check if user has account and role
-            if not hasattr(request.user, 'account') or not request.user.account.role:
+            # Check if user has seller and role
+            if not hasattr(request.user, 'seller') or not request.user.seller.role:
                 return False
 
-            user_role = request.user.account.role
+            user_role = request.user.seller.role
             try:
                 permissions = RolePermission.objects.filter(
                     can_read=True,
@@ -82,15 +109,20 @@ class DeletePermission(BasePermission):
         if request.user.is_superuser:
             return True
 
-        re_match = re.match(r"/api/cms/delete/(?P<model>[a-z]+)/$" , request.path)
+        re_match = re.match(r"/api/cms/delete/(?P<model>[a-z]+)/", request.path)
         if re_match:
             model = re_match.group("model")
 
-            # Check if user has account and role
-            if not hasattr(request.user, 'account') or not request.user.account.role:
+            # Check if user has seller and role
+            if not hasattr(request.user, 'seller') or not request.user.seller.role:
                 return False
 
-            user_role = request.user.account.role
+            # Check for active subscription for delete operations
+            if not has_active_subscription(request.user):
+                self.message = 'You need an active subscription to delete content.'
+                return False
+
+            user_role = request.user.seller.role
             try:
                 permissions = RolePermission.objects.filter(
                     can_delete=True,
@@ -109,9 +141,8 @@ class OwnerPermission(BasePermission):
 
     # Configure which models support owner-based permissions
     OWNER_ENABLED_MODELS = {
-        # Add your models here, e.g.:
-        # 'vehicle': 'seller__user',
-        # 'seller': 'user',
+        'vehicle': 'seller__user',
+        'seller': 'user',
     }
 
     def has_object_permission(self, request, view, obj):
@@ -146,14 +177,12 @@ class OwnerOrAdminFilterMixin:
     """
 
     OWNER_ENABLED_MODELS = {
-        # Add your models here, e.g.:
-        # 'vehicle': 'seller__user',
-        # 'seller': 'user',
+        'vehicle': 'created_by',
+        'seller': 'user',
     }
 
     def filter_queryset_by_owner(self, queryset, user, model_name):
         """Filter a queryset based on ownership rules"""
-        print(model_name)
         if user.is_superuser:
             return queryset
         if model_name == "AuditLog":
